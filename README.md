@@ -5,14 +5,14 @@
 </div>
 
 ## About
-
 This is the next generation of Pretzel. This version will be a complete rewrite and restructuring of the code as well as a completely new UI/UX design.
 
-<!--
 ## Contributing
+Coming soon... :eyes:
 
 ## License
--->
+Pretzel is released under the GNU General Public License v3.
+
 
 <!--## Getting started
 
