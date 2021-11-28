@@ -1,9 +1,8 @@
 <div align="center">
-  <h1>Pretzel</h1>
+  <!--<h1>Pretzel</h1>-->
   <img src="./assets/logo.png"/>
+  <p>The most customizable, free and open source stock take application ever.</p>
 </div>
-
-The most customizable, free and open source stock take application ever.
 
 ## Getting started
 
