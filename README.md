@@ -1,4 +1,6 @@
-# Pretzel
+<h1 align="center">Pretzel</h1>
+
+![Logo](assets/logo.png)
 
 The most customizable, free and open source stock take application ever.
 
