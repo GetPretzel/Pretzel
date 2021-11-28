@@ -1,5 +1,5 @@
 # Contributing
-:+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
+:+1: :tada: First off, thanks for taking the time to contribute! :tada: :+1:
 
 The following is a set of guidelines for contributing to Pretzel and its packages, which are hosted on the ][Pretzel group](https://gitlab.com/getpretzel/) on GitLab and the [Pretzel organization](https://github.com/GetPretzel/) on GitHub. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
