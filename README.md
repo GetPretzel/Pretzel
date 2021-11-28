@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Pretzel</h1>
-  <img href="assets/logo.png"/>
+  <img href="./assets/logo.png"/>
 </div>
 
 The most customizable, free and open source stock take application ever.
