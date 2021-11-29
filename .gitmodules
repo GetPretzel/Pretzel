@@ -1,0 +1,3 @@
+[submodule "thirdparty/KDDockWidgets"]
+	path = thirdparty/KDDockWidgets
+	url = https://github.com/KDAB/KDDockWidgets
