@@ -1,5 +1,9 @@
 <div align="center">
-  <!--<h1>Pretzel</h1>-->
+  <h1>Pretzel</h1>
+  <span>
+  <img src="https://img.shields.io/tokei/lines/gitlab/getpretzel/pretzel"/>
+  <a href="https://gitlab.com/getpretzel/pretzel/-/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-GPL_v3-green.svg"/></a>
+  </span>
   <img src="./assets/logo.png"/>
   <p>The most customizable, free and open source stock take application ever.</p>
 </div>
