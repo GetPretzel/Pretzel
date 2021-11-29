@@ -1,8 +1,9 @@
 <div align="center">
   <h1>Pretzel</h1>
   <span>
-  <img src="https://img.shields.io/tokei/lines/gitlab/getpretzel/pretzel"/>
   <a href="https://gitlab.com/getpretzel/pretzel/-/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-GPL_v3-green.svg"/></a>
+  <a href="https://discord.gg/5eAMUqNrUe"><img src="https://img.shields.io/discord/914698423205249054"/></a>
+  <img src="https://img.shields.io/tokei/lines/gitlab/getpretzel/pretzel"/>
   </span>
   <img src="./assets/logo.png"/>
   <p>The most customizable, free and open source stock take application ever.</p>
