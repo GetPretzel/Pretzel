@@ -1,3 +1,6 @@
 [submodule "thirdparty/KDDockWidgets"]
 	path = thirdparty/KDDockWidgets
 	url = https://github.com/KDAB/KDDockWidgets
+[submodule "thirdparty/SortFilterProxyModel"]
+	path = thirdparty/SortFilterProxyModel
+	url = https://github.com/oKcerG/SortFilterProxyModel
