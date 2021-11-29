@@ -1,7 +1,8 @@
 <div align="center">
   <h1>Pretzel</h1>
   <span>
-  <a href="https://gitlab.com/getpretzel/pretzel/-/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-GPL_v3-green.svg"/></a>
+  <a href="CODE_OF_CONDUCT.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg"/></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-GPL_v3-green.svg"/></a>
   <a href="https://discord.gg/5eAMUqNrUe"><img src="https://img.shields.io/discord/914698423205249054"/></a>
   <img src="https://img.shields.io/tokei/lines/gitlab/getpretzel/pretzel"/>
   </span>
@@ -13,7 +14,10 @@
 This is the next generation of Pretzel. This version will be a complete rewrite and restructuring of the code as well as a completely new UI/UX design.
 
 ## Contributing
-Contributions are welcome! Check out the [contributing](https://gitlab.com/getpretzel/pretzel/-/blob/main/CONTRIBUTING.md) guide.
+Contributions are welcome! Check out the [contributing](CONTRIBUTING.md) guide.
+
+## Code of Conduct
+Before contributing or participating in discussions with the community, please take a moment to read through the [code of conduct](CODE_OF_CONDUCT.md).
 
 ## License
 Pretzel is released under the GNU General Public License v3.
