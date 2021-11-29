@@ -9,3 +9,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(Qt5 COMPONENTS Core Gui Quick Sql REQUIRED)
+
+add_subdirectory(thirdparty)
+
+add_subdirectory(src)
