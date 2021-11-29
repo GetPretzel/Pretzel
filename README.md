@@ -8,7 +8,7 @@
 This is the next generation of Pretzel. This version will be a complete rewrite and restructuring of the code as well as a completely new UI/UX design.
 
 ## Contributing
-Coming soon... :eyes:
+Contributions are welcome! Check out the [contributing](https://gitlab.com/getpretzel/pretzel/-/blob/main/CONTRIBUTING.md) guide.
 
 ## License
 Pretzel is released under the GNU General Public License v3.
