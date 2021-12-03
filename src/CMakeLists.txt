@@ -1,3 +1,5 @@
+add_subdirectory(ui)
+
 set(SOURCES ${SOURCES}
     main.cpp
 )
