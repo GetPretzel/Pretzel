@@ -2,6 +2,7 @@ add_subdirectory(ui)
 
 set(SOURCES ${SOURCES}
     main.cpp
+    ui/register/register.cpp
 )
 
 set(RESOURCES ${RESOURCES}
