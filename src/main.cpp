@@ -7,6 +7,9 @@
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 #include <QQmlContext>
+#include <QString>
+
+#include "framework/actions/actioncontroller.h"
 
 #include "ui/register/register.h"
 
@@ -17,11 +20,9 @@ int main(int argc, char *argv[]) {
     QQmlApplicationEngine engine;
     KDDockWidgets::Config::self().setQmlEngine(&engine);
 
-    // Create a test object
-    QObject *test_obj;
-    QString test_obj_name = QString::fromStdString("Test");
-
-    Pretzel::Ui::registerObject(test_obj_name, test_obj);
+    QString actionControllerName("ActionController");
+    Pretzel::Framework::ActionController *actionController = new Pretzel::Framework::ActionController();
+    Pretzel::Ui::registerObject(actionControllerName, actionController);
 
     const QUrl url("qrc:/ui/main.qml");
     engine.load(url);
