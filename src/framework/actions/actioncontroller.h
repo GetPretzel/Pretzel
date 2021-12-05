@@ -2,6 +2,7 @@
 #define ACTIONCONTROLLER_H
 
 #include <QObject>
+#include <QMetaType>
 #include <QAction>
 #include <QString>
 #include <QVariant>
@@ -24,7 +25,7 @@ class Pretzel::Framework::ActionController : public QObject
 private:
     QList<Action> m_actionsList;
 public:
-    QAction* getActionFromName(QString &name);
+    Q_INVOKABLE QAction* getActionFromName(QString &name);
 };
 
 #endif // ACTIONCONTROLLER_H
