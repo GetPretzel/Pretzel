@@ -12,7 +12,7 @@ using namespace Pretzel::Ui;
 //     });
 // }
 
-void registerObject(QString &name, QObject *object) {
+void Pretzel::Ui::registerObject(QString &name, QObject *object) {
     // qmlRegisterSingletonType<object>("Pretzel.Ui", 1, 0, "Test", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
     //     Q_UNUSED(engine)
     //     Q_UNUSED(scriptEngine)
