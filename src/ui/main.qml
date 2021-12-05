@@ -15,5 +15,11 @@ ApplicationWindow {
     KDDW.MainWindowLayout {
         anchors.fill: parent
         uniqueName: "pretzelWindowLayout"
+
+        Button {
+            anchors.centerIn: parent
+            text: qsTr("Print Hello")
+            onClicked: ActionController.getActionFromName("hello").trigger()
+        }
     }
 }
