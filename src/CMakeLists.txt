@@ -1,3 +1,4 @@
+add_subdirectory(framework)
 add_subdirectory(ui)
 
 set(SOURCES ${SOURCES}
@@ -19,5 +20,7 @@ target_link_libraries(Pretzel PRIVATE
     Qt5::Gui
     Qt5::Quick
     Qt5::Sql
+    Qt5::Widgets
     KDAB::kddockwidgets
+    Actions
 )
