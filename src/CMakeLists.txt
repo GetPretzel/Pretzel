@@ -1,5 +1,4 @@
 add_subdirectory(framework)
-add_subdirectory(ui)
 
 set(SOURCES ${SOURCES}
     main.cpp
