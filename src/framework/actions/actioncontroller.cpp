@@ -1,8 +1,11 @@
 #include "actioncontroller.h"
 
-#include <QDebug>
-
 using namespace Pretzel::Framework;
+
+
+void ActionController::addAction(Pretzel::Framework::Action *action) {
+    m_actionsList.push_back(*action);
+}
 
 
 QAction* ActionController::getActionFromName(QString &name) {

@@ -8,14 +8,14 @@
 #include <QVariant>
 #include <QVariantList>
 
-struct Action {
-    QString name;
-    QAction *action;
-};
 
 namespace Pretzel::Framework
 {
     class ActionController;
+    struct Action {
+        QString name;
+        QAction *action;
+    };
 } // namespace Pretzel
 
 
@@ -23,8 +23,9 @@ class Pretzel::Framework::ActionController : public QObject
 {
     Q_OBJECT
 private:
-    QList<Action> m_actionsList;
+    QList<Pretzel::Framework::Action> m_actionsList;
 public:
+    void addAction(Pretzel::Framework::Action *action);
     Q_INVOKABLE QAction* getActionFromName(QString &name);
 };
 
