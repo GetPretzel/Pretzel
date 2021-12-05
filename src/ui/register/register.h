@@ -20,7 +20,7 @@
 namespace Pretzel::Ui
 {
     // void registerFunction(QQmlApplicationEngine engine, function_type func);
-    void registerObject(QString &name, QObject *object);
+    void registerObject(QQmlContext *context, QString &name, QObject *object);
 } // namespace Pretzel
 
 #endif // REGISTER_H
