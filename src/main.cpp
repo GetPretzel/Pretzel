@@ -3,8 +3,6 @@
 #include <kddockwidgets/private/DockRegistry_p.h>
 #include <kddockwidgets/FrameworkWidgetFactory.h>
 
-#include <QAction>
-#include <QApplication>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
@@ -32,9 +30,7 @@ int main(int argc, char *argv[]) {
     Pretzel::Framework::ActionController *actionController = new Pretzel::Framework::ActionController();
     
     QString printHelloName("hello");
-    QAction printHelloQAction(printHelloName);
-    // connect(printHelloQAction, &QAction::triggered, this, &printHello);
-    Pretzel::Framework::Action printHelloAction = {printHelloName, &printHelloQAction};
+    Pretzel::Framework::Action printHelloAction;
     actionController->addAction(&printHelloAction);
 
     QString actionControllerName("ActionController");

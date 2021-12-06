@@ -19,7 +19,6 @@ target_link_libraries(Pretzel PRIVATE
     Qt5::Gui
     Qt5::Quick
     Qt5::Sql
-    Qt5::Widgets
     KDAB::kddockwidgets
     Actions
 )
