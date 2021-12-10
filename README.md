@@ -13,6 +13,24 @@
 ## About
 This is the next generation of Pretzel. This version will be a complete rewrite and restructuring of the code as well as a completely new UI/UX design.
 
+## Compiling
+
+### Note for Windows Users
+
+This guide assumes you are using [MSYS2](https://msys2.org).
+
+### Dependecies
+
+All dependencies are submodules downloaded into the thirdparty directory except for Qt. Download the Qt Online Installer and follow the prompts to download the latest Qt 5.15 version.
+
+### Building
+
+1. Get Pretzel's source code with ``git clone --recursive https://gitlab.com/GetPretzel/Pretzel.git``
+
+2. Run ``mkdir build && cd build && cmake ..`` (if on Windows, the ``-G "MSYS Makefiles"`` flag may need to be added to the ``cmake`` command to use MSYS 2)
+
+3. Run ``make``
+
 ## Contributing
 Contributions are welcome! Check out the [contributing](CONTRIBUTING.md) guide.
 
