@@ -47,7 +47,7 @@ void ActionController::addAction(Pretzel::Framework::Action *action) {
 }
 
 
-Action ActionController::getActionFromName(QString &name) {
+Action ActionController::getActionFromName(const QString &name) const {
     for (int i = 0; i < m_actionsList.size(); i++) {
         if (m_actionsList.at(i).name == name) {
             // TODO: Should a pointer be returned?

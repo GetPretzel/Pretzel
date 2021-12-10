@@ -23,22 +23,22 @@ namespace Pretzel::Framework
 class Pretzel::Framework::Action : public QObject
 {
     Q_OBJECT
-    QML_ELEMENT
+    // QML_ELEMENT
 public:
     Action() {};
     Action(const Action &other) {};
     Action &operator=(const Action &other) {return *this;};
-    // ~Action();
+    // virtual ~Action() {};
 
     void createActionComponent();
 
     QString name;
-    // QObject *action;
-public slots:
     Q_INVOKABLE void trigger();
 signals:
     void triggered();
 };
+
+Q_DECLARE_METATYPE(Pretzel::Framework::Action);
 
 
 class Pretzel::Framework::ActionController : public QObject
@@ -48,7 +48,7 @@ private:
     QList<Pretzel::Framework::Action> m_actionsList;
 public:
     void addAction(Pretzel::Framework::Action *action);
-    Q_INVOKABLE Action getActionFromName(QString &name);
+    Q_INVOKABLE Action getActionFromName(const QString &name) const;
 };
 
 #endif // ACTIONCONTROLLER_H
