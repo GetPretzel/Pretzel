@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/framework/">
-        <file alias="QMLAction.qml">qml/Pretzel/Framework/QMLAction.qml</file>
-    </qresource>
-</RCC>

@@ -3,13 +3,8 @@ set(ACTIONS_SOURCES
     actioncontroller.h
 )
 
-set(ACTIONS_RESOURCES
-    actions.qrc
-)
-
 add_library(Actions STATIC
     ${ACTIONS_SOURCES}
-    ${ACTIONS_RESOURCES}
 )
 
 target_link_libraries(Actions PRIVATE
