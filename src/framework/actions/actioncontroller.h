@@ -25,7 +25,6 @@ class Pretzel::Framework::Action : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name WRITE setName)
-    // QML_ELEMENT
 private:
     QString m_name;
 public:
@@ -33,8 +32,6 @@ public:
     Action(const Action &other) {};
     Action &operator=(const Action&) {return *this;};
     ~Action() {};
-
-    // void createActionComponent();
 
     QString name() const;
     void setName(const QString &name);

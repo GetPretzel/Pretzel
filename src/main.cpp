@@ -23,13 +23,11 @@ void printHello() {
 
 
 int main(int argc, char *argv[]) {
-    // QApplication app(argc, argv);
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
     KDDockWidgets::Config::self().setQmlEngine(&engine);
 
-    // qmlRegisterType<Pretzel::Framework::Action>("Pretzel.Framework", 1, 0, "Action");
     qRegisterMetaType<Pretzel::Framework::Action*>("Action*");
 
     Pretzel::Framework::ActionController *actionController = new Pretzel::Framework::ActionController();
