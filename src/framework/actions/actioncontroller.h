@@ -18,7 +18,7 @@ namespace Pretzel::Framework
 {
     class Action;
     class ActionController;
-} // namespace Pretzel
+} // namespace Pretzel::Framework
 
 
 class Pretzel::Framework::Action : public QObject
