@@ -2,5 +2,9 @@
     <qresource prefix="/ui/components">
         <file>qml/Pretzel/UiComponents/qmldir</file>
         <file>qml/Pretzel/UiComponents/PButton.qml</file>
+        <file>qml/Pretzel/UiComponents/PLineEdit.qml</file>
+        <file>qml/Pretzel/UiComponents/PlistView.qml</file>
+        <file>qml/Pretzel/UiComponents/PScrollBar.qml</file>
+        <file>qml/Pretzel/UiComponents/PTextEdit.qml</file>
     </qresource>
 </RCC>
