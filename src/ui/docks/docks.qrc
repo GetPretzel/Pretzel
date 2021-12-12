@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/ui/docks/">
+        <file>qml/Pretzel/Docks/qmldir</file>
+        <file>qml/Pretzel/Docks/HomeDock.qml</file>
+        <file>qml/Pretzel/Docks/ItemsDock.qml</file>
+        <file>qml/Pretzel/Docks/ProfilesDock.qml</file>
+        <file>qml/Pretzel/Docks/StockDock.qml</file>
+    </qresource>
+</RCC>

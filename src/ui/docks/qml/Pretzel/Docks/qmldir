@@ -1,0 +1,5 @@
+module Pretzel.Docks
+HomeDock 1.0 HomeDock.qml
+ItemsDock 1.0 ItemsDock.qml
+ProfilesDock 1.0 ProfilesDock.qml
+StockDock 1.0 StockDock.qml
