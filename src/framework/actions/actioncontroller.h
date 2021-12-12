@@ -7,6 +7,7 @@
 #include <QVariant>
 #include <QVariantList>
 #include <QtQml>
+#include <QtQml/qqml.h>
 #include <QQmlEngine>
 #include <QQmlContext>
 #include <QQmlComponent>
@@ -23,16 +24,21 @@ namespace Pretzel::Framework
 class Pretzel::Framework::Action : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString name READ name WRITE setName)
     // QML_ELEMENT
+private:
+    QString m_name;
 public:
-    Action() {};
+    Action(QObject *parent = 0) {};
     Action(const Action &other) {};
-    Action &operator=(const Action &other) {return *this;};
-    // virtual ~Action() {};
+    Action &operator=(const Action&) {return *this;};
+    ~Action() {};
 
     void createActionComponent();
 
-    QString name;
+    QString name() const;
+    void setName(const QString &name);
+
     Q_INVOKABLE void trigger();
 signals:
     void triggered();

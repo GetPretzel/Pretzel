@@ -37,6 +37,16 @@ using namespace Pretzel::Framework;
 // }
 
 
+QString Action::name() const {
+    return m_name;
+}
+
+
+void Action::setName(const QString &name) {
+    m_name = name;
+}
+
+
 void Action::trigger() {
     emit triggered();
 }
@@ -49,7 +59,7 @@ void ActionController::addAction(Pretzel::Framework::Action *action) {
 
 Action ActionController::getActionFromName(const QString &name) const {
     for (int i = 0; i < m_actionsList.size(); i++) {
-        if (m_actionsList.at(i).name == name) {
+        if (m_actionsList.at(i).name() == name) {
             // TODO: Should a pointer be returned?
             return m_actionsList.at(i);
         }
