@@ -1,6 +1,6 @@
 module Pretzel.UiComponents
 PButton 1.0 PButton.qml
 PLineEdit 1.0 PLineEdit.qml
-PlistView 1.0 PlistView.qml
+PListView 1.0 PListView.qml
 PScrollBar 1.0 PScrollBar.qml
 PTextEdit 1.0 PTextEdit.qml
