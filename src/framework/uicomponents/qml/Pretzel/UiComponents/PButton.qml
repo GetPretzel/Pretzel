@@ -7,4 +7,5 @@ import QtQuick.Layouts 1.15
 // TODO: Create a custom button following Pretzel's UI/UX style guide
 Button {
     id: root
+    height: 30
 }
