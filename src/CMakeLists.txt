@@ -5,8 +5,10 @@ set(SOURCES ${SOURCES}
     ui/register/register.cpp
 )
 
+# TODO: Add these resources in their respective resource files
 set(RESOURCES ${RESOURCES}
     ui/ui.qrc
+    framework/uicomponents/uicomponents.qrc
 )
 
 add_executable(Pretzel
@@ -21,4 +23,5 @@ target_link_libraries(Pretzel PRIVATE
     Qt5::Sql
     KDAB::kddockwidgets
     Actions
+    # UiComponents
 )

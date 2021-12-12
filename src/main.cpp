@@ -40,6 +40,8 @@ int main(int argc, char *argv[]) {
     QString actionControllerName("ActionController");
     Pretzel::Ui::registerObject(engine.rootContext(), actionControllerName, actionController);
 
+    engine.addImportPath("qrc:/ui/components/qml");
+
     const QUrl url("qrc:/ui/main.qml");
     engine.load(url);
 

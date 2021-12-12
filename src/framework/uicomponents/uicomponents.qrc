@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/ui/components">
+        <file>qml/Pretzel/UiComponents/qmldir</file>
+        <file>qml/Pretzel/UiComponents/PButton.qml</file>
+    </qresource>
+</RCC>
