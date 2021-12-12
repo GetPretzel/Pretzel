@@ -37,8 +37,7 @@ int main(int argc, char *argv[]) {
     QObject::connect(printHelloAction, &Pretzel::Framework::Action::triggered, printHelloAction, &printHello);
     actionController->addAction(printHelloAction);
 
-    QString actionControllerName("ActionController");
-    Pretzel::Ui::registerObject(engine.rootContext(), actionControllerName, actionController);
+    Pretzel::Ui::registerObject(engine.rootContext(), "ActionController", actionController);
 
     engine.addImportPath("qrc:/ui/components/qml");
     engine.addImportPath("qrc:/ui/docks/qml");
