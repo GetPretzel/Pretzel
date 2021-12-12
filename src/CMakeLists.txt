@@ -7,8 +7,9 @@ set(SOURCES ${SOURCES}
 
 # TODO: Add these resources in their respective resource files
 set(RESOURCES ${RESOURCES}
-    ui/ui.qrc
     framework/uicomponents/uicomponents.qrc
+    ui/ui.qrc
+    ui/docks/docks.qrc
 )
 
 add_executable(Pretzel
