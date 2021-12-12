@@ -53,13 +53,13 @@ void Action::trigger() {
 
 
 void ActionController::addAction(Pretzel::Framework::Action *action) {
-    m_actionsList.push_back(*action);
+    m_actionsList.push_back(action);
 }
 
 
-Action ActionController::getActionFromName(const QString &name) const {
+Action* ActionController::getActionFromName(const QString &name) const {
     for (int i = 0; i < m_actionsList.size(); i++) {
-        if (m_actionsList.at(i).name() == name) {
+        if (m_actionsList.at(i)->name() == name) {
             // TODO: Should a pointer be returned?
             return m_actionsList.at(i);
         }

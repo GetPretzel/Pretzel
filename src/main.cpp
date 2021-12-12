@@ -30,14 +30,13 @@ int main(int argc, char *argv[]) {
     KDDockWidgets::Config::self().setQmlEngine(&engine);
 
     // qmlRegisterType<Pretzel::Framework::Action>("Pretzel.Framework", 1, 0, "Action");
-    qRegisterMetaType<Pretzel::Framework::Action>("Action");
+    qRegisterMetaType<Pretzel::Framework::Action*>("Action*");
 
     Pretzel::Framework::ActionController *actionController = new Pretzel::Framework::ActionController();
 
-    QString printHelloName("hello");
     Pretzel::Framework::Action* printHelloAction = new Pretzel::Framework::Action();
-    QObject scrapObj;
-    QObject::connect(printHelloAction, &Pretzel::Framework::Action::triggered, &scrapObj, &printHello);
+    printHelloAction->setName("hello");
+    QObject::connect(printHelloAction, &Pretzel::Framework::Action::triggered, printHelloAction, &printHello);
     actionController->addAction(printHelloAction);
 
     QString actionControllerName("ActionController");

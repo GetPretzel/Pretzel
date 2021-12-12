@@ -7,7 +7,7 @@
 #include <QVariant>
 #include <QVariantList>
 #include <QtQml>
-#include <QtQml/qqml.h>
+#include <QList>
 #include <QQmlEngine>
 #include <QQmlContext>
 #include <QQmlComponent>
@@ -34,7 +34,7 @@ public:
     Action &operator=(const Action&) {return *this;};
     ~Action() {};
 
-    void createActionComponent();
+    // void createActionComponent();
 
     QString name() const;
     void setName(const QString &name);
@@ -44,17 +44,17 @@ signals:
     void triggered();
 };
 
-Q_DECLARE_METATYPE(Pretzel::Framework::Action);
+Q_DECLARE_METATYPE(Pretzel::Framework::Action*);
 
 
 class Pretzel::Framework::ActionController : public QObject
 {
     Q_OBJECT
 private:
-    QList<Pretzel::Framework::Action> m_actionsList;
+    QList<Action *> m_actionsList;
 public:
     void addAction(Pretzel::Framework::Action *action);
-    Q_INVOKABLE Action getActionFromName(const QString &name) const;
+    Q_INVOKABLE Action* getActionFromName(const QString &name) const;
 };
 
 #endif // ACTIONCONTROLLER_H
