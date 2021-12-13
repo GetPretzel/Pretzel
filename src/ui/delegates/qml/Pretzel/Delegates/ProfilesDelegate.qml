@@ -18,7 +18,7 @@ ItemDelegate {
         RowLayout {
             Layout.fillWidth: true
             PLabel {
-                text: "The name (from the model)"
+                text: name
             }
         }
 
