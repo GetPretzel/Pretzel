@@ -1,2 +1,3 @@
 module Pretzel.Delegates
 ProfilesDelegate 1.0 ProfilesDelegate.qml
+PropertiesDelegate 1.0 PropertiesDelegate.qml

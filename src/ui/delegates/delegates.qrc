@@ -2,5 +2,6 @@
     <qresource prefix="/ui/delegates/">
         <file>qml/Pretzel/Delegates/qmldir</file>
         <file>qml/Pretzel/Delegates/ProfilesDelegate.qml</file>
+        <file>qml/Pretzel/Delegates/PropertiesDelegate.qml</file>
     </qresource>
 </RCC>

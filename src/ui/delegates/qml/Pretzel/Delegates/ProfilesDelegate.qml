@@ -54,6 +54,7 @@ ItemDelegate {
                         id: profilesListView
                         Layout.fillWidth: true
                         Layout.fillHeight: true
+                        delegate: PropertiesDelegate {}
                     }
 
                     PButton {
