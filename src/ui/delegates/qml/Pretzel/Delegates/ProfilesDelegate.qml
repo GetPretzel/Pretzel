@@ -5,18 +5,41 @@ import QtQuick.Layouts 1.15
 import Pretzel.UiComponents 1.0
 
 
-Component {
+ItemDelegate {
     id: root
-    Item {
-        width: ListView.view.width
-        height: 40
+    width: parent.width
+    checkable: true
 
-        ColumnLayout {
-            anchors.fill: parent
+    onClicked: ListView.view.currentIndex = index
+
+    contentItem: ColumnLayout {
+        anchors.fill: parent
+
+        RowLayout {
+            Layout.fillWidth: true
             PLabel {
-                Layout.alignment: Qt.AlignHCenter
-                text: index
+                text: "The name (from the model)"
             }
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+            visible: root.checked
+
+            PLabel {
+                text: qsTr("Name")
+            }
+
+            PLineEdit {
+                Layout.fillWidth: true
+                placeholderText: qsTr("The name of this profile")
+            }
+        }
+
+        PButton {
+            Layout.fillWidth: true
+            visible: root.checked
+            text: qsTr("Properties")
         }
     }
 }
