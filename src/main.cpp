@@ -14,7 +14,7 @@
 #include <QVariantList>
 
 #include "framework/actions/actioncontroller.h"
-
+#include "framework/models/profilesmodel.h"
 #include "ui/register/register.h"
 
 
@@ -33,7 +33,9 @@ int main(int argc, char *argv[]) {
     QQmlApplicationEngine engine;
     KDDockWidgets::Config::self().setQmlEngine(&engine);
 
+    // Register the types
     qRegisterMetaType<Pretzel::Framework::Action*>("Action*");
+    qmlRegisterType<Pretzel::Framework::Models::ProfilesModel>("Pretzel.Framework", 1, 0, "ProfilesModel");
 
     Pretzel::Framework::ActionController *actionController = new Pretzel::Framework::ActionController();
 
