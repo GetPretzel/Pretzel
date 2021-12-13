@@ -21,6 +21,7 @@ namespace Pretzel::Framework::Models
 class Pretzel::Framework::Models::ProfilesModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 private:
     QList<QVariantList> m_data;
     QHash<int, QByteArray> m_roleNames;
@@ -37,6 +38,17 @@ public:
     virtual QVariant data(const QModelIndex &index, int role) const override;
 
     QHash<int, QByteArray> roleNames() const override;
+
+    int count();
+
+    // QML methods
+    Q_INVOKABLE QVariantList get(int index);
+    Q_INVOKABLE void append(const QVariantList& value);
+    Q_INVOKABLE void insert(int index, const QVariantList& value);
+    Q_INVOKABLE void remove(int index);
+    Q_INVOKABLE void clear();
+signals:
+    void countChanged(int newCount);
 };
 
 #endif // PROFILESMODEL_H

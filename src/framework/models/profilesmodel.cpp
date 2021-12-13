@@ -45,3 +45,42 @@ QVariant ProfilesModel::data(const QModelIndex &index, int role) const {
             return QVariant();
     }
 }
+
+
+int ProfilesModel::count() {
+    return m_data.count();
+}
+
+
+QVariantList ProfilesModel::get(int index) {
+    return m_data.at(index);
+}
+
+
+void ProfilesModel::append(const QVariantList& value) {
+    insert(m_data.count(), value);
+}
+
+
+void ProfilesModel::insert(int index, const QVariantList& value) {
+    if (index < 0 || index > m_data.count()) {
+        return;
+    }
+
+    emit beginInsertRows(QModelIndex(), index, index);
+    m_data.insert(index, value);
+    emit endInsertRows();
+    emit countChanged(m_data.count());
+}
+
+
+void ProfilesModel::remove(int index) {
+    if (index < 0 || index >= m_data.count()) {
+        return;
+    }
+
+    emit beginRemoveRows(QModelIndex(), index, index);
+    m_data.removeAt(index);
+    emit endRemoveRows();
+    emit countChanged(m_data.count());
+}

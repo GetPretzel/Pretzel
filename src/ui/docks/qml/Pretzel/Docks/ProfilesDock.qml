@@ -17,10 +17,13 @@ KDDW.DockWidget {
         ColumnLayout {
             anchors.fill: parent
             PListView {
+                id: profilesListView
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 delegate: ProfilesDelegate {}
-                model: ProfilesModel {}
+                model: ProfilesModel {
+                    id: profilesModel
+                }
             }
         }
 
@@ -31,7 +34,10 @@ KDDW.DockWidget {
             anchors.bottomMargin: 8
             width: 30
             text: qsTr("+")
-            onClicked: ActionController.getActionFromName("hello").trigger([])
+            onClicked: {
+                profilesModel.append(["New profile", 0])
+                ActionController.getActionFromName("hello").trigger([])
+            }
         }
     }
 }
