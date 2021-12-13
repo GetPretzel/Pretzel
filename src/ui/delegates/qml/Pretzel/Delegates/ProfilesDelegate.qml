@@ -37,9 +37,7 @@ ItemDelegate {
                 Layout.fillWidth: true
                 text: root.model.get(index, 0)
                 placeholderText: qsTr("The name of this profile")
-                onTextEdited: {
-                    root.model.set(root.index, nameEdit.text, 0)
-                }
+                onTextEdited: root.model.set(root.index, nameEdit.text, 0)
             }
         }
 
