@@ -3,5 +3,6 @@ PButton 1.0 PButton.qml
 PLabel 1.0 PLabel.qml
 PLineEdit 1.0 PLineEdit.qml
 PListView 1.0 PListView.qml
+PPopup 1.0 PPopup.qml
 PScrollBar 1.0 PScrollBar.qml
 PTextEdit 1.0 PTextEdit.qml
