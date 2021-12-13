@@ -42,7 +42,9 @@ public:
     int count();
 
     // QML methods
-    Q_INVOKABLE QVariantList get(int index);
+    Q_INVOKABLE QVariant get(int index, int role);
+    Q_INVOKABLE void set(int index, QVariant value, int role);
+
     Q_INVOKABLE void append(const QVariantList& value);
     Q_INVOKABLE void insert(int index, const QVariantList& value);
     Q_INVOKABLE void remove(int index);

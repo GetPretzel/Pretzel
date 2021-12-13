@@ -52,8 +52,19 @@ int ProfilesModel::count() {
 }
 
 
-QVariantList ProfilesModel::get(int index) {
-    return m_data.at(index);
+QVariant ProfilesModel::get(int index, int role) {
+    const QVariantList &row_data = m_data[index];
+    // Index 0: name
+    // Index 1: properties
+    return row_data.at(role);
+}
+
+
+void ProfilesModel::set(int index, QVariant value, int role) {
+    QVariantList &row_data = m_data[index];
+    // Index 0: name
+    // Index 1: properties
+    row_data[role] = value;
 }
 
 

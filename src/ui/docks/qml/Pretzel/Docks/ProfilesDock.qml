@@ -21,9 +21,7 @@ KDDW.DockWidget {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 delegate: ProfilesDelegate {}
-                model: ProfilesModel {
-                    id: profilesModel
-                }
+                model: profilesModel
             }
         }
 
@@ -38,6 +36,10 @@ KDDW.DockWidget {
                 profilesModel.append(["New profile", 0])
                 ActionController.getActionFromName("hello").trigger([])
             }
+        }
+
+        ProfilesModel {
+            id: profilesModel
         }
     }
 }

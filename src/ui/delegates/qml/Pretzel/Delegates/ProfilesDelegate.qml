@@ -10,6 +10,8 @@ ItemDelegate {
     width: parent.width
     checkable: true
 
+    property var model: ListView.view.model
+
     onClicked: ListView.view.currentIndex = index
 
     contentItem: ColumnLayout {
@@ -18,7 +20,7 @@ ItemDelegate {
         RowLayout {
             Layout.fillWidth: true
             PLabel {
-                text: name
+                text: nameEdit.text
             }
         }
 
@@ -31,8 +33,13 @@ ItemDelegate {
             }
 
             PLineEdit {
+                id: nameEdit
                 Layout.fillWidth: true
+                text: root.model.get(index, 0)
                 placeholderText: qsTr("The name of this profile")
+                onTextEdited: {
+                    root.model.set(root.index, nameEdit.text, 0)
+                }
             }
         }
 
