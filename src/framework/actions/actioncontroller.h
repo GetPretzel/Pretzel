@@ -50,7 +50,7 @@ class Pretzel::Framework::ActionController : public QObject
 {
     Q_OBJECT
 private:
-    QList<Action *> m_actionsList;
+    QList<Action*> m_actionsList;
 public:
     void addAction(Pretzel::Framework::Action *action);
     Q_INVOKABLE Action* getActionFromName(const QString &name) const;
