@@ -45,6 +45,27 @@ ItemDelegate {
             Layout.fillWidth: true
             visible: root.checked
             text: qsTr("Properties")
+            onClicked: propertiesPopup.open()
+
+            PPopup {
+                id: propertiesPopup
+                contentItem: Item {
+                    PListView {
+                        id: profilesListView
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                    }
+
+                    PButton {
+                        id: addPropertyButton
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 8
+                        width: 30
+                        text: qsTr("+")
+                    }
+                }
+            }
         }
     }
 }
