@@ -13,9 +13,8 @@ Component {
 
         ColumnLayout {
             anchors.fill: parent
-            Text {
+            PLabel {
                 Layout.alignment: Qt.AlignHCenter
-                font.pixelSize: 10
                 text: index
             }
         }
