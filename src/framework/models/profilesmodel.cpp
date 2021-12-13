@@ -84,3 +84,11 @@ void ProfilesModel::remove(int index) {
     emit endRemoveRows();
     emit countChanged(m_data.count());
 }
+
+
+void ProfilesModel::clear() {
+    for (int i = 0; i < m_data.count(); i++) {
+        remove(i);
+    }
+    emit countChanged(m_data.count());
+}
