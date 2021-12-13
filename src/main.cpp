@@ -11,14 +11,19 @@
 #include <QObject>
 #include <QMetaType>
 #include <QDebug>
+#include <QVariantList>
 
 #include "framework/actions/actioncontroller.h"
 
 #include "ui/register/register.h"
 
 
-void printHello() {
-    qDebug() << "Hello";
+void printHello(QVariantList args) {
+    if (args.length() > 0) {
+        qDebug() << "Hello" << args.at(0).toInt();
+    } else {
+        qDebug() << "Hello";
+    }
 }
 
 

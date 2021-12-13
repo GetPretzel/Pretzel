@@ -2,6 +2,7 @@
 #include <QtQml>
 #include <QDebug>
 
+
 #include "actioncontroller.h"
 
 using namespace Pretzel::Framework;
@@ -17,8 +18,8 @@ void Action::setName(const QString &name) {
 }
 
 
-void Action::trigger() {
-    emit triggered();
+void Action::trigger(QVariantList args) {
+    emit triggered(args);
 }
 
 

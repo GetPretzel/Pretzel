@@ -13,6 +13,8 @@
 #include <QQmlComponent>
 #include <QQmlApplicationEngine>
 
+#include <optional>
+
 
 namespace Pretzel::Framework
 {
@@ -36,9 +38,9 @@ public:
     QString name() const;
     void setName(const QString &name);
 
-    Q_INVOKABLE void trigger();
+    Q_INVOKABLE void trigger(QVariantList args);
 signals:
-    void triggered();
+    void triggered(QVariantList args);
 };
 
 Q_DECLARE_METATYPE(Pretzel::Framework::Action*);

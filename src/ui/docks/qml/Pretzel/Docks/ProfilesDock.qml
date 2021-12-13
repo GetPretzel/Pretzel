@@ -28,6 +28,7 @@ KDDW.DockWidget {
             anchors.bottomMargin: 8
             width: 30
             text: qsTr("+")
+            onClicked: ActionController.getActionFromName("hello").trigger([])
         }
     }
 }
