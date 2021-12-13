@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/ui/delegates/">
+        <file>qml/Pretzel/Delegates/qmldir</file>
+        <file>qml/Pretzel/Delegates/ProfilesDelegate.qml</file>
+    </qresource>
+</RCC>

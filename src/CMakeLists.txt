@@ -9,6 +9,7 @@ set(SOURCES ${SOURCES}
 set(RESOURCES ${RESOURCES}
     framework/uicomponents/uicomponents.qrc
     ui/ui.qrc
+    ui/delegates/delegates.qrc
     ui/docks/docks.qrc
 )
 
