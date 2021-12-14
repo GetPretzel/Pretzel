@@ -12,6 +12,8 @@ ItemDelegate {
     checkable: true
 
     property var model: ListView.view.model
+    property var propertiesModel
+    // property alias propertiesModel: propertiesModel
 
     onClicked: ListView.view.currentIndex = index
 
@@ -80,9 +82,9 @@ ItemDelegate {
                         }
                     }
 
-                    PropertiesModel {
+                    /*PropertiesModel {
                         id: propertiesModel
-                    }
+                    }*/
                 }
             }
         }

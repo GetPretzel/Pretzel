@@ -20,7 +20,10 @@ KDDW.DockWidget {
                 id: profilesListView
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                delegate: ProfilesDelegate {}
+                delegate: ProfilesDelegate {
+                    // WARNING: This code may cause some trouble down the track 
+                    propertiesModel: profilesModel.getEditable(index, 1)
+                }
                 model: profilesModel
             }
         }
@@ -33,7 +36,9 @@ KDDW.DockWidget {
             width: 30
             text: qsTr("+")
             onClicked: {
-                profilesModel.append(["New profile", 0])
+                // WARNING: This code may cause some trouble down the track 
+                var newPropertiesModel = Qt.createQmlObject("import Pretzel.Framework 1.0; PropertiesModel {}", profilesModel, "dynamicPropertiesModel.qml")
+                profilesModel.append(["New profile", newPropertiesModel])
                 ActionController.getActionFromName("hello").trigger([])
             }
         }
