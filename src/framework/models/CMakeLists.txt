@@ -1,6 +1,8 @@
 set(MODELS_SOURCE
     profilesmodel.cpp
     profilesmodel.h
+    propertiesmodel.cpp
+    propertiesmodel.h
 )
 
 add_library(Models STATIC
