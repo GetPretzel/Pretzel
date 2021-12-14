@@ -3,11 +3,12 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 import Pretzel.UiComponents 1.0
+import Pretzel.Framework 1.0
 
 
 ItemDelegate {
     id: root
-    width: parent.width
+    width: ListView.view.width
     checkable: true
 
     property var model: ListView.view.model
@@ -49,12 +50,22 @@ ItemDelegate {
 
             PPopup {
                 id: propertiesPopup
+                contentWidth: profilesListView.implicitWidth
+                contentHeight: profilesListView.implicitHeight
+
+                height: 200
+
                 contentItem: Item {
-                    PListView {
-                        id: profilesListView
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        delegate: PropertiesDelegate {}
+                    ColumnLayout {
+                        anchors.fill: parent
+
+                        PListView {
+                            id: profilesListView
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            delegate: PropertiesDelegate {}
+                            model: propertiesModel
+                        }
                     }
 
                     PButton {
@@ -64,6 +75,13 @@ ItemDelegate {
                         anchors.bottomMargin: 8
                         width: 30
                         text: qsTr("+")
+                        onClicked: {
+                            propertiesModel.append(["New property", "String", "PLineEdit"])
+                        }
+                    }
+
+                    PropertiesModel {
+                        id: propertiesModel
                     }
                 }
             }

@@ -7,15 +7,22 @@ import Pretzel.UiComponents 1.0
 
 ItemDelegate {
     id: root
-    width: parent.width
+    width: ListView.view.width
     checkable: true
 
     property var model: ListView.view.model
 
     onClicked: ListView.view.currentIndex = index
 
-    contentItem = ColumnLayout {
+    contentItem: ColumnLayout {
         anchors.fill: parent
+
+        RowLayout {
+            Layout.fillWidth: true
+            PLabel {
+                text: name
+            }
+        }
     }
 }
 
