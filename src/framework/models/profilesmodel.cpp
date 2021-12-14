@@ -60,6 +60,15 @@ QVariant ProfilesModel::get(int index, int role) {
 }
 
 
+QVariant ProfilesModel::getEditable(int index, int role) {
+    // Returns a editable value (as oppose to get() which is read-only)
+    // Role 0: name
+    // Role 1: properties
+    QVariantList &row_data = m_data[index];
+    return row_data[role];
+}
+
+
 void ProfilesModel::set(int index, QVariant value, int role) {
     QVariantList &row_data = m_data[index];
     // Index 0: name

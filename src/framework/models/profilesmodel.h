@@ -43,6 +43,7 @@ public:
 
     // QML methods
     Q_INVOKABLE QVariant get(int index, int role);
+    Q_INVOKABLE QVariant getEditable(int index, int role);
     Q_INVOKABLE void set(int index, QVariant value, int role);
 
     Q_INVOKABLE void append(const QVariantList& value);
