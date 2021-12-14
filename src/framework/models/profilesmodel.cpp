@@ -53,9 +53,9 @@ int ProfilesModel::count() {
 
 
 QVariant ProfilesModel::get(int index, int role) {
+    // Role 0: name
+    // Role 1: properties
     const QVariantList &row_data = m_data[index];
-    // Index 0: name
-    // Index 1: properties
     return row_data.at(role);
 }
 
@@ -70,9 +70,9 @@ QVariant ProfilesModel::getEditable(int index, int role) {
 
 
 void ProfilesModel::set(int index, QVariant value, int role) {
+    // Role 0: name
+    // Role 1: properties
     QVariantList &row_data = m_data[index];
-    // Index 0: name
-    // Index 1: properties
     row_data[role] = value;
 }
 
