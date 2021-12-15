@@ -39,7 +39,10 @@ KDDW.DockWidget {
                 // WARNING: This code may cause some trouble down the track 
                 var newPropertiesModel = Qt.createQmlObject("import Pretzel.Framework 1.0; PropertiesModel {}", profilesModel, "dynamicPropertiesModel.qml")
                 profilesModel.append(["New profile", newPropertiesModel])
-                ActionController.getActionFromName("hello").trigger([])
+                // profilesModel.append([])
+                console.log("get(): " + profilesModel.get(profilesModel.count - 1, 2))
+                console.log("getProfileIdFromName(): " + profilesModel.getProfileIdFromName(profilesModel.get(root.index, 0)))
+                // ActionController.getActionFromName("hello").trigger([])
             }
         }
 

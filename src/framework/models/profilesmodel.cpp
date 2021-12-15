@@ -1,4 +1,7 @@
+#include <QDebug>
+
 #include "profilesmodel.h"
+#include "propertiesmodel.h"
 
 
 using namespace Pretzel::Framework::Models;
@@ -7,6 +10,8 @@ using namespace Pretzel::Framework::Models;
 ProfilesModel::ProfilesModel(QObject *parent) : QAbstractListModel(parent) {
     m_roleNames[NameRole] = "name";
     m_roleNames[PropertiesRole] = "properties";
+
+    m_dataIdNum = 0;
 }
 
 
@@ -69,6 +74,21 @@ QVariant ProfilesModel::getEditable(int index, int role) {
 }
 
 
+QVariant ProfilesModel::getProfileIdFromName(const QString &name) {
+    for (int i = 0; i < m_data.count(); i++) {
+        const QVariantList &row_data = m_data.at(i);
+        if (row_data.at(0).toString() == name) {
+            // The id is always the last index (-1)
+            // qDebug() << row_data.last();
+            // qDebug() << row_data.last().toInt();
+            return row_data.last();//.toInt();
+        }
+    }
+
+    return -1;
+}
+
+
 void ProfilesModel::set(int index, QVariant value, int role) {
     // Role 0: name
     // Role 1: properties
@@ -77,20 +97,37 @@ void ProfilesModel::set(int index, QVariant value, int role) {
 }
 
 
-void ProfilesModel::append(const QVariantList& value) {
+void ProfilesModel::append(QVariantList value) {
     insert(m_data.count(), value);
 }
 
 
-void ProfilesModel::insert(int index, const QVariantList& value) {
+void ProfilesModel::insert(int index, QVariantList value) {
     if (index < 0 || index > m_data.count()) {
         return;
     }
+
+    value.append(m_dataIdNum);
 
     emit beginInsertRows(QModelIndex(), index, index);
     m_data.insert(index, value);
     emit endInsertRows();
     emit countChanged(m_data.count());
+
+    // PropertiesModel* props_model = new PropertiesModel();
+    // QVariant props_variant_model = QVariant::fromValue(props_model);
+    
+    // QVariantList profile_vals;
+    // profile_vals.append("New profile");
+    // profile_vals.append(props_variant_model);
+    // profile_vals.append(m_dataIdNum);
+
+    // emit beginInsertRows(QModelIndex(), index, index);
+    // m_data.insert(index, profile_vals);
+    // emit endInsertRows();
+    // emit countChanged(m_data.count());
+
+    m_dataIdNum += 1;
 }
 
 

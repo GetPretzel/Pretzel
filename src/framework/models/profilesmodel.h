@@ -5,8 +5,10 @@
 #include <QByteArray>
 #include <QHash>
 #include <QList>
+#include <QMetaType>
 #include <QModelIndex>
 #include <QObject>
+#include <QtQml>
 #include <Qt>
 #include <QString>
 #include <QVariant>
@@ -22,8 +24,10 @@ class Pretzel::Framework::Models::ProfilesModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+    QML_ELEMENT
 private:
     QList<QVariantList> m_data;
+    int m_dataIdNum;
     QHash<int, QByteArray> m_roleNames;
 public:
     enum RoleNames {
@@ -44,10 +48,11 @@ public:
     // QML methods
     Q_INVOKABLE QVariant get(int index, int role);
     Q_INVOKABLE QVariant getEditable(int index, int role);
+    Q_INVOKABLE QVariant getProfileIdFromName(const QString &name);
     Q_INVOKABLE void set(int index, QVariant value, int role);
 
-    Q_INVOKABLE void append(const QVariantList& value);
-    Q_INVOKABLE void insert(int index, const QVariantList& value);
+    Q_INVOKABLE void append(QVariantList value);
+    Q_INVOKABLE void insert(int index, QVariantList value);
     Q_INVOKABLE void remove(int index);
     Q_INVOKABLE void clear();
 signals:

@@ -23,7 +23,7 @@ ItemDelegate {
         RowLayout {
             Layout.fillWidth: true
             PLabel {
-                text: nameEdit.text
+                text: name//nameEdit.text
             }
         }
 
@@ -38,7 +38,7 @@ ItemDelegate {
             PLineEdit {
                 id: nameEdit
                 Layout.fillWidth: true
-                text: root.model.get(index, 0)
+                text: root.model.get(root.index, 0)
                 placeholderText: qsTr("The name of this profile")
                 onTextEdited: root.model.set(root.index, nameEdit.text, 0)
             }
