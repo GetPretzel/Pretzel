@@ -5,8 +5,10 @@
 #include <QByteArray>
 #include <QHash>
 #include <QList>
+#include <QMetaType>
 #include <QModelIndex>
 #include <QObject>
+#include <QtQml>
 #include <Qt>
 #include <QString>
 #include <QVariant>
@@ -22,6 +24,7 @@ class Pretzel::Framework::Models::PropertiesModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+    QML_ELEMENT
 private:
     QList<QVariantList> m_data;
     QHash<int, QByteArray> m_roleNames;
