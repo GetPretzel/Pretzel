@@ -26,7 +26,9 @@ void DatabaseHost::init() {
     }
 
     QSqlQuery query;
-    query.exec("create table if not exists profiles (id integer not null primary key autoincrement, name TEXT null, properties TEXT null)");
+    query.exec("create table if not exists profiles (id integer not null primary key autoincrement, name TEXT null)");
+    query.exec("create table if not exists items (id integer not null primary key autoincrement, profile_id INTEGER)");
+    query.exec("create table if not exists stock (item_id INTEGER, quantity REAL, unit TEXT, cost REAL)");
 }
 
 
