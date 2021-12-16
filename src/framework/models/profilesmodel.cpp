@@ -75,13 +75,12 @@ QVariant ProfilesModel::getEditable(int index, int role) {
 
 
 QVariant ProfilesModel::getProfileIdFromName(const QString &name) {
+    qWarning() << "[WARNING] ProfilesModel::getProfileIdFromName() does not work. Use ProfilesModel::get(<index>, 2) to get the id instead";
     for (int i = 0; i < m_data.count(); i++) {
         const QVariantList &row_data = m_data.at(i);
         if (row_data.at(0).toString() == name) {
-            // The id is always the last index (-1)
-            // qDebug() << row_data.last();
-            // qDebug() << row_data.last().toInt();
-            return row_data.last();//.toInt();
+            // The id is the last index
+            return row_data.last();
         }
     }
 
