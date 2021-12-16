@@ -11,7 +11,6 @@ using namespace Pretzel::Framework::Database;
 
 void DatabaseHost::init() {
     QFile databaseFile(databaseLocation());
-    bool exists = databaseFile.exists();
 
     try {
         databaseFile.open(stderr, QIODevice::ReadWrite);
@@ -27,10 +26,7 @@ void DatabaseHost::init() {
     }
 
     QSqlQuery query;
-
-    if (!exists) {
-        query.exec("create table if not exists profiles (id integer not null primary key autoincrement, name TEXT null, properties TEXT null)");
-    }
+    query.exec("create table if not exists profiles (id integer not null primary key autoincrement, name TEXT null, properties TEXT null)");
 }
 
 
