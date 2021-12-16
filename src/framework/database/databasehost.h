@@ -24,7 +24,7 @@ public:
     Q_INVOKABLE void init();
     Q_INVOKABLE void quit();
 
-    Q_INVOKABLE QSqlDatabase databaseInstance();
+    static Q_INVOKABLE QSqlDatabase databaseInstance();
     Q_INVOKABLE QString databaseLocation();
 };
 
