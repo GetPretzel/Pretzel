@@ -1,11 +1,15 @@
 #include <QDebug>
 #include <QFile>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+
 
 #include "profilesmodel.h"
 #include "propertiesmodel.h"
 #include "../database/databasehost.h"
 
 
+using namespace Pretzel::Framework::Database;
 using namespace Pretzel::Framework::Models;
 
 
@@ -111,6 +115,18 @@ void ProfilesModel::insert(int index, QVariantList value) {
     }
 
     value.append(m_dataIdNum);
+
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query;
+
+    query.prepare("insert into profiles (name) values (:name)");
+    query.bindValue(":name", value[0]);
+    query.exec();
+
+    query.prepare("create table if not exists :prop_table_name (name TEXT, type TEXT, display_item TEXT)");
+    QString profilePropTable = "pofile_" + QString(m_dataIdNum) + "_properties";
+    query.bindValue(":prop_table_name", profilePropTable);
+    query.exec();
 
     emit beginInsertRows(QModelIndex(), index, index);
     m_data.insert(index, value);
