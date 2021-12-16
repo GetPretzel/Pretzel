@@ -14,6 +14,7 @@
 #include <QVariantList>
 
 #include "framework/actions/actioncontroller.h"
+#include "framework/database/databasehost.h"
 #include "framework/models/profilesmodel.h"
 #include "framework/models/propertiesmodel.h"
 #include "ui/register/register.h"
@@ -33,6 +34,10 @@ int main(int argc, char *argv[]) {
 
     QQmlApplicationEngine engine;
     KDDockWidgets::Config::self().setQmlEngine(&engine);
+
+    // Initialize the database
+    Pretzel::Framework::Database::DatabaseHost databaseHost;
+    databaseHost.init();
 
     // Register the types
     qRegisterMetaType<Pretzel::Framework::Action*>("Action*");

@@ -25,6 +25,7 @@ target_link_libraries(Pretzel PRIVATE
     Qt5::Sql
     KDAB::kddockwidgets
     Actions
+    Database
     Models
     # UiComponents
 )
