@@ -23,7 +23,8 @@ ItemDelegate {
         RowLayout {
             Layout.fillWidth: true
             PLabel {
-                text: name//nameEdit.text
+                // TODO: Why isn't "name" not working? Should there be another signal called ("dataChanged" or "layoutChanged")?
+                text: nameEdit.text
             }
         }
 
