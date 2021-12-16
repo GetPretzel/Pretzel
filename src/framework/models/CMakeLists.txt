@@ -12,5 +12,7 @@ add_library(Models STATIC
 target_link_libraries(Models PRIVATE
     Qt5::Core
     Qt5::Quick
+    Qt5::Sql
+    Database
 )
 

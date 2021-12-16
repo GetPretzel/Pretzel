@@ -1,7 +1,9 @@
 #include <QDebug>
+#include <QFile>
 
 #include "profilesmodel.h"
 #include "propertiesmodel.h"
+#include "../database/databasehost.h"
 
 
 using namespace Pretzel::Framework::Models;
@@ -11,7 +13,9 @@ ProfilesModel::ProfilesModel(QObject *parent) : QAbstractListModel(parent) {
     m_roleNames[NameRole] = "name";
     m_roleNames[PropertiesRole] = "properties";
 
-    m_dataIdNum = 0;
+    // TODO: Load the data saved to the database
+
+    m_dataIdNum = m_data.count();
 }
 
 
