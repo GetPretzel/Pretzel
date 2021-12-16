@@ -12,6 +12,7 @@
 
 namespace Pretzel::Framework::Database
 {
+    // TODO: Is ``DatabaseManager`` a better name?
     class DatabaseHost;
 } // namespace Pretzel::Framework::Database
 
