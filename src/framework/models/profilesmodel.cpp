@@ -69,7 +69,7 @@ QVariant ProfilesModel::get(int index, int role) {
     // Role 0: name
     // Role 1: properties
     // Role 2: id
-    const QVariantList row_data = m_data[index];
+    const QVariantList &row_data = m_data[index];
     return row_data.at(role);
 }
 
@@ -79,7 +79,7 @@ QVariant ProfilesModel::getEditable(int index, int role) {
     // Role 0: name
     // Role 1: properties
     // Role 2: id
-    QVariantList row_data = m_data[index];
+    QVariantList &row_data = m_data[index];
     return row_data[role];
 }
 
@@ -107,7 +107,7 @@ void ProfilesModel::set(int index, QVariant value, int role) {
         return;
     }
 
-    QVariantList row_data = m_data[index];
+    QVariantList &row_data = m_data[index];
     row_data[role] = value;
 
     // Update the database
