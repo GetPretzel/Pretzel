@@ -114,7 +114,7 @@ void ProfilesModel::set(int index, QVariant value, int role) {
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query;
 
-    // No need for switch statement as profiles model doesn't manage the properties (see the properties model)
+    // No need for a switch statement as the profiles model only updates the name
     query.prepare("update profiles set name = :name where id = :id");
     query.bindValue(":name", value);
     query.bindValue(":id", row_data[2]);
