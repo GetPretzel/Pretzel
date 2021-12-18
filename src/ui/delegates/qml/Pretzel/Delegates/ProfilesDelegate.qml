@@ -39,9 +39,9 @@ ItemDelegate {
             PLineEdit {
                 id: nameEdit
                 Layout.fillWidth: true
-                text: root.model.get(root.index, 0)
+                text: root.model.get(index, 0)
                 placeholderText: qsTr("The name of this profile")
-                onTextEdited: root.model.set(root.index, nameEdit.text, 0)
+                onTextEdited: root.model.set(index, nameEdit.text, 0)
             }
         }
 

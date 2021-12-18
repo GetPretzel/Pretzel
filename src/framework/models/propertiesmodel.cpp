@@ -97,8 +97,6 @@ void PropertiesModel::insert(int index, const QVariantList& value) {
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query;
 
-    qDebug() << m_profileId;
-
     QString query_string = QString("INSERT INTO profile_%1_properties (name, type, display_item) VALUES (?, ?, ?)").arg(m_profileId);
     query.prepare(query_string);
     query.bindValue(0, value[0]);

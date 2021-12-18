@@ -18,8 +18,8 @@ ProfilesModel::ProfilesModel(QObject *parent) : QAbstractListModel(parent) {
 
     // TODO: Load the data saved to the database
 
-    // WARNING: This *will* produce errors in future
-    m_dataIdNum = m_data.count();
+    // WARNING: This *will* produce errors in future (when loading data from the database when rows have been removed)
+    m_dataIdNum = 1;
 }
 
 
@@ -68,7 +68,8 @@ int ProfilesModel::count() {
 QVariant ProfilesModel::get(int index, int role) {
     // Role 0: name
     // Role 1: properties
-    const QVariantList &row_data = m_data[index];
+    // Role 2: id
+    const QVariantList row_data = m_data[index];
     return row_data.at(role);
 }
 
@@ -77,7 +78,8 @@ QVariant ProfilesModel::getEditable(int index, int role) {
     // Returns a editable value (as oppose to get() which is read-only)
     // Role 0: name
     // Role 1: properties
-    QVariantList &row_data = m_data[index];
+    // Role 2: id
+    QVariantList row_data = m_data[index];
     return row_data[role];
 }
 
@@ -104,7 +106,7 @@ void ProfilesModel::set(int index, QVariant value, int role) {
         // The ID can not be overriden
         return;
     }
-    
+
     QVariantList row_data = m_data[index];
     row_data[role] = value;
 
@@ -113,9 +115,9 @@ void ProfilesModel::set(int index, QVariant value, int role) {
     QSqlQuery query;
 
     // No need for switch statement as profiles model doesn't manage the properties (see the properties model)
-    query.prepare("update profiles set name = :name where name = :old_name");
+    query.prepare("update profiles set name = :name where id = :id");
     query.bindValue(":name", value);
-    query.bindValue(":old_name", oldValue);
+    query.bindValue(":id", row_data[2]);
     query.exec();
 }
 
