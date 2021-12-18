@@ -99,8 +99,13 @@ QVariant ProfilesModel::getProfileIdFromName(const QString &name) {
 void ProfilesModel::set(int index, QVariant value, int role) {
     // Role 0: name
     // Role 1: properties
-    QVariantList &row_data = m_data[index];
-    QString oldValue = row_data[role].toString();
+    // Role 2: id (the last index)
+    if (role == m_data.at(index).count() - 1) {
+        // The ID can not be overriden
+        return;
+    }
+    
+    QVariantList row_data = m_data[index];
     row_data[role] = value;
 
     // Update the database
