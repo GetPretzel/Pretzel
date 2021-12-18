@@ -19,6 +19,7 @@ ProfilesModel::ProfilesModel(QObject *parent) : QAbstractListModel(parent) {
 
     // TODO: Load the data saved to the database
 
+    // WARNING: This *will* produce errors in future
     m_dataIdNum = m_data.count();
 }
 
