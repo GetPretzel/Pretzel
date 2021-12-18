@@ -127,19 +127,28 @@ void ProfilesModel::insert(int index, QVariantList value) {
 
     value.append(m_dataIdNum);
 
+    PropertiesModel* props_model = new PropertiesModel(0, m_dataIdNum);
+    QVariant props_variant_model = QVariant::fromValue(props_model);
+    
+    QVariantList profile_vals;
+    profile_vals.append("New profile");
+    profile_vals.append(props_variant_model);
+    profile_vals.append(m_dataIdNum);
+
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query;
 
     query.prepare("insert into profiles (name) values (:name)");
-    query.bindValue(":name", value[0]);
+    query.bindValue(":name", profile_vals[0]);
     query.exec();
 
     // Use a QString for the query (see https://forum.qt.io/topic/132903/sqlite-create-table-does-not-work-when-inserting-variable-into-query/2)
-    QString query_string = QString("create table if not exists profile_%1_properties (name TEXT, type TEXT, display_item TEXT)").arg(value.at(2).toString());
+    // QString query_string = QString("create table if not exists profile_%1_properties (name TEXT, type TEXT, display_item TEXT)").arg(value.at(2).toString());
+    QString query_string = QString("create table if not exists profile_%1_properties (name TEXT, type TEXT, display_item TEXT)").arg(profile_vals.at(2).toString());
     query.exec(query_string);
 
     emit beginInsertRows(QModelIndex(), index, index);
-    m_data.insert(index, value);
+    m_data.insert(index, profile_vals);
     emit endInsertRows();
     emit countChanged(m_data.count());
 

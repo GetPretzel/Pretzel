@@ -1,10 +1,15 @@
+#include <QSqlDatabase>
+#include <QSqlQuery>
+
 #include "propertiesmodel.h"
+#include "../database/databasehost.h"
 
 
+using namespace Pretzel::Framework::Database;
 using namespace Pretzel::Framework::Models;
 
 
-PropertiesModel::PropertiesModel(QObject *parent) : QAbstractListModel(parent) {
+PropertiesModel::PropertiesModel(QObject *parent, int profileId) : QAbstractListModel(parent), m_profileId(profileId) {
     m_roleNames[NameRole] = "name";
     m_roleNames[TypeRole] = "type";
     m_roleNames[DisplayItemRole] = "displayItem";
@@ -88,6 +93,18 @@ void PropertiesModel::insert(int index, const QVariantList& value) {
     m_data.insert(index, value);
     emit endInsertRows();
     emit countChanged(m_data.count());
+
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query;
+
+    qDebug() << m_profileId;
+
+    QString query_string = QString("INSERT INTO profile_%1_properties (name, type, display_item) VALUES (?, ?, ?)").arg(m_profileId);
+    query.prepare(query_string);
+    query.bindValue(0, value[0]);
+    query.bindValue(1, value[1]);
+    query.bindValue(2, value[2]);
+    query.exec();
 }
 
 

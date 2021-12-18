@@ -28,6 +28,7 @@ class Pretzel::Framework::Models::PropertiesModel : public QAbstractListModel
 private:
     QList<QVariantList> m_data;
     QHash<int, QByteArray> m_roleNames;
+    int m_profileId;
 public:
     enum RoleNames {
         NameRole = Qt::UserRole,
@@ -35,7 +36,7 @@ public:
         DisplayItemRole = Qt::UserRole + 3
     };
 
-    explicit PropertiesModel(QObject *parent = 0);
+    explicit PropertiesModel(QObject *parent = 0, int profileId = -1);
     ~PropertiesModel();
 
     virtual int rowCount(const QModelIndex &parent) const override;
