@@ -1,5 +1,4 @@
 #include <QDebug>
-#include <QFile>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 
