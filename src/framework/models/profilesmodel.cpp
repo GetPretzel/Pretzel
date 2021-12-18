@@ -101,7 +101,18 @@ void ProfilesModel::set(int index, QVariant value, int role) {
     // Role 0: name
     // Role 1: properties
     QVariantList &row_data = m_data[index];
+    QString oldValue = row_data[role].toString();
     row_data[role] = value;
+
+    // Update the database
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query;
+
+    // No need for switch statement as profiles model doesn't manage the properties (see the properties model)
+    query.prepare("update profiles set name = :name where name = :old_name");
+    query.bindValue(":name", value);
+    query.bindValue(":old_name", oldValue);
+    query.exec();
 }
 
 
