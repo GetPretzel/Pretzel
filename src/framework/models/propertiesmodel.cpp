@@ -107,7 +107,6 @@ void PropertiesModel::set(int index, QVariant value, int role) {
     }
 
     query.exec();
-    qDebug() << "SQLite Error: " << query.lastError().text();
 }
 
 
