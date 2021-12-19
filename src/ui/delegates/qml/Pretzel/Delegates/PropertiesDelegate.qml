@@ -37,7 +37,7 @@ ItemDelegate {
                 Layout.fillWidth: true
                 text: root.model.get(index, 0)
                 placeholderText: qsTr("The name of this property")
-                onTextEdited: root.model.set(root.index, nameEdit.text, 0)
+                onTextEdited: root.model.set(index, nameEdit.text, 0)
             }
         }
 
@@ -53,7 +53,8 @@ ItemDelegate {
                 id: typeDropDown
                 Layout.fillWidth: true
                 model: ["String", "Integer", "Float"]
-                onActivated: root.model.set(root.index, typeDropDown.currentText, 1)
+                // TODO: Surely "index - 1" will cause an error down the track. Also why "index" doesn't work when "displayItemDropDown" works? 
+                onActivated: root.model.set(index - 1, typeDropDown.currentText, 1)
             }
         }
 
@@ -70,7 +71,7 @@ ItemDelegate {
                 Layout.fillWidth: true
                 // TODO: Update the availbe components when the type is changed
                 model: ["PDropDown", "PLineEdit", "PTextEdit"]
-                onActivated: root.model.set(root.index, displayItemDropDown.text, 2)
+                onActivated: root.model.set(index, displayItemDropDown.currentText, 2)
 
                 Component.onCompleted: displayItemDropDown.currentIndex = 1
             }

@@ -75,7 +75,39 @@ void PropertiesModel::set(int index, QVariant value, int role) {
     // Role 1: type
     // Role 2: display item
     QVariantList &row_data = m_data[index];
+    QString oldName = row_data.at(0).toString();
     row_data[role] = value;
+
+
+    // Update the database
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query;
+
+    QString tableName = QString("profile_%1_properties").arg(m_profileId);
+
+    switch (role) {
+        // TODO: ID's should probably be used instead of names to get/set items in the database
+        case 0:
+            query.prepare("update " + tableName + " set name = :name where name = :old_name");
+            query.bindValue(":name", value);
+            query.bindValue(":old_name", oldName);
+            break;
+        case 1:
+            query.prepare("update " + tableName + " set type = :type where name = :name");
+            query.bindValue(":type", value);
+            query.bindValue(":name", get(index, 0));
+            break;
+        case 2:
+            query.prepare("update " + tableName + " set display_item = :display_item where name = :name");
+            query.bindValue(":display_item", value);
+            query.bindValue(":name", get(index, 0));
+            break;
+        default:
+            return;
+    }
+
+    query.exec();
+    qDebug() << "SQLite Error: " << query.lastError().text();
 }
 
 
