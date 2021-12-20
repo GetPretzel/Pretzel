@@ -1,12 +1,54 @@
-# You can override the included template(s) by including variable overrides
-# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
-# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
-# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
-# Note that environment variables can be set in several places
-# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
-stages:
-- test
-sast:
-  stage: test
-include:
-- template: Security/SAST.gitlab-ci.yml
+# Commented out temporarily
+
+# stages:
+# - setup
+# - build
+
+# setup windows:
+#   stage: setup
+#   tags:
+#     - windows
+#   script:
+#     # TODO: Work out how to get MSYS 2, CMake and Qt 5
+#     - choco install qt5
+
+# setup linux:
+#   stage: setup
+#   tags:
+#     - docker
+#   image: ubuntu:latest
+#   script:
+#     # TODO: Do I need sudo
+#     - apt-get update
+#     - apt-get install build-essential
+#     - apt-get install cmake
+#     - apt-get install qt5-default
+
+# build windows:
+#   stage: build
+#   tags:
+#     - windows
+#   script:
+#     - mkdir build
+#     - cd build
+#     - cmake -G "MSYS Makefiles" ..
+#     # TODO: Use "make install"
+#     - make
+#   artifacts:
+#     paths:
+#       - install/
+
+# build linux:
+#   stage: build
+#   tags:
+#     docker
+#   image: ubuntu:latest
+#   script:
+#     - mkdir build
+#     - cd build
+#     - cmake ..
+#     # TODO: Use "make install"
+#     - make
+#   artifacts:
+#     paths:
+#       - install/
