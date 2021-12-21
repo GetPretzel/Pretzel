@@ -60,7 +60,7 @@ KDDW.DockWidget {
             id: profilesModel
         }
 
-        SortFilterProxyModel {
+        /*SortFilterProxyModel {
             id: profilesProxyModel
             sourceModel: profilesModel
             filters: RegExpFilter {
@@ -71,6 +71,6 @@ KDDW.DockWidget {
             sorters: StringSorter {
                 roleName: "name"
             }
-        }
+        }*/
     }
 }
