@@ -24,6 +24,7 @@ target_link_libraries(Pretzel PRIVATE
     Qt5::Quick
     Qt5::Sql
     KDAB::kddockwidgets
+    SortFilterProxyModel
     Actions
     Database
     Models

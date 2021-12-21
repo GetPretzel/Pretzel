@@ -7,6 +7,8 @@ import Pretzel.Framework 1.0
 import Pretzel.UiComponents 1.0
 import com.kdab.dockwidgets 1.0 as KDDW
 
+import SortFilterProxyModel 0.2
+
 
 KDDW.DockWidget {
     id: root
@@ -16,14 +18,24 @@ KDDW.DockWidget {
     Item {
         ColumnLayout {
             anchors.fill: parent
+
+            /*PLineEdit {
+                id: filterProfilesLineEdit
+                Layout.fillWidth: true
+                placeholderText: qsTr("Search for a profile...")
+            }*/
+
             PListView {
                 id: profilesListView
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 delegate: ProfilesDelegate {
-                    // WARNING: This code may cause some trouble down the track 
+                    model: profilesModel
+                    // WARNING: This code may cause some trouble down the track
                     propertiesModel: profilesModel.getEditable(index, 1)
                 }
+                // TODO: Does the proxy model edit the items in profiles model?
+                // model: profilesProxyModel
                 model: profilesModel
             }
         }
@@ -46,6 +58,19 @@ KDDW.DockWidget {
 
         ProfilesModel {
             id: profilesModel
+        }
+
+        SortFilterProxyModel {
+            id: profilesProxyModel
+            sourceModel: profilesModel
+            filters: RegExpFilter {
+                roleName: "name"
+                pattern: filterProfilesLineEdit.text
+                caseSensitivity: Qt.CaseInsensitive
+            }
+            sorters: StringSorter {
+                roleName: "name"
+            }
         }
     }
 }
