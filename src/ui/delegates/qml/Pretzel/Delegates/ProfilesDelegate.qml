@@ -78,9 +78,7 @@ ItemDelegate {
                         anchors.bottomMargin: 8
                         width: 30
                         text: qsTr("+")
-                        onClicked: {
-                            propertiesModel.append(["New property", "String", "PLineEdit"])
-                        }
+                        onClicked: propertiesModel.append(["New property", "String", "PLineEdit"])
                     }
 
                     /*PropertiesModel {
