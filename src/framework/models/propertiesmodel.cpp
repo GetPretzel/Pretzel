@@ -13,6 +13,10 @@ PropertiesModel::PropertiesModel(QObject *parent, int profileId) : QAbstractList
     m_roleNames[NameRole] = "name";
     m_roleNames[TypeRole] = "type";
     m_roleNames[DisplayItemRole] = "displayItem";
+
+    // Load properties model here
+
+    m_dataIdNum = 1;
 }
 
 
@@ -65,6 +69,7 @@ QVariant PropertiesModel::get(int index, int role) {
     // Role 0: name
     // Role 1: type
     // Role 2: display item
+    // Role 3: id
     const QVariantList &row_data = m_data[index];
     return row_data.at(role);
 }
@@ -74,10 +79,14 @@ void PropertiesModel::set(int index, QVariant value, int role) {
     // Role 0: name
     // Role 1: type
     // Role 2: display item
+    // Role 3: id (the last index)
+    if (role == m_data.at(index).count() - 1) {
+        // The ID can not be overriden
+        return;
+    }
+    
     QVariantList &row_data = m_data[index];
-    QString oldName = row_data.at(0).toString();
     row_data[role] = value;
-
 
     // Update the database
     QSqlDatabase database = DatabaseHost::databaseInstance();
@@ -88,19 +97,19 @@ void PropertiesModel::set(int index, QVariant value, int role) {
     switch (role) {
         // TODO: ID's should probably be used instead of names to get/set items in the database
         case 0:
-            query.prepare("update " + tableName + " set name = :name where name = :old_name");
+            query.prepare("update " + tableName + " set name = :name where id = :id");
             query.bindValue(":name", value);
-            query.bindValue(":old_name", oldName);
+            query.bindValue(":id", get(index, 3));
             break;
         case 1:
-            query.prepare("update " + tableName + " set type = :type where name = :name");
+            query.prepare("update " + tableName + " set type = :type where id = :id");
             query.bindValue(":type", value);
-            query.bindValue(":name", get(index, 0));
+            query.bindValue(":id", get(index, 3));
             break;
         case 2:
-            query.prepare("update " + tableName + " set display_item = :display_item where name = :name");
+            query.prepare("update " + tableName + " set display_item = :display_item where id = :id");
             query.bindValue(":display_item", value);
-            query.bindValue(":name", get(index, 0));
+            query.bindValue(":id", get(index, 3));
             break;
         default:
             return;
@@ -120,8 +129,14 @@ void PropertiesModel::insert(int index, const QVariantList& value) {
         return;
     }
 
+    QVariantList properties_vals;
+    properties_vals.append("New property");
+    properties_vals.append("String");
+    properties_vals.append("PLineEdit");
+    properties_vals.append(m_dataIdNum);
+
     emit beginInsertRows(QModelIndex(), index, index);
-    m_data.insert(index, value);
+    m_data.insert(index, properties_vals);
     emit endInsertRows();
     emit countChanged(m_data.count());
 
@@ -130,10 +145,12 @@ void PropertiesModel::insert(int index, const QVariantList& value) {
 
     QString query_string = QString("INSERT INTO profile_%1_properties (name, type, display_item) VALUES (?, ?, ?)").arg(m_profileId);
     query.prepare(query_string);
-    query.bindValue(0, value[0]);
-    query.bindValue(1, value[1]);
-    query.bindValue(2, value[2]);
+    query.bindValue(0, properties_vals[0]);
+    query.bindValue(1, properties_vals[1]);
+    query.bindValue(2, properties_vals[2]);
     query.exec();
+
+    m_dataIdNum += 1;
 }
 
 

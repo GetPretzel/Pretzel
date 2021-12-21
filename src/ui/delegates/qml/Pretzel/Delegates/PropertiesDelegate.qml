@@ -13,6 +13,9 @@ ItemDelegate {
     property var model: ListView.view.model
 
     onClicked: ListView.view.currentIndex = index
+    // WARNING: This doesn't seem to work. Which means there is a bug
+    hoverEnabled: true
+    onHoveredChanged: ListView.currentIndex = index
 
     contentItem: ColumnLayout {
         anchors.fill: parent
@@ -53,8 +56,7 @@ ItemDelegate {
                 id: typeDropDown
                 Layout.fillWidth: true
                 model: ["String", "Integer", "Float"]
-                // TODO: Surely "index - 1" will cause an error down the track. Also why "index" doesn't work when "displayItemDropDown" works? 
-                onActivated: root.model.set(index - 1, typeDropDown.currentText, 1)
+                onActivated: root.model.set(root.ListView.view.currentIndex, typeDropDown.currentText, 1)
             }
         }
 
@@ -71,11 +73,10 @@ ItemDelegate {
                 Layout.fillWidth: true
                 // TODO: Update the availbe components when the type is changed
                 model: ["PDropDown", "PLineEdit", "PTextEdit"]
-                onActivated: root.model.set(index, displayItemDropDown.currentText, 2)
+                onActivated: root.model.set(root.ListView.view.currentIndex, displayItemDropDown.currentText, 2)
 
                 Component.onCompleted: displayItemDropDown.currentIndex = 1
             }
         }
     }
 }
-

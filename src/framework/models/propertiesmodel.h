@@ -29,6 +29,7 @@ private:
     QList<QVariantList> m_data;
     QHash<int, QByteArray> m_roleNames;
     int m_profileId;
+    int m_dataIdNum;
 public:
     enum RoleNames {
         NameRole = Qt::UserRole,

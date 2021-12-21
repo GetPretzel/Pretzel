@@ -151,7 +151,7 @@ void ProfilesModel::insert(int index, QVariantList value) {
 
     // Use a QString for the query (see https://forum.qt.io/topic/132903/sqlite-create-table-does-not-work-when-inserting-variable-into-query/2)
     // QString query_string = QString("create table if not exists profile_%1_properties (name TEXT, type TEXT, display_item TEXT)").arg(value.at(2).toString());
-    QString query_string = QString("create table if not exists profile_%1_properties (name TEXT, type TEXT, display_item TEXT)").arg(profile_vals.at(2).toString());
+    QString query_string = QString("create table if not exists profile_%1_properties (id integer not null primary key autoincrement, name TEXT, type TEXT, display_item TEXT)").arg(profile_vals.at(2).toString());
     query.exec(query_string);
 
     emit beginInsertRows(QModelIndex(), index, index);
