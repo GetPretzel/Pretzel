@@ -10,7 +10,24 @@ KDDW.DockWidget {
     id: root
     uniqueName: "itemsDock"
     title: qsTr("Items")
-    Rectangle {
-        color: "white"
+    Item {
+        ColumnLayout {
+            anchors.fill: parent
+
+            PListView {
+                id: itemsListView
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+        }
+
+        PButton {
+            id: addItemsButton
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 8
+            width: 30
+            text: qsTr("+")
+        }
     }
 }
