@@ -15,6 +15,8 @@ KDDW.DockWidget {
     uniqueName: "profilesDock"
     title: qsTr("Profiles")
 
+    property var profilesModel
+
     Item {
         ColumnLayout {
             anchors.fill: parent
@@ -54,10 +56,6 @@ KDDW.DockWidget {
                 // console.log("get(): " + profilesModel.get(profilesModel.count - 1, 2))
                 // ActionController.getActionFromName("hello").trigger([])
             }
-        }
-
-        ProfilesModel {
-            id: profilesModel
         }
 
         /*SortFilterProxyModel {

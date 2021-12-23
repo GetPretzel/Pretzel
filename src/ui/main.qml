@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 import Pretzel.Docks 1.0
+import Pretzel.Framework 1.0
 import Pretzel.UiComponents 1.0
 import com.kdab.dockwidgets 1.0 as KDDW
 
@@ -24,10 +25,12 @@ ApplicationWindow {
 
         ProfilesDock {
             id: profilesDock
+            profilesModel: profilesModel
         }
 
         ItemsDock {
             id: itemsDock
+            itemsModel: itemsModel
         }
 
         StockDock {
@@ -41,5 +44,14 @@ ApplicationWindow {
             addDockWidget(itemsDock, KDDW.KDDockWidgets.Location_OnRight)
             // addDockWidget(stockDock, KDDW.KDDockWidgets.Location_OnLeft)
         }
+    }
+
+    ProfilesModel {
+        id: profilesModel
+    }
+
+    ItemsModel {
+        id: itemsModel
+        profilesModel: profilesModel
     }
 }

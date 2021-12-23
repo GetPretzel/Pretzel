@@ -1,5 +1,5 @@
-#ifndef PROFILESMODEL_H
-#define PROFILESMODEL_H
+#ifndef ITEMSMODEL_H
+#define ITEMSMODEL_H
 
 #include <QAbstractListModel>
 #include <QByteArray>
@@ -12,31 +12,39 @@
 #include <Qt>
 #include <QString>
 #include <QVariant>
+#include <QVariantList>
+
+#include "profilesmodel.h"
+#include "propertiesmodel.h"
 
 
 namespace Pretzel::Framework::Models
 {
-    class ProfilesModel;
+    class ItemsModel;
 } // namespace Pretzel::Framework::Models
 
 
-class Pretzel::Framework::Models::ProfilesModel : public QAbstractListModel
+class Pretzel::Framework::Models::ItemsModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+    Q_PROPERTY(QVariant profilesModel READ profilesModel WRITE setProfilesModel NOTIFY profilesModelChanged)
+    Q_PROPERTY(int profileId READ profileId WRITE setProfileId NOTIFY profileIdChanged)
     QML_ELEMENT
 private:
     QList<QVariantList> m_data;
     int m_dataIdNum;
     QHash<int, QByteArray> m_roleNames;
+    QVariant m_profilesModel;
+    int m_profileId;
 public:
     enum RoleNames {
         NameRole = Qt::UserRole,
         PropertiesRole = Qt::UserRole + 2
     };
 
-    explicit ProfilesModel(QObject *parent = 0);
-    ~ProfilesModel();
+    explicit ItemsModel(QObject *parent = 0);
+    ~ItemsModel();
 
     virtual int rowCount(const QModelIndex &parent) const override;
     virtual QVariant data(const QModelIndex &index, int role) const override;
@@ -45,11 +53,18 @@ public:
 
     int count();
 
+    QVariant profilesModel();
+    void setProfilesModel(QVariant model);
+
+    int profileId();
+    void setProfileId(int id);
+
+    Q_INVOKABLE QVariantList getProfileData();
+    Q_INVOKABLE QVariant getPropertiesModel();
+
     // QML methods
     Q_INVOKABLE QVariant get(int index, int role);
     Q_INVOKABLE QVariant getEditable(int index, int role);
-    // TODO: Does this method need to be a static method?
-    Q_INVOKABLE QVariantList getProfileFromId(int id);
     Q_INVOKABLE QVariant getProfileIdFromName(const QString &name);
     Q_INVOKABLE void set(int index, QVariant value, int role);
 
@@ -59,6 +74,8 @@ public:
     Q_INVOKABLE void clear();
 signals:
     void countChanged(int newCount);
+    void profilesModelChanged(QVariant model);
+    void profileIdChanged(int newProfileId);
 };
 
-#endif // PROFILESMODEL_H
+#endif // ITEMSMODEL_H
