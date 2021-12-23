@@ -1,20 +1,19 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-
 import Pretzel.UiComponents 1.0
 import Pretzel.Framework 1.0
 
-
 ItemDelegate {
+    // property alias propertiesModel: propertiesModel
+
     id: root
-    width: ListView.view.width
-    checkable: true
 
     property var model: ListView.view.model
     property var propertiesModel
-    // property alias propertiesModel: propertiesModel
 
+    width: ListView.view.width
+    checkable: true
     onClicked: ListView.view.currentIndex = index
 
     contentItem: ColumnLayout {
@@ -22,10 +21,12 @@ ItemDelegate {
 
         RowLayout {
             Layout.fillWidth: true
+
             PLabel {
                 // TODO: Why isn't "name" not working? Should there be another signal called ("dataChanged" or "layoutChanged")?
                 text: nameEdit.text
             }
+
         }
 
         RowLayout {
@@ -38,11 +39,13 @@ ItemDelegate {
 
             PLineEdit {
                 id: nameEdit
+
                 Layout.fillWidth: true
                 text: root.model.get(index, 0)
                 placeholderText: qsTr("The name of this profile")
                 onTextEdited: root.model.set(index, nameEdit.text, 0)
             }
+
         }
 
         PButton {
@@ -52,10 +55,14 @@ ItemDelegate {
             onClicked: propertiesPopup.open()
 
             PPopup {
+                /*PropertiesModel {
+                        id: propertiesModel
+                    }*/
+
                 id: propertiesPopup
+
                 contentWidth: profilesListView.implicitWidth
                 contentHeight: profilesListView.implicitHeight
-
                 height: 200
 
                 contentItem: Item {
@@ -64,15 +71,21 @@ ItemDelegate {
 
                         PListView {
                             id: profilesListView
+
                             Layout.fillWidth: true
                             Layout.fillHeight: true
-                            delegate: PropertiesDelegate {}
                             model: propertiesModel
+
+                            delegate: PropertiesDelegate {
+                            }
+
                         }
+
                     }
 
                     PButton {
                         id: addPropertyButton
+
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.bottom: parent.bottom
                         anchors.bottomMargin: 8
@@ -81,11 +94,12 @@ ItemDelegate {
                         onClicked: propertiesModel.append(["New property", "String", "PLineEdit"])
                     }
 
-                    /*PropertiesModel {
-                        id: propertiesModel
-                    }*/
                 }
+
             }
+
         }
+
     }
+
 }
