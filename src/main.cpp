@@ -34,7 +34,9 @@ int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    KDDockWidgets::Config::self().setQmlEngine(&engine);
+    auto &config = KDDockWidgets::Config::self();
+    config.setFlags(KDDockWidgets::Config::Flag_Default | KDDockWidgets::Config::Flag_AllowReorderTabs);
+    config.setQmlEngine(&engine);
 
     // Initialize the database
     Pretzel::Framework::Database::DatabaseHost databaseHost;
