@@ -3,6 +3,8 @@ builds
 
 .idea
 .vscode
+.kdev4
+*.kdev4
 
 CMakeLists.txt.user
 CMakeCache.txt
