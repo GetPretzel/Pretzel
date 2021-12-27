@@ -87,17 +87,10 @@ void ItemsModel::setProfileId(int id) {
 }
 
 
-QVariantList ItemsModel::getProfileData() {
-    // QObject *obj = m_profilesModel.value<QObject*>();
-    // QVariantList data = m_profilesModel.value<ProfilesModel*>()->getProfileFromId(m_profileId);
-    // ProfilesModel *model = qvariant_cast<ProfilesModel*>(m_profilesModel);
-    // ProfilesModel *model = reinterpret_cast<ProfilesModel*>(m_profilesModel.data());
-    // QObject *obj = qvariant_cast<QObject*>(m_profilesModel);
-    // ProfilesModel *model = qobject_cast<ProfilesModel*>(obj);
-    // QVariantList data = model->getProfileFromId(m_profileId);
-    // return data;
-
-    Pretzel::Framework::Models::ProfilesModel *model = m_profilesModel.value<Pretzel::Framework::Models::ProfilesModel *>();
+QVariantList ItemsModel::getProfileData(int id) {
+    ProfilesModel *model = m_profilesModel.value<ProfilesModel*>();
+    QVariantList data = model->getProfileFromId(id);
+    return data;
 }
 
 

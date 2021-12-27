@@ -35,7 +35,7 @@ KDDW.DockWidget {
             anchors.bottomMargin: 8
             width: 30
             text: qsTr("+")
-            onClicked: itemsModel.getProfileData()
+            onClicked: console.log(itemsModel.getProfileData(1))
         }
 
     }

@@ -59,7 +59,7 @@ public:
     int profileId();
     void setProfileId(int id);
 
-    Q_INVOKABLE QVariantList getProfileData();
+    Q_INVOKABLE QVariantList getProfileData(int id);
     Q_INVOKABLE QVariant getPropertiesModel();
 
     // QML methods
