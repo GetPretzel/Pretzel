@@ -98,20 +98,6 @@ QVariantList ProfilesModel::getProfileFromId(int id) {
 }
 
 
-QVariant ProfilesModel::getProfileIdFromName(const QString &name) {
-    qWarning() << "[WARNING] ProfilesModel::getProfileIdFromName() does not work. Use ProfilesModel::get(<index>, 2) to get the id instead";
-    for (int i = 0; i < m_data.count(); i++) {
-        const QVariantList &row_data = m_data.at(i);
-        if (row_data.at(0).toString() == name) {
-            // The id is the last index
-            return row_data.last();
-        }
-    }
-
-    return -1;
-}
-
-
 void ProfilesModel::set(int index, QVariant value, int role) {
     // Role 0: name
     // Role 1: properties

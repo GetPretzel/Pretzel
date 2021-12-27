@@ -50,7 +50,6 @@ public:
     Q_INVOKABLE QVariant getEditable(int index, int role);
     // TODO: Does this method need to be a static method?
     Q_INVOKABLE QVariantList getProfileFromId(int id);
-    Q_INVOKABLE QVariant getProfileIdFromName(const QString &name);
     Q_INVOKABLE void set(int index, QVariant value, int role);
 
     Q_INVOKABLE void append(QVariantList value);
