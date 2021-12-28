@@ -13,7 +13,8 @@ using namespace Pretzel::Framework::Models;
 
 
 ItemsModel::ItemsModel(QObject *parent) : QAbstractListModel(parent) {
-    m_roleNames[NameRole] = "name";
+    // ProfileRole = the profile id
+    m_roleNames[ProfileRole] = "profile";
     m_roleNames[PropertiesRole] = "properties";
 
     // TODO: Load the data saved to the database
@@ -48,7 +49,7 @@ QVariant ItemsModel::data(const QModelIndex &index, int role) const {
     const QVariantList &row_data = m_data.at(row);
 
     switch (role) {
-        case NameRole:
+        case ProfileRole:
             // The name
             return row_data.at(0);
         case PropertiesRole:
@@ -101,9 +102,8 @@ QVariant ItemsModel::getPropertiesModel() {
 
 
 QVariant ItemsModel::get(int index, int role) {
-    // Role 0: name
-    // Role 1: properties
-    // Role 2: id
+    // Role 0: profile id
+    // Role 1: item id
     const QVariantList &row_data = m_data[index];
     return row_data.at(role);
 }
@@ -111,18 +111,16 @@ QVariant ItemsModel::get(int index, int role) {
 
 QVariant ItemsModel::getEditable(int index, int role) {
     // Returns a editable value (as oppose to get() which is read-only)
-    // Role 0: name
-    // Role 1: properties
-    // Role 2: id
+    // Role 0: profile id
+    // Role 1: item id
     QVariantList &row_data = m_data[index];
     return row_data[role];
 }
 
 
 void ItemsModel::set(int index, QVariant value, int role) {
-    // Role 0: name
-    // Role 1: properties
-    // Role 2: id (the last index)
+    // Role 0: profile id
+    // Role 1: item id
     if (role == m_data.at(index).count() - 1) {
         // The ID can not be overriden
         return;
@@ -136,9 +134,9 @@ void ItemsModel::set(int index, QVariant value, int role) {
     QSqlQuery query;
 
     // No need for a switch statement as the profiles model only updates the name
-    query.prepare("update profiles set name = :name where id = :id");
-    query.bindValue(":name", value);
-    query.bindValue(":id", row_data[2]);
+    query.prepare("update items set profile_id = :profile_id where id = :item_id");
+    query.bindValue(":profile_id", value);
+    query.bindValue(":item_id", row_data.at(1));
     query.exec();
 }
 
@@ -155,22 +153,17 @@ void ItemsModel::insert(int index, QVariantList value) {
 
     value.append(m_dataIdNum);
 
-    PropertiesModel* props_model = new PropertiesModel(0, m_dataIdNum);
-    QVariant props_variant_model = QVariant::fromValue(props_model);
-    
     QVariantList itemVals;
-    itemVals.append("New item");
     // The profile id
     itemVals.append(1);
-    // itemVals.append(props_variant_model);
     // The item id
     itemVals.append(m_dataIdNum);
 
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query;
 
-    query.prepare("insert into items (name) values (:name)");
-    query.bindValue(":name", itemVals[0]);
+    query.prepare("insert into items (profile_id) values (:profile_id)");
+    query.bindValue(":profile_id", itemVals[0]);
     query.exec();
 
     // Use a QString for the query (see https://forum.qt.io/topic/132903/sqlite-create-table-does-not-work-when-inserting-variable-into-query/2)

@@ -39,7 +39,7 @@ private:
     int m_profileId;
 public:
     enum RoleNames {
-        NameRole = Qt::UserRole,
+        ProfileRole = Qt::UserRole,
         PropertiesRole = Qt::UserRole + 2
     };
 
