@@ -37,6 +37,9 @@ ItemDelegate {
 
             PDropDown {
                 id: profileDropDown
+
+                Layout.fillWidth: true
+
                 textRole: "text"
                 valueRole: "value"
                 model: []
