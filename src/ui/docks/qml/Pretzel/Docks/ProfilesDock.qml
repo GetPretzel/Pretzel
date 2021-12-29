@@ -53,7 +53,7 @@ KDDW.DockWidget {
                     model: profilesModel
                     // WARNING: This code may cause some trouble down the track
                     propertiesModel: profilesModel.getEditable(index, 1)
-                    onProfilesModelDataChanged: root.onProfilesModelDataChanged()
+                    onProfilesModelDataChanged: root.profilesModelDataChanged()
                 }
 
             }
