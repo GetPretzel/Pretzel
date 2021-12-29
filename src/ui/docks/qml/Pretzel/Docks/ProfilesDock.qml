@@ -18,6 +18,7 @@ KDDW.DockWidget {
     signal profilesModelDataChanged
 
     Item {
+        // TODO: Does the proxy model edit the items in profiles model?
         /*SortFilterProxyModel {
             id: profilesProxyModel
             sourceModel: profilesModel
@@ -54,7 +55,6 @@ KDDW.DockWidget {
                     propertiesModel: profilesModel.getEditable(index, 1)
                     onProfilesModelDataChanged: root.onProfilesModelDataChanged()
                 }
-                // TODO: Does the proxy model edit the items in profiles model?
 
             }
 
