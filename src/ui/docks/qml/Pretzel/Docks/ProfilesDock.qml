@@ -15,6 +15,8 @@ KDDW.DockWidget {
     uniqueName: "profilesDock"
     title: qsTr("Profiles")
 
+    signal profilesModelDataChanged
+
     Item {
         /*SortFilterProxyModel {
             id: profilesProxyModel
@@ -50,6 +52,7 @@ KDDW.DockWidget {
                     model: profilesModel
                     // WARNING: This code may cause some trouble down the track
                     propertiesModel: profilesModel.getEditable(index, 1)
+                    onProfilesModelDataChanged: root.onProfilesModelDataChanged()
                 }
                 // TODO: Does the proxy model edit the items in profiles model?
 
@@ -72,6 +75,7 @@ KDDW.DockWidget {
                 // WARNING: This code may cause some trouble down the track
                 var newPropertiesModel = Qt.createQmlObject("import Pretzel.Framework 1.0; PropertiesModel {}", profilesModel, "dynamicPropertiesModel.qml");
                 profilesModel.append(["New profile", newPropertiesModel]);
+                root.profilesModelDataChanged()
             }
         }
 

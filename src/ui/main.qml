@@ -34,6 +34,9 @@ ApplicationWindow {
             id: profilesDock
 
             profilesModel: profilesModel
+            onProfilesModelDataChanged: {
+                itemsDock.profilesModelDataChanged()
+            }
         }
 
         ItemsDock {

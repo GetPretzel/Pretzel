@@ -14,6 +14,8 @@ KDDW.DockWidget {
     uniqueName: "itemsDock"
     title: qsTr("Items")
 
+    signal profilesModelDataChanged
+
     Item {
         ColumnLayout {
             anchors.fill: parent
@@ -25,7 +27,12 @@ KDDW.DockWidget {
                 Layout.fillHeight: true
                 model: itemsModel
 
-                delegate: ItemsDelegate {}
+                delegate: ItemsDelegate {
+                    id: itemsDelegate
+                    Component.onCompleted: {
+                        root.profilesModelDataChanged.connect(itemsDelegate.updateProfilesModel)
+                    }
+                }
             }
 
         }

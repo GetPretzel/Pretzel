@@ -16,6 +16,8 @@ ItemDelegate {
     checkable: true
     onClicked: ListView.view.currentIndex = index
 
+    signal profilesModelDataChanged
+
     contentItem: ColumnLayout {
         anchors.fill: parent
 
@@ -91,7 +93,10 @@ ItemDelegate {
                         anchors.bottomMargin: 8
                         width: 30
                         text: qsTr("+")
-                        onClicked: propertiesModel.append(["New property", "String", "PLineEdit"])
+                        onClicked: {
+                            propertiesModel.append(["New property", "String", "PLineEdit"])
+                            root.profilesModelDataChanged()
+                        }
                     }
 
                 }
