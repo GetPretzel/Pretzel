@@ -65,6 +65,8 @@ int ProfilesModel::count() {
 }
 
 
+// TODO: Look at SortFilterProxyModel for a better example of a get method
+// QQmlSortFilterProxyModel::get(int row, const QString& roleName) const
 QVariant ProfilesModel::get(int index, int role) {
     // Role 0: name
     // Role 1: properties
