@@ -17,11 +17,17 @@ ItemDelegate {
     onClicked: ListView.view.currentIndex = index
 
     function updateProfilesModel() {
+        var profileDropDownIndex = profileDropDown.currentIndex;
+
         var newModel = [];
         for (var i = 0; i < itemsModel.profilesModel.count; i++) {
             newModel.push({"text": itemsModel.profilesModel.get(i, 0), "value": itemsModel.profilesModel.get(i, 1)});
         }
         profileDropDown.model = newModel;
+
+        if (profileDropDownIndex < profileDropDown.model.length) {
+            profileDropDown.currentIndex = profileDropDownIndex
+        }
     }
 
     contentItem: ColumnLayout {
