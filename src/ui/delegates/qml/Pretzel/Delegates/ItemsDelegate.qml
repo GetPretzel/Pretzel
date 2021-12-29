@@ -19,7 +19,6 @@ ItemDelegate {
     function updateProfilesModel() {
         var newModel = [];
         for (var i = 0; i < itemsModel.profilesModel.count; i++) {
-            console.log(itemsModel.profilesModel.get(i, 0));
             newModel.push({"text": itemsModel.profilesModel.get(i, 0), "value": itemsModel.profilesModel.get(i, 1)});
         }
         profileDropDown.model = newModel;
@@ -41,6 +40,8 @@ ItemDelegate {
                 textRole: "text"
                 valueRole: "value"
                 model: []
+
+                Component.onCompleted: root.updateProfilesModel()
             }
         }
     }
