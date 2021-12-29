@@ -58,8 +58,8 @@ ItemDelegate {
 
             PPopup {
                 /*PropertiesModel {
-                        id: propertiesModel
-                    }*/
+                    id: propertiesModel
+                }*/
 
                 id: propertiesPopup
 
@@ -78,8 +78,7 @@ ItemDelegate {
                             Layout.fillHeight: true
                             model: propertiesModel
 
-                            delegate: PropertiesDelegate {
-                            }
+                            delegate: PropertiesDelegate {}
 
                         }
 
