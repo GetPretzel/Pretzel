@@ -118,7 +118,10 @@ ItemDelegate {
                 valueRole: "value"
                 model: []
 
-                onActivated: root.updateProperties()
+                onActivated: {
+                    root.model.set(root.ListView.view.currentIndex, profileDropDown.currentValue, 0)
+                    root.updateProperties()
+                }
 
                 Component.onCompleted: root.updateProfilesModel()
             }
