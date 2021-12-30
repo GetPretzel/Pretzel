@@ -86,7 +86,7 @@ ItemDelegate {
             if (profileProperties.get(i, 1) == "String") {
                 var newObject = Qt.createQmlObject(stringLayout, contentLayout, "StringLayout.qml")
             } else if (profileProperties.get(i, 1) == "Integer") {
-                var newObject = Qt.createQmlObject(integerLayout, contentLayout, "integerLayout.qml")
+                var newObject = Qt.createQmlObject(integerLayout, contentLayout, "IntegerLayout.qml")
             } else {
                 return
             }
