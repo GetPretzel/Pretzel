@@ -33,6 +33,7 @@ ItemDelegate {
 
 
     function updateProperties() {
+        // TODO: Is there a way to fix the visual glitch of replacing/updating the properties shown in the item?
         for (var i = 0; i < root.dynamicObjects.length; i++) {
             root.dynamicObjects[i].destroy()
         }
