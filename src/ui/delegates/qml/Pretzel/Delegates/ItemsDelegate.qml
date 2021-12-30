@@ -21,7 +21,7 @@ ItemDelegate {
 
         var newModel = [];
         for (var i = 0; i < itemsModel.profilesModel.count; i++) {
-            newModel.push({"text": itemsModel.profilesModel.get(i, 0), "value": itemsModel.profilesModel.get(i, 1)});
+            newModel.push({"text": itemsModel.profilesModel.get(i, 0), "value": itemsModel.profilesModel.get(i, 2)});
         }
         profileDropDown.model = newModel;
 
