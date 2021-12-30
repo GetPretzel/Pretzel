@@ -118,6 +118,8 @@ ItemDelegate {
                 valueRole: "value"
                 model: []
 
+                onActivated: root.updateProperties()
+
                 Component.onCompleted: root.updateProfilesModel()
             }
         }
