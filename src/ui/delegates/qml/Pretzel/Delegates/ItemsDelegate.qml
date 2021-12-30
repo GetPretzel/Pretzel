@@ -30,6 +30,17 @@ ItemDelegate {
         }
     }
 
+
+    function updateProperties() {
+        var profileId = profileDropDown.currentValue
+        var profile = itemsModel.profilesModel.getProfileFromId(profileId)
+        var profileProperties = profile[1]
+        for (var i = 0; i < profileProperties.count; i++) {
+            console.log(profileProperties.get(i, 0))
+        }
+    }
+
+
     contentItem: ColumnLayout {
         anchors.fill: parent
 

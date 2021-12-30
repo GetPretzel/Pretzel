@@ -17,6 +17,7 @@ ItemDelegate {
     onClicked: ListView.view.currentIndex = index
 
     signal profilesModelDataChanged
+    signal propertiesModelDataChanged(int profileId)
 
     contentItem: ColumnLayout {
         anchors.fill: parent
@@ -81,7 +82,9 @@ ItemDelegate {
                             Layout.fillHeight: true
                             model: propertiesModel
 
-                            delegate: PropertiesDelegate {}
+                            delegate: PropertiesDelegate {
+                                onPropertiesModelChanged: root.propertiesModelDataChanged(model.get(index, 2))
+                            }
 
                         }
 
@@ -95,7 +98,10 @@ ItemDelegate {
                         anchors.bottomMargin: 8
                         width: 30
                         text: qsTr("+")
-                        onClicked: propertiesModel.append(["New property", "String", "PLineEdit"])
+                        onClicked: {
+                            propertiesModel.append(["New property", "String", "PLineEdit"])
+                            root.propertiesModelDataChanged(model.get(index, 2))
+                        }
                     }
 
                 }

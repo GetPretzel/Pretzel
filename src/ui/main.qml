@@ -37,6 +37,9 @@ ApplicationWindow {
             onProfilesModelDataChanged: {
                 itemsDock.profilesModelDataChanged()
             }
+            Component.onCompleted: {
+                profilesDock.propertiesModelDataChanged.connect(itemsDock.propertiesModelDataChanged)
+            }
         }
 
         ItemsDock {

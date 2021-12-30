@@ -16,6 +16,7 @@ KDDW.DockWidget {
     title: qsTr("Profiles")
 
     signal profilesModelDataChanged
+    signal propertiesModelDataChanged(int profileId)
 
     Item {
         // TODO: Does the proxy model edit the items in profiles model?
@@ -50,10 +51,16 @@ KDDW.DockWidget {
                 model: profilesModel
 
                 delegate: ProfilesDelegate {
+                    id: profilesDelegate
                     model: profilesModel
                     // WARNING: This code may cause some trouble down the track
                     propertiesModel: profilesModel.getEditable(index, 1)
                     onProfilesModelDataChanged: root.profilesModelDataChanged()
+                    // TODO: Send the profile id parameter
+                    // onPropertiesModelChanged: root.propertiesModelChanged()
+                    Component.onCompleted: {
+                        profilesDelegate.propertiesModelDataChanged.connect(root.propertiesModelDataChanged)
+                    }
                 }
 
             }

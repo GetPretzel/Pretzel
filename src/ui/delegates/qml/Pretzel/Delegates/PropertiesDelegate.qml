@@ -15,6 +15,9 @@ ItemDelegate {
     hoverEnabled: true
     onHoveredChanged: ListView.currentIndex = index
 
+    // The profile id parameter is handled in the profiles delegate
+    signal propertiesModelChanged
+
     contentItem: ColumnLayout {
         anchors.fill: parent
 
@@ -41,7 +44,10 @@ ItemDelegate {
                 Layout.fillWidth: true
                 text: root.model.get(index, 0)
                 placeholderText: qsTr("The name of this property")
-                onTextEdited: root.model.set(index, nameEdit.text, 0)
+                onTextEdited: {
+                    root.model.set(index, nameEdit.text, 0)
+                    root.propertiesModelChanged()
+                }
             }
 
         }

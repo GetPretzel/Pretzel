@@ -15,6 +15,7 @@ KDDW.DockWidget {
     title: qsTr("Items")
 
     signal profilesModelDataChanged
+    signal propertiesModelDataChanged(int profileId)
 
     Item {
         ColumnLayout {
@@ -31,6 +32,7 @@ KDDW.DockWidget {
                     id: itemsDelegate
                     Component.onCompleted: {
                         root.profilesModelDataChanged.connect(itemsDelegate.updateProfilesModel)
+                        root.propertiesModelDataChanged.connect(itemsDelegate.updateProperties)
                     }
                 }
             }
