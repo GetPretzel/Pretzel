@@ -83,7 +83,7 @@ ItemDelegate {
                             model: propertiesModel
 
                             delegate: PropertiesDelegate {
-                                onPropertiesModelChanged: root.propertiesModelDataChanged(model.get(index, 2))
+                                onPropertiesModelDataChanged: root.propertiesModelDataChanged(model.get(index, 2))
                             }
 
                         }
