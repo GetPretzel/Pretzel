@@ -8,6 +8,12 @@
 using namespace Pretzel::Framework;
 
 
+void Action::connect(void* method) {
+    // TODO: Pass in any method/function (with/without return type) as a parameter to this method
+    // QObject::connect(this, &Action::triggered, this, method);
+}
+
+
 QString Action::name() const {
     return m_name;
 }

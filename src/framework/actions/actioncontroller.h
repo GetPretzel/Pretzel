@@ -35,6 +35,8 @@ public:
     Action &operator=(const Action&) {return *this;};
     ~Action() {};
 
+    void connect(void* method);
+
     QString name() const;
     void setName(const QString &name);
 

@@ -52,6 +52,7 @@ int main(int argc, char *argv[]) {
 
     Pretzel::Framework::Action* printHelloAction = new Pretzel::Framework::Action();
     printHelloAction->setName("hello");
+    // printHelloAction->connect(&printHello);
     QObject::connect(printHelloAction, &Pretzel::Framework::Action::triggered, printHelloAction, &printHello);
     actionController->addAction(printHelloAction);
 

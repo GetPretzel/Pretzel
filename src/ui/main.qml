@@ -23,6 +23,7 @@ ApplicationWindow {
             addDockWidget(profilesDock, KDDW.KDDockWidgets.Location_OnLeft);
             addDockWidget(itemsDock, KDDW.KDDockWidgets.Location_OnRight);
             // addDockWidget(stockDock, KDDW.KDDockWidgets.Location_OnLeft)
+            // ActionController.getActionFromName("hello").trigger([])
         }
 
         HomeDock {
