@@ -166,6 +166,9 @@ void ItemsModel::insert(int index, QVariantList value) {
     query.bindValue(":profile_id", itemVals[0]);
     query.exec();
 
+    QString queryString = QString("create table if not exists item_%1_properties (id integer not null primary key autoincrement)").arg(itemVals.at(1).toString());
+    query.exec(queryString);
+
     // Use a QString for the query (see https://forum.qt.io/topic/132903/sqlite-create-table-does-not-work-when-inserting-variable-into-query/2)
     // QString query_string = QString("create table if not exists profile_%1_properties (name TEXT, type TEXT, display_item TEXT)").arg(value.at(2).toString());
     
