@@ -61,7 +61,36 @@ ItemDelegate {
                     }
                 }
             `
-            var newObject = Qt.createQmlObject(stringLayout, contentLayout, "StringLayout.qml")
+
+            var integerLayout = `
+                import QtQuick 2.15
+                import QtQuick.Controls 2.15
+                import QtQuick.Layouts 1.15
+                import Pretzel.UiComponents 1.0
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    visible: root.checked
+
+                    PLabel {
+                        text: qsTr("${profileProperties.get(i, 0)}")
+                    }
+
+                    PSpinBox {
+                        Layout.fillWidth: true
+                        value: 0
+                    }
+                }
+            `
+
+            if (profileProperties.get(i, 1) == "String") {
+                var newObject = Qt.createQmlObject(stringLayout, contentLayout, "StringLayout.qml")
+            } else if (profileProperties.get(i, 1) == "Integer") {
+                var newObject = Qt.createQmlObject(integerLayout, contentLayout, "integerLayout.qml")
+            } else {
+                return
+            }
+
             root.dynamicObjects.push(newObject)
         }
     }
