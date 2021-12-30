@@ -16,7 +16,7 @@ ItemDelegate {
     onHoveredChanged: ListView.currentIndex = index
 
     // The profile id parameter is handled in the profiles delegate
-    signal propertiesModelChanged
+    signal propertiesModelDataChanged
 
     contentItem: ColumnLayout {
         anchors.fill: parent
@@ -46,7 +46,7 @@ ItemDelegate {
                 placeholderText: qsTr("The name of this property")
                 onTextEdited: {
                     root.model.set(index, nameEdit.text, 0)
-                    root.propertiesModelChanged()
+                    root.propertiesModelDataChanged()
                 }
             }
 
@@ -65,7 +65,10 @@ ItemDelegate {
 
                 Layout.fillWidth: true
                 model: ["String", "Integer", "Float"]
-                onActivated: root.model.set(root.ListView.view.currentIndex, typeDropDown.currentText, 1)
+                onActivated: {
+                    root.model.set(root.ListView.view.currentIndex, typeDropDown.currentText, 1)
+                    root.propertiesModelDataChanged()
+                }
             }
 
         }
@@ -84,7 +87,10 @@ ItemDelegate {
                 Layout.fillWidth: true
                 // TODO: Update the availbe components when the type is changed
                 model: ["PDropDown", "PLineEdit", "PTextEdit"]
-                onActivated: root.model.set(root.ListView.view.currentIndex, displayItemDropDown.currentText, 2)
+                onActivated: {
+                    root.model.set(root.ListView.view.currentIndex, displayItemDropDown.currentText, 2)
+                    root.propertiesModelDataChanged()
+                }
                 Component.onCompleted: displayItemDropDown.currentIndex = 1
             }
 
