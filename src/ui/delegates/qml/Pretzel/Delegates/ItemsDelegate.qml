@@ -11,6 +11,7 @@ ItemDelegate {
     id: root
 
     property var model: ListView.view.model
+    property var dynamicObjects: []
     
     width: ListView.view.width
     checkable: true
@@ -32,16 +33,42 @@ ItemDelegate {
 
 
     function updateProperties() {
+        for (var i = 0; i < root.dynamicObjects.length; i++) {
+            root.dynamicObjects[i].destroy()
+        }
+        root.dynamicObjects = []
+
         var profileId = profileDropDown.currentValue
         var profile = itemsModel.profilesModel.getProfileFromId(profileId)
         var profileProperties = profile[1]
         for (var i = 0; i < profileProperties.count; i++) {
-            console.log(profileProperties.get(i, 0))
+            var stringLayout = `
+                import QtQuick 2.15
+                import QtQuick.Controls 2.15
+                import QtQuick.Layouts 1.15
+                import Pretzel.UiComponents 1.0
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    visible: root.checked
+
+                    PLabel {
+                        text: qsTr("${profileProperties.get(i, 0)}")
+                    }
+
+                    PLineEdit {
+                        Layout.fillWidth: true
+                    }
+                }
+            `
+            var newObject = Qt.createQmlObject(stringLayout, contentLayout, "StringLayout.qml")
+            root.dynamicObjects.push(newObject)
         }
     }
 
 
     contentItem: ColumnLayout {
+        id: contentLayout
         anchors.fill: parent
 
         RowLayout {
