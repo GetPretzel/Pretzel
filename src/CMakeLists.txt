@@ -7,6 +7,7 @@ set(SOURCES ${SOURCES}
 
 # TODO: Add these resources in their respective resource files
 set(RESOURCES ${RESOURCES}
+    ../assets/assets.qrc
     framework/uicomponents/uicomponents.qrc
     ui/ui.qrc
     ui/delegates/delegates.qrc

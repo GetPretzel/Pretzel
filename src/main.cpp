@@ -4,6 +4,7 @@
 #include <kddockwidgets/FrameworkWidgetFactory.h>
 
 #include <QGuiApplication>
+#include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 #include <QQmlContext>
@@ -32,6 +33,9 @@ void printHello(QVariantList args) {
 
 int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
+    // TODO: Why does the white on the icon render as brown when using SVG here?
+    // TODO: Does ICO render on all platforms?
+    app.setWindowIcon(QIcon(":/assets/icon.ico"));
 
     QQmlApplicationEngine engine;
     auto &config = KDDockWidgets::Config::self();
