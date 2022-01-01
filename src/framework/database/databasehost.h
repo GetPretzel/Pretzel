@@ -22,6 +22,7 @@ class Pretzel::Framework::Database::DatabaseHost : public QObject
     Q_OBJECT
 public:
     Q_INVOKABLE void init();
+    // TODO: Call the SQLite VACUUM command on quit
     Q_INVOKABLE void quit();
 
     static Q_INVOKABLE QSqlDatabase databaseInstance();
