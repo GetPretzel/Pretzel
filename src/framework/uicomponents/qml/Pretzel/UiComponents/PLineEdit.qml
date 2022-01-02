@@ -5,4 +5,6 @@ import QtQuick.Controls 2.15
 // TODO: Create a custom button following Pretzel's UI/UX style guide
 TextField {
     id: root
+    
+    height: 30
 }
