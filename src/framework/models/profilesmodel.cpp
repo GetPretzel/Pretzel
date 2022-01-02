@@ -87,7 +87,6 @@ QVariant ProfilesModel::getEditable(int index, int role) {
 
 
 QVariantList ProfilesModel::getProfileFromId(int id) {
-    qDebug() << m_data;
     for (int i = 0; i < m_data.count(); i++) {
         // TODO: Does this need to be editable?
         const QVariantList &row_data = m_data.at(i);
