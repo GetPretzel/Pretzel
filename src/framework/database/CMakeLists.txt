@@ -1,5 +1,6 @@
 set(DATABASE_SOURCE
     databasehost.cpp
+    items.cpp
 )
 
 add_library(Database STATIC
@@ -10,4 +11,5 @@ target_link_libraries(Database PRIVATE
     Qt5::Core
     Qt5::Quick
     Qt5::Sql
+    Models
 )

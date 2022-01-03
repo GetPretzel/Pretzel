@@ -89,6 +89,7 @@ ItemDelegate {
                 }
             `
 
+            // TODO: Add properties where needed to the layout code for modifying data in the database
             if (profileProperties.get(i, 1) == "String") {
                 var newObject = Qt.createQmlObject(stringLayout, contentLayout, "StringLayout.qml")
             } else if (profileProperties.get(i, 1) == "Integer" || profileProperties.get(i, 1) == "Float") {
@@ -124,7 +125,20 @@ ItemDelegate {
                 model: []
 
                 onActivated: {
+                    // Go through all items which use the old profile id and clear all data in the database
+                    /*for (var i = 0; i < root.model.count; i++) {
+                        if (root.model.get(i, 0) == currentValue) {
+                            ActionController.getActionFromName("clear-item-properties").trigger([root.model.get(i, 1)])
+                        }
+                    }*/
+
+                    // Reset the item properties
+                    // WARNING: "root.ListView.view.currentIndex" will cause problems when implementing filtering and searching
+                    ActionController.getActionFromName("reset-item-properties").trigger([root.model.get(root.ListView.view.currentIndex, 1), root.model.profilesModel.getProfileFromId(root.model.get(root.ListView.view.currentIndex, 0))])
+
+                    // Update the profile id
                     root.model.set(root.ListView.view.currentIndex, profileDropDown.currentValue, 0)
+                    // Add the new data
                     root.updateProperties()
                 }
 

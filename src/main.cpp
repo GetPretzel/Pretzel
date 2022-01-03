@@ -16,6 +16,7 @@
 
 #include "framework/actions/actioncontroller.h"
 #include "framework/database/databasehost.h"
+#include "framework/database/items.h"
 #include "framework/models/itemsmodel.h"
 #include "framework/models/profilesmodel.h"
 #include "framework/models/propertiesmodel.h"
@@ -59,6 +60,11 @@ int main(int argc, char *argv[]) {
     // printHelloAction->connect(&printHello);
     QObject::connect(printHelloAction, &Pretzel::Framework::Action::triggered, printHelloAction, &printHello);
     actionController->addAction(printHelloAction);
+
+    Pretzel::Framework::Action* resetItemPropertiesAction = new Pretzel::Framework::Action();
+    resetItemPropertiesAction->setName("reset-item-properties");
+    QObject::connect(resetItemPropertiesAction, &Pretzel::Framework::Action::triggered, resetItemPropertiesAction, &Pretzel::Actions::resetItemProperties);
+    actionController->addAction(resetItemPropertiesAction);
 
     Pretzel::Ui::registerObject(engine.rootContext(), "ActionController", actionController);
 
