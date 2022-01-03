@@ -131,6 +131,7 @@ void PropertiesModel::insert(int index, const QVariantList& value) {
 
     QVariantList properties_vals;
     properties_vals.append("New property");
+    // TODO: Use PDropDown.currentValue to input the actual SQLite 3 types (which will save a switch statement later)
     properties_vals.append("String");
     properties_vals.append("PLineEdit");
     properties_vals.append(m_dataIdNum);
