@@ -33,6 +33,11 @@ ItemDelegate {
 
 
     function updateProperties() {
+        // TODO: There is a bug involving using where profile doesn't exist (when no items exist). The following does not fix the bug
+        /*if (root.parent === "undefined") {
+            console.log("No parent")
+        }*/
+
         // TODO: Is there a way to fix the visual glitch of replacing/updating the properties shown in the item?
         for (var i = 0; i < root.dynamicObjects.length; i++) {
             root.dynamicObjects[i].destroy()
