@@ -155,7 +155,7 @@ void ItemsModel::insert(int index, QVariantList value) {
 
     QVariantList itemVals;
     // The profile id
-    itemVals.append(1);
+    itemVals.append(-1);
     // The item id
     itemVals.append(m_dataIdNum);
 
