@@ -32,3 +32,37 @@ void Pretzel::Actions::resetItemProperties(QVariantList args) {
     queryString = QString("CREATE TABLE IF NOT EXISTS " + tableName + " (property_id INTEGER, value TEXT)");
     query.exec(queryString);
 }
+
+
+void Pretzel::Actions::addItemProperty(QVariantList args) {
+    const int id = args.at(0).toInt();
+    const int propertyId = args.at(1).toInt();
+    const QVariant value = args.at(2).toString();
+
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query;
+
+    QString tableName = QString("item_%1_properties").arg(id);
+    QString queryString = QString("INSERT INTO " + tableName + " (property_id, value) VALUES (:property_id, :value)");
+    query.prepare(queryString);
+    query.bindValue(":property_id", propertyId);
+    query.bindValue(":value", value);
+    query.exec();
+}
+
+
+void Pretzel::Actions::updateItemProperty(QVariantList args) {
+    const int id = args.at(0).toInt();
+    const int propertyId = args.at(1).toInt();
+    const QVariant value = args.at(2).toString();
+
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query;
+
+    QString tableName = QString("item_%1_properties").arg(id);
+    QString queryString = QString("UPDATE " + tableName + " SET value = :value WHERE property_id = :property_id");
+    query.prepare(queryString);
+    query.bindValue(":property_id", propertyId);
+    query.bindValue(":value", value);
+    query.exec();
+}

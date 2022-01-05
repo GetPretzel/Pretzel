@@ -75,6 +75,11 @@ int main(int argc, char *argv[]) {
     QObject::connect(addItemPropertyAction, &Pretzel::Framework::Action::triggered, addItemPropertyAction, &Pretzel::Actions::addItemProperty);
     actionController->addAction(addItemPropertyAction);
 
+    Pretzel::Framework::Action* updateItemPropertyAction = new Pretzel::Framework::Action();
+    updateItemPropertyAction->setName("update-item-property");
+    QObject::connect(updateItemPropertyAction, &Pretzel::Framework::Action::triggered, updateItemPropertyAction, &Pretzel::Actions::updateItemProperty);
+    actionController->addAction(updateItemPropertyAction);
+
     Pretzel::Ui::registerObject(engine.rootContext(), "ActionController", actionController);
 
     engine.addImportPath("qrc:/ui/components/qml");

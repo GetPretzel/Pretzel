@@ -55,15 +55,20 @@ ItemDelegate {
                 import Pretzel.UiComponents 1.0
 
                 RowLayout {
+                    id: contentLayout
                     Layout.fillWidth: true
                     visible: root.checked
+
+                    signal propertyChanged(string propVal)
 
                     PLabel {
                         text: qsTr("${profileProperties.get(i, 0)}")
                     }
 
                     PLineEdit {
+                        id: lineEdit
                         Layout.fillWidth: true
+                        onTextEdited: contentLayout.propertyChanged(lineEdit.text)
                     }
                 }
             `
@@ -92,6 +97,9 @@ ItemDelegate {
             // TODO: Add properties where needed to the layout code for modifying data in the database
             if (profileProperties.get(i, 1) == "String") {
                 var newObject = Qt.createQmlObject(stringLayout, contentLayout, "StringLayout.qml")
+                ActionController.getActionFromName("add-item-property").trigger([root.model.get(index, 1), profileProperties.get(i, 3), text])
+                // TODO: Work out why using "i" instead of "index" crashes Pretzel
+                newObject.propertyChanged.connect(function(propVal) {updateItemProperty(propVal, index)})
             } else if (profileProperties.get(i, 1) == "Integer" || profileProperties.get(i, 1) == "Float") {
                 var newObject = Qt.createQmlObject(integerLayout, contentLayout, "IntegerLayout.qml")
             } else {
@@ -100,6 +108,14 @@ ItemDelegate {
 
             root.dynamicObjects.push(newObject)
         }
+    }
+
+
+    function updateItemProperty(text, index) {
+        var profileId = profileDropDown.currentValue
+        var profile = itemsModel.profilesModel.getProfileFromId(profileId)
+        var profileProperties = profile[1]
+        ActionController.getActionFromName("update-item-property").trigger([root.model.get(index, 1), profileProperties.get(index, 3), text])
     }
 
 
