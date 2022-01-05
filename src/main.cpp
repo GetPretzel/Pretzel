@@ -3,6 +3,7 @@
 #include <kddockwidgets/private/DockRegistry_p.h>
 #include <kddockwidgets/FrameworkWidgetFactory.h>
 
+#include <QEvent>
 #include <QGuiApplication>
 #include <QIcon>
 #include <QQmlApplicationEngine>
@@ -15,6 +16,7 @@
 #include <QVariantList>
 
 #include "framework/actions/actioncontroller.h"
+// #include "framework/actions/papplication.h"
 #include "framework/database/databasehost.h"
 #include "framework/database/items.h"
 #include "framework/models/itemsmodel.h"
@@ -34,6 +36,8 @@ void printHello(QVariantList args) {
 
 int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
+    // TODO: Add a custom application class based on QGuiApplication
+    // Pretzel::Framework::Application::PApplication app(argc, argv);
     // TODO: Why does the white on the icon render as brown when using SVG here?
     // TODO: Does ICO render on all platforms?
     app.setWindowIcon(QIcon(":/assets/icon.ico"));
@@ -65,6 +69,11 @@ int main(int argc, char *argv[]) {
     resetItemPropertiesAction->setName("reset-item-properties");
     QObject::connect(resetItemPropertiesAction, &Pretzel::Framework::Action::triggered, resetItemPropertiesAction, &Pretzel::Actions::resetItemProperties);
     actionController->addAction(resetItemPropertiesAction);
+
+    Pretzel::Framework::Action* addItemPropertyAction = new Pretzel::Framework::Action();
+    addItemPropertyAction->setName("add-item-property");
+    QObject::connect(addItemPropertyAction, &Pretzel::Framework::Action::triggered, addItemPropertyAction, &Pretzel::Actions::addItemProperty);
+    actionController->addAction(addItemPropertyAction);
 
     Pretzel::Ui::registerObject(engine.rootContext(), "ActionController", actionController);
 
