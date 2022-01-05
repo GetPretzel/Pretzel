@@ -59,7 +59,7 @@ ItemDelegate {
                     Layout.fillWidth: true
                     visible: root.checked
 
-                    signal propertyChanged(string propVal)
+                    signal propertyChanged(string propVal, int index)
 
                     PLabel {
                         text: qsTr("${profileProperties.get(i, 0)}")
@@ -68,7 +68,7 @@ ItemDelegate {
                     PLineEdit {
                         id: lineEdit
                         Layout.fillWidth: true
-                        onTextEdited: contentLayout.propertyChanged(lineEdit.text)
+                        onTextEdited: contentLayout.propertyChanged(lineEdit.text, ${i})
                     }
                 }
             `
@@ -99,7 +99,7 @@ ItemDelegate {
                 var newObject = Qt.createQmlObject(stringLayout, contentLayout, "StringLayout.qml")
                 ActionController.getActionFromName("add-item-property").trigger([root.model.get(index, 1), profileProperties.get(i, 3), text])
                 // TODO: Work out why using "i" instead of "index" crashes Pretzel
-                newObject.propertyChanged.connect(function(propVal) {updateItemProperty(propVal, index)})
+                newObject.propertyChanged.connect(root.updateItemProperty)//function(propVal, i=i) {updateItemProperty(propVal, i)})
             } else if (profileProperties.get(i, 1) == "Integer" || profileProperties.get(i, 1) == "Float") {
                 var newObject = Qt.createQmlObject(integerLayout, contentLayout, "IntegerLayout.qml")
             } else {
@@ -111,11 +111,11 @@ ItemDelegate {
     }
 
 
-    function updateItemProperty(text, index) {
+    function updateItemProperty(value, index) {
         var profileId = profileDropDown.currentValue
         var profile = itemsModel.profilesModel.getProfileFromId(profileId)
         var profileProperties = profile[1]
-        ActionController.getActionFromName("update-item-property").trigger([root.model.get(index, 1), profileProperties.get(index, 3), text])
+        ActionController.getActionFromName("update-item-property").trigger([root.model.get(root.ListView.view.currentIndex, 1), profileProperties.get(index, 3), value])
     }
 
 
