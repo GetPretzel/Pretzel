@@ -148,12 +148,16 @@ ItemDelegate {
                         }
                     }*/
 
-                    // Reset the item properties
-                    // WARNING: "root.ListView.view.currentIndex" will cause problems when implementing filtering and searching
-                    ActionController.getActionFromName("reset-item-properties").trigger([root.model.get(root.ListView.view.currentIndex, 1), root.model.profilesModel.getProfileFromId(root.model.get(root.ListView.view.currentIndex, 1))])
-
                     // Update the profile id
                     root.model.set(root.ListView.view.currentIndex, profileDropDown.currentValue, 0)
+
+                    // Reset the item properties
+                    // WARNING: "root.ListView.view.currentIndex" will cause problems when implementing filtering and searching
+                    console.log("Profiles id: " + root.model.get(root.ListView.view.currentIndex, 0))
+                    console.log("Items id: " + root.model.get(root.ListView.view.currentIndex, 1))
+                    console.log("Profile data: " + root.model.profilesModel.getProfileFromId(root.model.get(root.ListView.view.currentIndex, 0)))
+                    ActionController.getActionFromName("reset-item-properties").trigger([root.model.get(root.ListView.view.currentIndex, 1), root.model.profilesModel.getProfileFromId(root.model.get(root.ListView.view.currentIndex, 0))])
+
                     // Add the new data
                     root.updateProperties()
                 }
