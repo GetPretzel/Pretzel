@@ -22,7 +22,7 @@ ApplicationWindow {
             // addDockWidget(homeDock, KDDW.KDDockWidgets.Location_OnLeft)
             addDockWidget(profilesDock, KDDW.KDDockWidgets.Location_OnLeft);
             addDockWidget(itemsDock, KDDW.KDDockWidgets.Location_OnRight);
-            // addDockWidget(stockDock, KDDW.KDDockWidgets.Location_OnLeft)
+            addDockWidget(stockDock, KDDW.KDDockWidgets.Location_OnLeft)
         }
 
         HomeDock {
