@@ -19,10 +19,10 @@ ApplicationWindow {
         uniqueName: "pretzelWindowLayout"
         Component.onCompleted: {
             // TODO: Add these dock widgets on top of each other
-            // addDockWidget(homeDock, KDDW.KDDockWidgets.Location_OnLeft)
-            addDockWidget(profilesDock, KDDW.KDDockWidgets.Location_OnLeft);
-            addDockWidget(itemsDock, KDDW.KDDockWidgets.Location_OnRight);
             addDockWidget(stockDock, KDDW.KDDockWidgets.Location_OnLeft)
+            addDockWidget(itemsDock, KDDW.KDDockWidgets.Location_OnLeft);
+            addDockWidget(profilesDock, KDDW.KDDockWidgets.Location_OnLeft);
+            // addDockWidget(homeDock, KDDW.KDDockWidgets.Location_OnLeft)
         }
 
         HomeDock {
