@@ -94,11 +94,9 @@ ItemDelegate {
                 }
             `
 
-            // TODO: Add properties where needed to the layout code for modifying data in the database
             if (profileProperties.get(i, 1) == "String") {
                 var newObject = Qt.createQmlObject(stringLayout, contentLayout, "StringLayout.qml")
                 ActionController.getActionFromName("add-item-property").trigger([root.model.get(root.ListView.view.currentIndex, 1), profileProperties.get(i, 3), text])
-                // TODO: Work out why using "i" instead of "index" crashes Pretzel
                 newObject.propertyChanged.connect(root.updateItemProperty)//function(propVal, i=i) {updateItemProperty(propVal, i)})
             } else if (profileProperties.get(i, 1) == "Integer" || profileProperties.get(i, 1) == "Float") {
                 var newObject = Qt.createQmlObject(integerLayout, contentLayout, "IntegerLayout.qml")
