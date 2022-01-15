@@ -35,6 +35,12 @@ KDDW.DockWidget {
                         root.propertiesModelDataChanged.connect(itemsDelegate.updateProperties)
                     }
                 }
+
+                PLabel {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    visible: itemsModel.count < 1
+                    text: qsTr("Click the '+' button to add a new item")
+                }
             }
 
         }
