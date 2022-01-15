@@ -10,8 +10,27 @@ KDDW.DockWidget {
     uniqueName: "stockDock"
     title: qsTr("Stock")
 
-    Rectangle {
-        color: "white"
+    Item {
+        ColumnLayout {
+            anchors.fill: parent
+
+            PListView {
+                id: stockListView
+                
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+        }
+
+        PButton {
+            id: addStockButton
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 8
+            width: 30
+            text: qsTr("+")
+        }
     }
 
 }
