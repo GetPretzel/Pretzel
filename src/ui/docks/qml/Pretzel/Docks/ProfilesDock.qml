@@ -63,6 +63,12 @@ KDDW.DockWidget {
                     }
                 }
 
+                PLabel {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    visible: profilesModel.count < 1
+                    text: qsTr("Click the '+' button to add a new profile")
+                }
+
             }
 
         }
