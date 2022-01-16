@@ -3,6 +3,7 @@
 
 #include <QVariantList>
 
+// TODO: Should this file be moved to ``Pretzel/src/actions``?
 namespace Pretzel::Actions
 {
     void resetItemProperties(QVariantList args);
