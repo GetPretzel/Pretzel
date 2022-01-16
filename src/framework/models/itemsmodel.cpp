@@ -177,6 +177,7 @@ void ItemsModel::insert(int index, QVariantList value) {
     // query.exec(query_string);
 
     emit beginInsertRows(QModelIndex(), index, index);
+    // TODO: Should the database code be moved here?
     m_data.insert(index, itemVals);
     emit endInsertRows();
     emit countChanged(m_data.count());
