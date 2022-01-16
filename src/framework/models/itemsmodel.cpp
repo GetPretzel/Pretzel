@@ -205,6 +205,7 @@ void ItemsModel::remove(int index) {
     }
 
     emit beginRemoveRows(QModelIndex(), index, index);
+    // TODO: Add the database code
     m_data.removeAt(index);
     emit endRemoveRows();
     emit countChanged(m_data.count());
@@ -215,5 +216,8 @@ void ItemsModel::clear() {
     for (int i = 0; i < m_data.count(); i++) {
         remove(i);
     }
+
+    // TODO: Add the database code
+    
     emit countChanged(m_data.count());
 }
