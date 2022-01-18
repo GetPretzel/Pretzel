@@ -13,6 +13,10 @@
 ## About
 This is the next generation of Pretzel. This version will be a complete rewrite and restructuring of the code as well as a completely new UI/UX design.
 
+<!-- TODO
+## Support
+-->
+
 ## Compiling
 
 ### Note for Windows Users
