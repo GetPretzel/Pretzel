@@ -29,7 +29,7 @@ void Pretzel::Actions::resetItemProperties(QVariantList args) {
     query.exec(queryString);
 
     QString tableName = QString("item_%1_properties").arg(id);
-    queryString = QString("CREATE TABLE IF NOT EXISTS " + tableName + " (property_id INTEGER, value TEXT)");
+    queryString = QString("CREATE TABLE IF NOT EXISTS " + tableName + " (property_id INTEGER not null primary key autoincrement, value TEXT)");
     query.exec(queryString);
 }
 

@@ -166,7 +166,7 @@ void ItemsModel::insert(int index, QVariantList value) {
     query.bindValue(":profile_id", itemVals[0]);
     query.exec();
 
-    QString queryString = QString("create table if not exists item_%1_properties (id integer not null primary key autoincrement)").arg(itemVals.at(1).toString());
+    QString queryString = QString("create table if not exists item_%1_properties (property_id integer not null primary key autoincrement)").arg(itemVals.at(1).toString());
     query.exec(queryString);
 
     // TODO: Is an id needed?
