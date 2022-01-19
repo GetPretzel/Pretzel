@@ -28,16 +28,6 @@ KDDW.DockWidget {
                 model: stockModel
             }
         }
-
-        PButton {
-            id: addStockButton
-
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 8
-            width: 30
-            text: qsTr("+")
-        }
     }
 
 }
