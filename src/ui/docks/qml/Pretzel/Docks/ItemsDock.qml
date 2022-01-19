@@ -56,7 +56,7 @@ KDDW.DockWidget {
             text: qsTr("+")
             onClicked: {
                 itemsModel.append([])
-                stockModel.append([0, 0, "Unit", 0])
+                stockModel.append([itemsModel.count - 1, 0, "Unit", 0])
             }
         }
 
