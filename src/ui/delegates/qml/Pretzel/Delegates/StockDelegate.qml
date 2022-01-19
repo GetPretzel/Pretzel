@@ -27,11 +27,48 @@ ItemDelegate {
         }
 
         RowLayout {
+            id: quantityLayout
             Layout.fillWidth: true
             visible: root.checked
+
+            PLabel {
+                text: qsTr("Quantity")
+            }
+
+            PSpinBox {
+                Layout.fillWidth: true
+                value: 0
+            }
         }
-    }
-    PLabel {
-        text: index
+
+        RowLayout {
+            id: unitLayout
+            Layout.fillWidth: true
+            visible: root.checked
+
+            PLabel {
+                text: qsTr("Unit")
+            }
+
+            PLineEdit {
+                Layout.fillWidth: true
+                placeholderText: qsTr("The measuring unit of this item (cm, mm etc.")
+            }
+        }
+
+        RowLayout {
+            id: costLayout
+            Layout.fillWidth: true
+            visible: root.checked
+
+            PLabel {
+                text: qsTr("Cost")
+            }
+
+            PSpinBox {
+                Layout.fillWidth: true
+                value: 0
+            }
+        }
     }
 }
