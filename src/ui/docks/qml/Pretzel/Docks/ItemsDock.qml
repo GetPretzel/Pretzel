@@ -10,6 +10,7 @@ KDDW.DockWidget {
     id: root
 
     property var itemsModel
+    property var stockModel
 
     uniqueName: "itemsDock"
     title: qsTr("Items")
@@ -53,7 +54,10 @@ KDDW.DockWidget {
             anchors.bottomMargin: 8
             width: 30
             text: qsTr("+")
-            onClicked: itemsModel.append([])
+            onClicked: {
+                itemsModel.append([])
+                stockModel.append([0, 0, "Unit", 0])
+            }
         }
 
     }

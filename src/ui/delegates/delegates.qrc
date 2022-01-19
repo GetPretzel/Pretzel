@@ -4,5 +4,6 @@
         <file>qml/Pretzel/Delegates/ItemsDelegate.qml</file>
         <file>qml/Pretzel/Delegates/ProfilesDelegate.qml</file>
         <file>qml/Pretzel/Delegates/PropertiesDelegate.qml</file>
+        <file>qml/Pretzel/Delegates/StockDelegate.qml</file>
     </qresource>
 </RCC>

@@ -44,12 +44,13 @@ ApplicationWindow {
 
         ItemsDock {
             id: itemsDock
-
             itemsModel: itemsModel
+            stockModel: stockModel
         }
 
         StockDock {
             id: stockDock
+            stockModel: stockModel
         }
 
     }
@@ -62,6 +63,11 @@ ApplicationWindow {
         id: itemsModel
 
         profilesModel: profilesModel
+    }
+
+    StockModel {
+        id: stockModel
+        itemsModel: itemsModel
     }
 
 }

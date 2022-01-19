@@ -2,3 +2,4 @@ module Pretzel.Delegates
 ItemsDelegate 1.0 ItemsDelegate.qml
 ProfilesDelegate 1.0 ProfilesDelegate.qml
 PropertiesDelegate 1.0 PropertiesDelegate.qml
+StockDelegate 1.0 StockDelegate.qml
