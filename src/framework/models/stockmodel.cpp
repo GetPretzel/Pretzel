@@ -112,35 +112,37 @@ void StockModel::set(int index, QVariant value, int role) {
     QVariantList &row_data = m_data[index];
     row_data[role] = value;
 
-    int itemId = itemsModel->get(index, 2).toInt();
-    QString tableName = QString("item_%1_properties").arg(itemId);
+    // int itemId = itemsModel->get(index, 2).toInt();
+    int itemId = itemsModel->get(index, 1).toInt();
+    // TODO: Should I use the "stock" table instead?
+    QString tableName = QString("item_%1_stock").arg(itemId);
 
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query;
+    QString queryString;
 
     switch (role)
     {
     case 1:
         // The quantity
-        // TODO: Insert into first item (don't use id's)
-        query.prepare("update " + tableName + " set quantity = :quantity limit 1");
-        query.bindValue(":quantity", value);
+        // TODO: Why doesn't "limit 1" work?
+        queryString = QString("update " + tableName + " set quantity = " + value.toString());// + " limit 1");
         break;
     case 2:
         // The unit
-        query.prepare("update " + tableName + " set unit = :unit limit 1");
-        query.bindValue(":unit", value);
+        // TODO: Why doesn't "limit 1" work?
+        queryString = QString("update " + tableName + " set unit = '" + value.toString() + "'");// + " limit 1");
         break;
     case 3:
         // The cost
-        query.prepare("update " + tableName + " set cost = :cost limit 1");
-        query.bindValue(":cost", value);
+        // TODO: Why doesn't "limit 1" work?
+        queryString = QString("update " + tableName + " set cost = " + value.toString());// + " limit 1");
         break;
     default:
         return;
     }
 
-    query.exec();
+    query.exec(queryString);
 }
 
 

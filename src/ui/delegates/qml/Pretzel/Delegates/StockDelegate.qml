@@ -36,8 +36,10 @@ ItemDelegate {
             }
 
             PSpinBox {
+                id: quantitySpinBox
                 Layout.fillWidth: true
                 value: 0
+                onValueModified: stockModel.set(index, quantitySpinBox.value, 1)
             }
         }
 
@@ -51,8 +53,10 @@ ItemDelegate {
             }
 
             PLineEdit {
+                id: unitLineEdit
                 Layout.fillWidth: true
                 placeholderText: qsTr("The measuring unit of this item (cm, mm etc.")
+                onTextEdited: stockModel.set(index, unitLineEdit.text, 2)
             }
         }
 
@@ -66,8 +70,10 @@ ItemDelegate {
             }
 
             PSpinBox {
+                id: costSpinBox
                 Layout.fillWidth: true
                 value: 0
+                onValueModified: stockModel.set(index, costSpinBox.value, 3)
             }
         }
     }
