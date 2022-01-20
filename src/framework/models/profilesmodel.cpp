@@ -16,10 +16,36 @@ ProfilesModel::ProfilesModel(QObject *parent) : QAbstractListModel(parent) {
     m_roleNames[NameRole] = "name";
     m_roleNames[PropertiesRole] = "properties";
 
-    // TODO: Load the data saved to the database
-
     // WARNING: This *will* produce errors in future (when loading data from the database when rows have been removed)
     m_dataIdNum = 1;
+
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query("SELECT * FROM profiles");
+
+    int idIndex = query.record().indexOf("id");
+    int nameIndex = query.record().indexOf("name");
+
+    while (query.next()) {
+        int id = query.value(idIndex).toInt();
+        if (id > m_dataIdNum) {
+            m_dataIdNum = id;
+        }
+        QVariantList row_data;
+
+        QString name = query.value(nameIndex).toString();
+        row_data << name;
+
+        // TODO: Load the properties model
+        PropertiesModel *propertiesModel = new PropertiesModel(0, id);
+        QVariant propertiesModelVariant = QVariant::fromValue(propertiesModel);
+        row_data.append(propertiesModelVariant);
+
+        row_data << id;
+
+        m_data.append(row_data);
+    }
+
+    m_dataIdNum += 1;
 }
 
 
