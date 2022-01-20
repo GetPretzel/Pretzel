@@ -51,7 +51,9 @@ public:
     Q_INVOKABLE QVariant get(int index, int role);
     Q_INVOKABLE void set(int index, QVariant value, int role);
 
+    Q_INVOKABLE void append();
     Q_INVOKABLE void append(const QVariantList& value);
+    Q_INVOKABLE void insert(int index);
     Q_INVOKABLE void insert(int index, const QVariantList& value);
     Q_INVOKABLE void remove(int index);
     Q_INVOKABLE void clear();

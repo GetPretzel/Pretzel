@@ -30,13 +30,39 @@ ProfilesModel::ProfilesModel(QObject *parent) : QAbstractListModel(parent) {
         if (id > m_dataIdNum) {
             m_dataIdNum = id;
         }
+
         QVariantList row_data;
 
         QString name = query.value(nameIndex).toString();
         row_data << name;
 
-        // TODO: Load the properties model
         PropertiesModel *propertiesModel = new PropertiesModel(0, id);
+        QString propertiesQueryString = QString("SELECT * FROM profile_%1_properties").arg(id);
+        QSqlQuery propertiesQuery(propertiesQueryString);
+
+        int propertyIdIndex = propertiesQuery.record().indexOf("id");
+        int propertyNameIndex = propertiesQuery.record().indexOf("name");
+        int propertyTypeIndex = propertiesQuery.record().indexOf("type");
+        int propertyDisplayItemIndex = propertiesQuery.record().indexOf("display_item");
+
+        while (propertiesQuery.next()) {
+            QVariantList propertiesRowData;
+
+            QString propertyName = propertiesQuery.value(propertyNameIndex).toString();
+            propertiesRowData.append(propertyName);
+
+            QString propertyType = propertiesQuery.value(propertyTypeIndex).toString();
+            propertiesRowData.append(propertyType);
+
+            QString propertyDisplayItem = propertiesQuery.value(propertyDisplayItemIndex).toString();
+            propertiesRowData.append(propertyDisplayItem);
+
+            int propertyId = propertiesQuery.value(propertyIdIndex).toInt();
+            propertiesRowData.append(propertyId);
+
+            propertiesModel->append(propertiesRowData);
+        }
+
         QVariant propertiesModelVariant = QVariant::fromValue(propertiesModel);
         row_data.append(propertiesModelVariant);
 

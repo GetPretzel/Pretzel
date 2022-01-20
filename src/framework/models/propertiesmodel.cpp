@@ -119,12 +119,17 @@ void PropertiesModel::set(int index, QVariant value, int role) {
 }
 
 
+void PropertiesModel::append() {
+    insert(m_data.count());
+}
+
+
 void PropertiesModel::append(const QVariantList& value) {
     insert(m_data.count(), value);
 }
 
 
-void PropertiesModel::insert(int index, const QVariantList& value) {
+void PropertiesModel::insert(int index) {
     if (index < 0 || index > m_data.count()) {
         return;
     }
@@ -150,6 +155,31 @@ void PropertiesModel::insert(int index, const QVariantList& value) {
     query.bindValue(1, properties_vals[1]);
     query.bindValue(2, properties_vals[2]);
     query.exec();
+
+    m_dataIdNum += 1;
+}
+
+
+void PropertiesModel::insert(int index, const QVariantList& value) {
+    if (index < 0 || index > m_data.count()) {
+        return;
+    }
+
+    emit beginInsertRows(QModelIndex(), index, index);
+    m_data.insert(index, value);
+    emit endInsertRows();
+    emit countChanged(m_data.count());
+
+    // Don't do anything with the database here (or loading the properties doesn't work)
+    // QSqlDatabase database = DatabaseHost::databaseInstance();
+    // QSqlQuery query;
+
+    // QString query_string = QString("INSERT INTO profile_%1_properties (name, type, display_item) VALUES (?, ?, ?)").arg(m_profileId);
+    // query.prepare(query_string);
+    // query.bindValue(0, value[0]);
+    // query.bindValue(1, value[1]);
+    // query.bindValue(2, value[2]);
+    // query.exec();
 
     m_dataIdNum += 1;
 }
