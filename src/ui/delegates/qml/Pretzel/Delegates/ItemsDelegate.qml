@@ -160,7 +160,10 @@ ItemDelegate {
                     root.updateProperties()
                 }
 
-                Component.onCompleted: root.updateProfilesModel()
+                Component.onCompleted: {
+                    root.updateProfilesModel()
+                    currentIndex = root.model.get(index, 0) - 1
+                }
             }
         }
     }

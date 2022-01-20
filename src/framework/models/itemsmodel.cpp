@@ -17,7 +17,23 @@ ItemsModel::ItemsModel(QObject *parent) : QAbstractListModel(parent) {
     m_roleNames[ProfileRole] = "profile";
     m_roleNames[PropertiesRole] = "properties";
 
-    // TODO: Load the data saved to the database
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query("SELECT * FROM items");
+
+    int idIndex = query.record().indexOf("id");
+    int profileIdIndex = query.record().indexOf("profile_id");
+
+    while (query.next()) {
+        QVariantList values;
+
+        int profileId = query.value(profileIdIndex).toInt();
+        values.append(profileId);
+
+        int id = query.value(idIndex).toInt();
+        values.append(id);
+
+        m_data.append(values);
+    }
 
     // WARNING: This *will* produce errors in future (when loading data from the database when rows have been removed)
     m_dataIdNum = 1;
