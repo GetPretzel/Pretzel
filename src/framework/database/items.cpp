@@ -13,6 +13,9 @@ using namespace Pretzel::Framework::Database;
 using namespace Pretzel::Framework::Models;
 
 
+// TODO: Create a ItemPropertiesModel
+
+
 void Pretzel::Actions::resetItemProperties(QVariantList args) {
     // Resets an item's properties
     
