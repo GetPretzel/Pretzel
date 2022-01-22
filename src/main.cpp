@@ -20,6 +20,7 @@
 #include "framework/database/databasehost.h"
 #include "framework/database/items.h"
 #include "framework/models/itemsmodel.h"
+#include "framework/models/itempropertiesmodel.h"
 #include "framework/models/profilesmodel.h"
 #include "framework/models/propertiesmodel.h"
 #include "framework/models/stockmodel.h"
@@ -55,6 +56,7 @@ int main(int argc, char *argv[]) {
     // Register the types
     qRegisterMetaType<Pretzel::Framework::Action*>("Action*");
     qmlRegisterType<Pretzel::Framework::Models::ItemsModel>("Pretzel.Framework", 1, 0, "ItemsModel");
+    qmlRegisterType<Pretzel::Framework::Models::ItemPropertiesModel>("Pretzel.Framework", 1, 0, "ItemPropertiesModel");
     qmlRegisterType<Pretzel::Framework::Models::ProfilesModel>("Pretzel.Framework", 1, 0, "ProfilesModel");
     qmlRegisterType<Pretzel::Framework::Models::PropertiesModel>("Pretzel.Framework", 1, 0, "PropertiesModel");
     qmlRegisterType<Pretzel::Framework::Models::StockModel>("Pretzel.Framework", 1, 0, "StockModel");

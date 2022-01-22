@@ -1,6 +1,8 @@
 set(MODELS_SOURCE
     itemsmodel.cpp
     itemsmodel.h
+    itempropertiesmodel.cpp
+    itempropertiesmodel.h
     profilesmodel.cpp
     profilesmodel.h
     propertiesmodel.cpp
