@@ -16,6 +16,7 @@
 
 namespace Pretzel::Framework::Models
 {
+    // TODO: Rename to "ProfilePropertiesModel"
     class PropertiesModel;
 } // namespace Pretzel::Framework::Models
 
