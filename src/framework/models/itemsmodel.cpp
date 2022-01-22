@@ -14,6 +14,7 @@ using namespace Pretzel::Framework::Models;
 
 ItemsModel::ItemsModel(QObject *parent) : QAbstractListModel(parent) {
     // ProfileRole = the profile id
+    // TODO: Add a item id role
     m_roleNames[ProfileRole] = "profile";
     m_roleNames[PropertiesRole] = "properties";
 
