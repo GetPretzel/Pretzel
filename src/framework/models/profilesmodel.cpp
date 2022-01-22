@@ -25,7 +25,10 @@ ProfilesModel::ProfilesModel(QObject *parent) : QAbstractListModel(parent) {
     int idIndex = query.record().indexOf("id");
     int nameIndex = query.record().indexOf("name");
 
+    bool dataLoaded = false;
+
     while (query.next()) {
+        dataLoaded = true;
         int id = query.value(idIndex).toInt();
         if (id > m_dataIdNum) {
             m_dataIdNum = id;
@@ -71,7 +74,9 @@ ProfilesModel::ProfilesModel(QObject *parent) : QAbstractListModel(parent) {
         m_data.append(row_data);
     }
 
-    m_dataIdNum += 1;
+    if (dataLoaded) {
+        m_dataIdNum += 1;
+    }
 }
 
 
