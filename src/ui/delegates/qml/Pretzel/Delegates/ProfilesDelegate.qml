@@ -99,7 +99,7 @@ ItemDelegate {
                         width: 30
                         text: qsTr("+")
                         onClicked: {
-                            propertiesModel.append(["New property", "String", "PLineEdit"])
+                            propertiesModel.append()//["New property", "String", "PLineEdit"])
                             root.propertiesModelDataChanged(model.get(index, 2))
                         }
                     }
