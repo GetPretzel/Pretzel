@@ -120,7 +120,7 @@ QVariant ItemsModel::getPropertiesModel() {
 
 QVariant ItemsModel::get(int index, int role) {
     // Role 0: profile id
-    // Role 1: item id
+    // Role 2: item id
     const QVariantList &row_data = m_data[index];
     return row_data.at(role);
 }
@@ -129,7 +129,7 @@ QVariant ItemsModel::get(int index, int role) {
 QVariant ItemsModel::getEditable(int index, int role) {
     // Returns a editable value (as oppose to get() which is read-only)
     // Role 0: profile id
-    // Role 1: item id
+    // Role 2: item id
     QVariantList &row_data = m_data[index];
     return row_data[role];
 }
@@ -137,8 +137,8 @@ QVariant ItemsModel::getEditable(int index, int role) {
 
 void ItemsModel::set(int index, QVariant value, int role) {
     // Role 0: profile id
-    // Role 1: item id
-    if (role == m_data.at(index).count() - 1) {
+    // Role 2: item id
+    if (role == m_data.at(index).count() - 2) {
         // The ID can not be overriden
         return;
     }
@@ -153,7 +153,7 @@ void ItemsModel::set(int index, QVariant value, int role) {
     // No need for a switch statement as the profiles model only updates the name
     query.prepare("update items set profile_id = :profile_id where id = :item_id");
     query.bindValue(":profile_id", value);
-    query.bindValue(":item_id", row_data.at(1));
+    query.bindValue(":item_id", row_data.at(2));
     query.exec();
 }
 
@@ -183,12 +183,12 @@ void ItemsModel::insert(int index, QVariantList value) {
     query.bindValue(":profile_id", itemVals[0]);
     query.exec();
 
-    QString queryString = QString("create table if not exists item_%1_properties (property_id integer not null primary key autoincrement)").arg(itemVals.at(1).toString());
+    QString queryString = QString("create table if not exists item_%1_properties (property_id integer not null primary key autoincrement, value text)").arg(itemVals.at(2).toString());
     query.exec(queryString);
 
     // TODO: Is an id needed?
-    // QString queryString = QString("create table if not exists item_%1_stock (id integer not null primary key autoincrement, quantity real, unit text, cost real)").arg(itemVals.at(1).toString());
-    queryString = QString("create table if not exists item_%1_stock (quantity real, unit text, cost real)").arg(itemVals.at(1).toString());
+    // QString queryString = QString("create table if not exists item_%2_stock (id integer not null primary key autoincrement, quantity real, unit text, cost real)").arg(itemVals.at(2).toString());
+    queryString = QString("create table if not exists item_%1_stock (quantity real, unit text, cost real)").arg(itemVals.at(2).toString());
     query.exec(queryString);
 
     // Use a QString for the query (see https://forum.qt.io/topic/132903/sqlite-create-table-does-not-work-when-inserting-variable-into-query/2)
