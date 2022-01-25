@@ -29,12 +29,10 @@ ItemDelegate {
         profileDropDown.model = newModel;
     }
 
-
     function updateItemProperties() {
         root.clearItemProperties()
         root.addItemProperties()
     }
-
 
     function clearItemProperties() {
         root.model.get(index, 1).clear()
@@ -45,7 +43,6 @@ ItemDelegate {
 
         root.properties = []
     }
-
 
     function addItemProperties() {
         var profileId = profileDropDown.currentValue
@@ -117,11 +114,9 @@ ItemDelegate {
         }
     }
 
-
     function updateItemProperty(itemPropertyId, value) {
         root.model.get(index, 1).set(itemPropertyId, value)
     }
-
 
     contentItem: ColumnLayout {
         id: contentLayout
