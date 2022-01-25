@@ -176,6 +176,7 @@ void ItemsModel::insert(int index, QVariantList value) {
     itemVals.append(-1);
     // The item properties
     ItemPropertiesModel* itemPropsModel = new ItemPropertiesModel();
+    itemPropsModel->setItemId(m_dataIdNum);
     QVariant itemPropsModelVariant = QVariant::fromValue(itemPropsModel);
     itemVals.append(itemPropsModelVariant);
     // The item id
