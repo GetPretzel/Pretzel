@@ -3,6 +3,7 @@
 #include <QSqlQuery>
 
 #include "itemsmodel.h"
+#include "itempropertiesmodel.h"
 #include "profilesmodel.h"
 #include "propertiesmodel.h"
 #include "../database/databasehost.h"
