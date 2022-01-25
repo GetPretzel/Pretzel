@@ -64,7 +64,8 @@ ItemDelegate {
                 id: typeDropDown
 
                 Layout.fillWidth: true
-                model: ["String", "Integer", "Float"]
+                // TODO: Add support for floats
+                model: ["String", "Integer"]//, "Float"]
                 onActivated: {
                     root.model.set(root.ListView.view.currentIndex, typeDropDown.currentText, 1)
                     root.propertiesModelDataChanged()
