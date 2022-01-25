@@ -144,11 +144,7 @@ ItemDelegate {
 
                 onActivated: root.updateItemProperties()
 
-                Component.onCompleted: {
-                    root.updateProfilesDropDown()
-                    // root.updateProfilesModel()
-                    // currentIndex = root.model.get(index, 0) - 1
-                }
+                Component.onCompleted: root.updateProfilesDropDown()
             }
         }
     }
