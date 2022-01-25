@@ -22,8 +22,8 @@ ItemDelegate {
         var profileDropDownIndex = profileDropDown.currentIndex;
 
         var newModel = [];
-        for (var i = 0; i < itemsModel.profilesModel.count; i++) {
-            newModel.push({"text": itemsModel.profilesModel.get(i, 0), "value": itemsModel.profilesModel.get(i, 2)});
+        for (var i = 0; i < model.profilesModel.count; i++) {
+            newModel.push({"text": model.profilesModel.get(i, 0), "value": model.profilesModel.get(i, 2)});
         }
         profileDropDown.model = newModel;
 
@@ -46,7 +46,7 @@ ItemDelegate {
         root.dynamicObjects = []
 
         var profileId = profileDropDown.currentValue
-        var profile = itemsModel.profilesModel.getProfileFromId(profileId)
+        var profile = model.profilesModel.getProfileFromId(profileId)
         var profileProperties = profile[1]
         for (var i = 0; i < profileProperties.count; i++) {
             var stringLayout = `
@@ -97,7 +97,7 @@ ItemDelegate {
 
             if (profileProperties.get(i, 1) == "String") {
                 var newObject = Qt.createQmlObject(stringLayout, contentLayout, "StringLayout.qml")
-                ActionController.getActionFromName("add-item-property").trigger([root.model.get(root.ListView.view.currentIndex, 1), profileProperties.get(i, 3), text])
+                ActionController.getActionFromName("add-item-property").trigger([root.model.get(root.ListView.view.currentIndex, 2), profileProperties.get(i, 3), text])
                 newObject.propertyChanged.connect(root.updateItemProperty)//function(propVal, i=i) {updateItemProperty(propVal, i)})
             } else if (profileProperties.get(i, 1) == "Integer" || profileProperties.get(i, 1) == "Float") {
                 var newObject = Qt.createQmlObject(integerLayout, contentLayout, "IntegerLayout.qml")
@@ -112,9 +112,9 @@ ItemDelegate {
 
     function updateItemProperty(value, index) {
         var profileId = profileDropDown.currentValue
-        var profile = itemsModel.profilesModel.getProfileFromId(profileId)
+        var profile = model.profilesModel.getProfileFromId(profileId)
         var profileProperties = profile[1]
-        ActionController.getActionFromName("update-item-property").trigger([root.model.get(root.ListView.view.currentIndex, 1), profileProperties.get(index, 3), value])
+        ActionController.getActionFromName("update-item-property").trigger([root.model.get(root.ListView.view.currentIndex, 2), profileProperties.get(index, 3), value])
     }
 
 
@@ -153,9 +153,9 @@ ItemDelegate {
                     // Reset the item properties
                     // WARNING: "root.ListView.view.currentIndex" will cause problems when implementing filtering and searching
                     console.log("Profiles id: " + root.model.get(root.ListView.view.currentIndex, 0))
-                    console.log("Items id: " + root.model.get(root.ListView.view.currentIndex, 1))
+                    console.log("Items id: " + root.model.get(root.ListView.view.currentIndex, 2))
                     console.log("Profile data: " + root.model.profilesModel.getProfileFromId(root.model.get(root.ListView.view.currentIndex, 0)))
-                    ActionController.getActionFromName("reset-item-properties").trigger([root.model.get(root.ListView.view.currentIndex, 1), root.model.profilesModel.getProfileFromId(root.model.get(root.ListView.view.currentIndex, 0))])
+                    ActionController.getActionFromName("reset-item-properties").trigger([root.model.get(root.ListView.view.currentIndex, 2), root.model.profilesModel.getProfileFromId(root.model.get(root.ListView.view.currentIndex, 0))])
 
                     // Add the new data
                     root.updateProperties()
