@@ -10,6 +10,7 @@ import com.kdab.dockwidgets 1.0 as KDDW
 ItemDelegate {
     id: root
 
+    // TODO: Use "model" or "itemsModel"?
     property var model: ListView.view.model
     property var dynamicObjects: []
     
