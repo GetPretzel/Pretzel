@@ -33,7 +33,7 @@ KDDW.DockWidget {
                     id: itemsDelegate
                     Component.onCompleted: {
                         root.profilesModelDataChanged.connect(itemsDelegate.updateProfilesDropDown)
-                        root.propertiesModelDataChanged.connect(itemsDelegate.updateProperties)
+                        root.propertiesModelDataChanged.connect(itemsDelegate.updateItemProperties)
                     }
                 }
 

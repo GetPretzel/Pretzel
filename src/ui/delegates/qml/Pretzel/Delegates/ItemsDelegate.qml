@@ -111,12 +111,12 @@ ItemDelegate {
     }
 
 
-    function updateItemProperty(value, index) {
-        var profileId = profileDropDown.currentValue
-        var profile = model.profilesModel.getProfileFromId(profileId)
-        var profileProperties = profile[1]
-        ActionController.getActionFromName("update-item-property").trigger([root.model.get(root.ListView.view.currentIndex, 2), profileProperties.get(index, 3), value])
-    }
+    // function updateItemProperty(value, index) {
+    //     var profileId = profileDropDown.currentValue
+    //     var profile = model.profilesModel.getProfileFromId(profileId)
+    //     var profileProperties = profile[1]
+    //     ActionController.getActionFromName("update-item-property").trigger([root.model.get(root.ListView.view.currentIndex, 2), profileProperties.get(index, 3), value])
+    // }
 
 
     function updateProfilesDropDown() {
@@ -130,15 +130,65 @@ ItemDelegate {
     }
 
 
+    function updateItemProperties() {
+        root.clearItemProperties()
+        root.addItemProperties()
+    }
+
+
     function clearItemProperties() {
         root.model.get(index, 1).clear()
 
         for (var i = 0; i < root.properties.length; i++) {
             root.properties[i].destroy()
         }
+
+        root.properties = []
     }
 
 
+    function addItemProperties() {
+        var profileId = profileDropDown.currentValue
+        var propertiesModel = root.model.profilesModel.get(index, 1)
+        for (var i = 0; i < propertiesModel.count; i++) {
+            var stringLayout = `
+                import QtQuick 2.15
+                import QtQuick.Layouts 1.15
+
+                import Pretzel.UiComponents 1.0
+
+                RowLayout {
+                    id: layoutRoot
+                    Layout.fillWidth: true
+                    visible: root.checked
+
+                    signal itemPropertyChanged(int itemPropertyId, var value)
+
+                    PLabel {
+                        text: qsTr("${propertiesModel.get(i, 0)}")
+                    }
+
+                    PLineEdit {
+                        id: lineEdit
+                        onTextEdited: layoutRoot.itemPropertyChanged(${i} + 1, lineEdit.text)
+                    }
+                }
+            `
+
+            if (propertiesModel.get(i, 1) === "String") {
+                root.model.get(index, 1).append([propertiesModel.get(i, 3), ""])
+                var newObject = Qt.createQmlObject(stringLayout, contentLayout, "StringLayout.qml")
+                newObject.itemPropertyChanged.connect(root.updateItemProperty)
+            }
+
+            root.properties.push(newObject)
+        }
+    }
+
+
+    function updateItemProperty(itemPropertyId, value) {
+        root.model.get(index, 1).set(itemPropertyId, value)
+    }
 
 
     contentItem: ColumnLayout {
@@ -162,28 +212,7 @@ ItemDelegate {
                 valueRole: "value"
                 model: []
 
-                onActivated: {
-                    // Go through all items which use the old profile id and clear all data in the database
-                    /*for (var i = 0; i < root.model.count; i++) {
-                        if (root.model.get(i, 0) == currentValue) {
-                            ActionController.getActionFromName("clear-item-properties").trigger([root.model.get(i, 1)])
-                        }
-                    }*/
-
-                    // Update the profile id
-                    // root.model.set(root.ListView.view.currentIndex, profileDropDown.currentValue, 0)
-
-                    // Reset the item properties
-                    // WARNING: "root.ListView.view.currentIndex" will cause problems when implementing filtering and searching
-                    // console.log("Profiles id: " + root.model.get(root.ListView.view.currentIndex, 0))
-                    // console.log("Items id: " + root.model.get(root.ListView.view.currentIndex, 2))
-                    // console.log("Profile data: " + root.model.profilesModel.getProfileFromId(root.model.get(root.ListView.view.currentIndex, 0)))
-                    // ActionController.getActionFromName("reset-item-properties").trigger([root.model.get(root.ListView.view.currentIndex, 2), root.model.profilesModel.getProfileFromId(root.model.get(root.ListView.view.currentIndex, 0))])
-
-                    // Add the new data
-                    // root.updateProperties()
-                    root.clearItemProperties()
-                }
+                onActivated: root.updateItemProperties()
 
                 Component.onCompleted: {
                     root.updateProfilesDropDown()

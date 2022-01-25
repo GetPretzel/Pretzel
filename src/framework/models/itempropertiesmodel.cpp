@@ -82,6 +82,19 @@ QVariant ItemPropertiesModel::getEditable(int index, int role) {
 }
 
 
+void ItemPropertiesModel::set(int itemPropertyId, QVariant value) {
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query;
+
+    QString queryString = QString("update item_%1_properties set value = :value where property_id = :property_id").arg(m_itemId);
+
+    query.prepare(queryString);
+    query.bindValue(":property_id", itemPropertyId);
+    query.bindValue(":value", value);
+    query.exec();
+}
+
+
 void ItemPropertiesModel::set(int index, QVariant value, int role) {
     // Role 0: property id
     // Role 1: value
@@ -100,8 +113,8 @@ void ItemPropertiesModel::set(int index, QVariant value, int role) {
     QString queryString = QString("update item_%1_properties set value = :value where property_id = :property_id").arg(m_itemId);
 
     query.prepare(queryString);
+    query.bindValue(":property_id", row_data.at(0));
     query.bindValue(":value", value);
-    query.bindValue(":id", row_data.at(0));
     query.exec();
 }
 
