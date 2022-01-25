@@ -46,7 +46,7 @@ ItemDelegate {
 
     function addItemProperties() {
         var profileId = profileDropDown.currentValue
-        var propertiesModel = root.model.profilesModel.get(index, 1)
+        var propertiesModel = root.model.profilesModel.getProfileFromId(profileId)[1]
         for (var i = 0; i < propertiesModel.count; i++) {
             var stringLayout = `
                 import QtQuick 2.15
