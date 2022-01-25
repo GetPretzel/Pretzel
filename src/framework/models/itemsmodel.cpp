@@ -173,6 +173,10 @@ void ItemsModel::insert(int index, QVariantList value) {
     QVariantList itemVals;
     // The profile id
     itemVals.append(-1);
+    // The item properties
+    ItemPropertiesModel* itemPropsModel = new ItemPropertiesModel();
+    QVariant itemPropsModelVariant = QVariant::fromValue(itemPropsModel);
+    itemVals.append(itemPropsModelVariant);
     // The item id
     itemVals.append(m_dataIdNum);
 
