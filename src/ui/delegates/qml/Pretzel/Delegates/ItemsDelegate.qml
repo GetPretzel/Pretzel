@@ -175,10 +175,40 @@ ItemDelegate {
                 }
             `
 
+            var integerLayout = `
+                import QtQuick 2.15
+                import QtQuick.Layouts 1.15
+
+                import Pretzel.UiComponents 1.0
+
+                RowLayout {
+                    id: layoutRoot
+                    Layout.fillWidth: true
+                    visible: root.checked
+
+                    signal itemPropertyChanged(int itemPropertyId, var value)
+
+                    PLabel {
+                        text: qsTr("${propertiesModel.get(i, 0)}")
+                    }
+
+                    PSpinBox {
+                        id: spinBox
+                        onValueModified: layoutRoot.itemPropertyChanged(${i} + 1, spinBox.value)
+                    }
+                }
+            `
+
             if (propertiesModel.get(i, 1) === "String") {
                 root.model.get(index, 1).append([propertiesModel.get(i, 3), ""])
                 var newObject = Qt.createQmlObject(stringLayout, contentLayout, "StringLayout.qml")
                 newObject.itemPropertyChanged.connect(root.updateItemProperty)
+            } else if (propertiesModel.get(i, 1) === "Integer") {
+                root.model.get(index, 1).append([propertiesModel.get(i, 3), 0])
+                var newObject = Qt.createQmlObject(integerLayout, contentLayout, "IntegerLayout.qml")
+                newObject.itemPropertyChanged.connect(root.updateItemProperty)
+            } else {
+                console.log("[WARNING] Type '" + propertiesModel.get(i, 1) + "' is not supported (ItemsDelegate.qml)");
             }
 
             root.properties.push(newObject)
