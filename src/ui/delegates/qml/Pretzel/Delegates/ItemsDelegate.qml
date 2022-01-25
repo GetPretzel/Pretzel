@@ -13,6 +13,7 @@ ItemDelegate {
     // TODO: Use "model" or "itemsModel"?
     property var model: ListView.view.model
     property var dynamicObjects: []
+    property var properties: []
     
     width: ListView.view.width
     checkable: true
@@ -118,6 +119,28 @@ ItemDelegate {
     }
 
 
+    function updateProfilesDropDown() {
+        var profileDropDownIndex = profileDropDown.currentIndex;
+
+        var newModel = [];
+        for (var i = 0; i < model.profilesModel.count; i++) {
+            newModel.push({"text": model.profilesModel.get(i, 0), "value": model.profilesModel.get(i, 2)});
+        }
+        profileDropDown.model = newModel;
+    }
+
+
+    function clearItemProperties() {
+        root.model.get(index, 1).clear()
+
+        for (var i = 0; i < root.properties.length; i++) {
+            root.properties[i].destroy()
+        }
+    }
+
+
+
+
     contentItem: ColumnLayout {
         id: contentLayout
         anchors.fill: parent
@@ -148,22 +171,24 @@ ItemDelegate {
                     }*/
 
                     // Update the profile id
-                    root.model.set(root.ListView.view.currentIndex, profileDropDown.currentValue, 0)
+                    // root.model.set(root.ListView.view.currentIndex, profileDropDown.currentValue, 0)
 
                     // Reset the item properties
                     // WARNING: "root.ListView.view.currentIndex" will cause problems when implementing filtering and searching
-                    console.log("Profiles id: " + root.model.get(root.ListView.view.currentIndex, 0))
-                    console.log("Items id: " + root.model.get(root.ListView.view.currentIndex, 2))
-                    console.log("Profile data: " + root.model.profilesModel.getProfileFromId(root.model.get(root.ListView.view.currentIndex, 0)))
-                    ActionController.getActionFromName("reset-item-properties").trigger([root.model.get(root.ListView.view.currentIndex, 2), root.model.profilesModel.getProfileFromId(root.model.get(root.ListView.view.currentIndex, 0))])
+                    // console.log("Profiles id: " + root.model.get(root.ListView.view.currentIndex, 0))
+                    // console.log("Items id: " + root.model.get(root.ListView.view.currentIndex, 2))
+                    // console.log("Profile data: " + root.model.profilesModel.getProfileFromId(root.model.get(root.ListView.view.currentIndex, 0)))
+                    // ActionController.getActionFromName("reset-item-properties").trigger([root.model.get(root.ListView.view.currentIndex, 2), root.model.profilesModel.getProfileFromId(root.model.get(root.ListView.view.currentIndex, 0))])
 
                     // Add the new data
-                    root.updateProperties()
+                    // root.updateProperties()
+                    root.clearItemProperties()
                 }
 
                 Component.onCompleted: {
-                    root.updateProfilesModel()
-                    currentIndex = root.model.get(index, 0) - 1
+                    root.updateProfilesDropDown()
+                    // root.updateProfilesModel()
+                    // currentIndex = root.model.get(index, 0) - 1
                 }
             }
         }
