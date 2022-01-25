@@ -112,8 +112,7 @@ void StockModel::set(int index, QVariant value, int role) {
     QVariantList &row_data = m_data[index];
     row_data[role] = value;
 
-    // int itemId = itemsModel->get(index, 2).toInt();
-    int itemId = itemsModel->get(index, 1).toInt();
+    int itemId = itemsModel->get(index, 2).toInt();
     // TODO: Should I use the "stock" table instead?
     QString tableName = QString("item_%1_stock").arg(itemId);
 
@@ -160,7 +159,7 @@ void StockModel::insert(int index, QVariantList values) {
     emit beginInsertRows(QModelIndex(), index, index);
 
     ItemsModel *itemsModel = m_itemsModel.value<ItemsModel*>();
-    int itemId = itemsModel->get(index, 1).toInt();
+    int itemId = itemsModel->get(index, 2).toInt();
 
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query;
