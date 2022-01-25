@@ -1,6 +1,5 @@
 set(DATABASE_SOURCE
     databasehost.cpp
-    items.cpp
 )
 
 add_library(Database STATIC

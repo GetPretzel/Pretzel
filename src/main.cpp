@@ -18,7 +18,6 @@
 #include "framework/actions/actioncontroller.h"
 // #include "framework/actions/papplication.h"
 #include "framework/database/databasehost.h"
-#include "framework/database/items.h"
 #include "framework/models/itemsmodel.h"
 #include "framework/models/itempropertiesmodel.h"
 #include "framework/models/profilesmodel.h"
@@ -68,21 +67,6 @@ int main(int argc, char *argv[]) {
     // printHelloAction->connect(&printHello);
     QObject::connect(printHelloAction, &Pretzel::Framework::Action::triggered, printHelloAction, &printHello);
     actionController->addAction(printHelloAction);
-
-    Pretzel::Framework::Action* resetItemPropertiesAction = new Pretzel::Framework::Action();
-    resetItemPropertiesAction->setName("reset-item-properties");
-    QObject::connect(resetItemPropertiesAction, &Pretzel::Framework::Action::triggered, resetItemPropertiesAction, &Pretzel::Actions::resetItemProperties);
-    actionController->addAction(resetItemPropertiesAction);
-
-    Pretzel::Framework::Action* addItemPropertyAction = new Pretzel::Framework::Action();
-    addItemPropertyAction->setName("add-item-property");
-    QObject::connect(addItemPropertyAction, &Pretzel::Framework::Action::triggered, addItemPropertyAction, &Pretzel::Actions::addItemProperty);
-    actionController->addAction(addItemPropertyAction);
-
-    Pretzel::Framework::Action* updateItemPropertyAction = new Pretzel::Framework::Action();
-    updateItemPropertyAction->setName("update-item-property");
-    QObject::connect(updateItemPropertyAction, &Pretzel::Framework::Action::triggered, updateItemPropertyAction, &Pretzel::Actions::updateItemProperty);
-    actionController->addAction(updateItemPropertyAction);
 
     Pretzel::Ui::registerObject(engine.rootContext(), "ActionController", actionController);
 
