@@ -150,5 +150,13 @@ void ItemPropertiesModel::clear() {
     for (int i = 0; i < m_data.count(); i++) {
         remove(i);
     }
+
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query;
+
+    QString tableName = QString("item_%1_properties").arg(m_itemId);
+    query.prepare("delete from " + tableName);
+    query.exec();
+
     emit countChanged(m_data.count());
 }
