@@ -70,6 +70,7 @@ ItemDelegate {
 
                     PLineEdit {
                         id: lineEdit
+                        Layout.fillWidth: true
                         onTextEdited: layoutRoot.itemPropertyChanged(${i} + 1, lineEdit.text)
                     }
                 }
@@ -94,6 +95,7 @@ ItemDelegate {
 
                     PSpinBox {
                         id: spinBox
+                        Layout.fillWidth: true
                         onValueModified: layoutRoot.itemPropertyChanged(${i} + 1, spinBox.value)
                     }
                 }
