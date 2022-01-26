@@ -87,11 +87,13 @@ void ItemPropertiesModel::set(int itemPropertyId, QVariant value) {
     QSqlQuery query;
 
     QString queryString = QString("update item_%1_properties set value = :value where property_id = :property_id").arg(m_itemId);
+    qDebug() << queryString;
 
     query.prepare(queryString);
     query.bindValue(":property_id", itemPropertyId);
     query.bindValue(":value", value);
     query.exec();
+    qDebug() << query.lastError().text();
 }
 
 
@@ -124,6 +126,11 @@ void ItemPropertiesModel::append(QVariantList value) {
 }
 
 
+void ItemPropertiesModel::append(QVariantList value, bool updateDatabase) {
+    insert(m_data.count(), value, updateDatabase);
+}
+
+
 void ItemPropertiesModel::insert(int index, QVariantList values) {
     if (index < 0 || index > m_data.count()) {
         return;
@@ -140,6 +147,31 @@ void ItemPropertiesModel::insert(int index, QVariantList values) {
     query.bindValue(":property_id", values.at(0));
     query.bindValue(":value", values.at(1));
     query.exec();
+    
+    m_data.insert(index, values);
+    emit endInsertRows();
+    emit countChanged(m_data.count());
+}
+
+
+void ItemPropertiesModel::insert(int index, QVariantList values, bool updateDatabase) {
+    if (index < 0 || index > m_data.count()) {
+        return;
+    }
+
+
+    emit beginInsertRows(QModelIndex(), index, index);
+
+    if (updateDatabase) {
+        QSqlDatabase database = DatabaseHost::databaseInstance();
+        QSqlQuery query;
+
+        QString tableName = QString("item_%1_properties").arg(m_itemId);
+        query.prepare("insert into " + tableName + " (property_id, value) values (:property_id, :value)");
+        query.bindValue(":property_id", values.at(0));
+        query.bindValue(":value", values.at(1));
+        query.exec();
+    }
     
     m_data.insert(index, values);
     emit endInsertRows();

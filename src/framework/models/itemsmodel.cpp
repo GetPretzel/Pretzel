@@ -32,6 +32,31 @@ ItemsModel::ItemsModel(QObject *parent) : QAbstractListModel(parent) {
         values.append(profileId);
 
         int id = query.value(idIndex).toInt();
+
+        ItemPropertiesModel *propertiesModel = new ItemPropertiesModel();
+        propertiesModel->setItemId(id);
+
+        QString propertiesQueryString = QString("SELECT * FROM item_%1_properties").arg(id);
+        QSqlQuery propertiesQuery(propertiesQueryString);
+
+        int propertyIdIndex = propertiesQuery.record().indexOf("property_id");
+        int valueIndex = propertiesQuery.record().indexOf("value");
+
+        while (propertiesQuery.next()) {
+            QVariantList propertiesRowData;
+
+            int propertyId = propertiesQuery.value(propertyIdIndex).toInt();
+            propertiesRowData.append(propertyId);
+
+            QString value = propertiesQuery.value(valueIndex).toString();
+            propertiesRowData.append(value);
+
+            propertiesModel->append(propertiesRowData, false);
+        }
+
+        QVariant propertiesModelVariant = QVariant::fromValue(propertiesModel);
+        values.append(propertiesModelVariant);
+
         values.append(id);
 
         m_data.append(values);

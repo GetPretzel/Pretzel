@@ -57,7 +57,9 @@ public:
     Q_INVOKABLE void set(int index, QVariant value, int role);
 
     Q_INVOKABLE void append(QVariantList value);
+    Q_INVOKABLE void append(QVariantList value, bool updateDatabase);
     Q_INVOKABLE void insert(int index, QVariantList values);
+    Q_INVOKABLE void insert(int index, QVariantList value, bool updateDatabase);
     Q_INVOKABLE void remove(int index);
     Q_INVOKABLE void clear();
 signals:

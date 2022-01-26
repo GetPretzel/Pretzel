@@ -17,7 +17,13 @@ ItemDelegate {
     
     width: ListView.view.width
     checkable: true
-    onClicked: ListView.view.currentIndex = index    
+    onClicked: ListView.view.currentIndex = index
+
+    // TODO: Think of a better name for this function
+    function resetCurrentIndexProfilesDropDown() {
+        root.updateProfilesDropDown()
+        profileDropDown.currentIndex = root.model.get(index, 0) - 1
+    }
 
     function updateProfilesDropDown() {
         var profileDropDownIndex = profileDropDown.currentIndex;
@@ -47,6 +53,7 @@ ItemDelegate {
     function addItemProperties() {
         var profileId = profileDropDown.currentValue
         var propertiesModel = root.model.profilesModel.getProfileFromId(profileId)[1]
+
         for (var i = 0; i < propertiesModel.count; i++) {
             var stringLayout = `
                 import QtQuick 2.15
@@ -114,6 +121,80 @@ ItemDelegate {
         }
     }
 
+
+    function loadItemProperties() {
+        var profileId = root.model.get(index, 0)
+        var propertiesModel = root.model.profilesModel.getProfileFromId(profileId)[1]
+
+        for (var i = 0; i < propertiesModel.count; i++) {
+            var stringLayout = `
+                import QtQuick 2.15
+                import QtQuick.Layouts 1.15
+
+                import Pretzel.UiComponents 1.0
+
+                RowLayout {
+                    id: layoutRoot
+                    Layout.fillWidth: true
+                    visible: root.checked
+
+                    signal itemPropertyChanged(int itemPropertyId, var value)
+
+                    PLabel {
+                        text: qsTr("${propertiesModel.get(i, 0)}")
+                    }
+
+                    PLineEdit {
+                        id: lineEdit
+                        Layout.fillWidth: true
+                        text: "${root.model.get(index, 1).get(i, 1)}"
+                        onTextEdited: layoutRoot.itemPropertyChanged(${i} + 1, lineEdit.text)
+                    }
+                }
+            `
+
+            var integerLayout = `
+                import QtQuick 2.15
+                import QtQuick.Layouts 1.15
+
+                import Pretzel.UiComponents 1.0
+
+                RowLayout {
+                    id: layoutRoot
+                    Layout.fillWidth: true
+                    visible: root.checked
+
+                    signal itemPropertyChanged(int itemPropertyId, var value)
+
+                    PLabel {
+                        text: qsTr("${propertiesModel.get(i, 0)}")
+                    }
+
+                    PSpinBox {
+                        id: spinBox
+                        Layout.fillWidth: true
+                        value: ${root.model.get(index, 1).get(i, 1)}
+                        onValueModified: layoutRoot.itemPropertyChanged(${i} + 1, spinBox.value)
+                    }
+                }
+            `
+
+            if (propertiesModel.get(i, 1) === "String") {
+                // root.model.get(index, 1).append([propertiesModel.get(i, 3), ""])
+                var newObject = Qt.createQmlObject(stringLayout, contentLayout, "StringLayout.qml")
+                newObject.itemPropertyChanged.connect(root.updateItemProperty)
+            } else if (propertiesModel.get(i, 1) === "Integer") {
+                // root.model.get(index, 1).append([propertiesModel.get(i, 3), 0])
+                var newObject = Qt.createQmlObject(integerLayout, contentLayout, "IntegerLayout.qml")
+                newObject.itemPropertyChanged.connect(root.updateItemProperty)
+            } else {
+                console.log("[WARNING] Type '" + propertiesModel.get(i, 1) + "' is not supported (ItemsDelegate.qml)");
+            }
+
+            root.properties.push(newObject)
+        }
+    }
+
     function updateItemProperty(itemPropertyId, value) {
         root.model.get(index, 1).set(itemPropertyId, value)
     }
@@ -141,8 +222,10 @@ ItemDelegate {
 
                 onActivated: root.updateItemProperties()
 
-                Component.onCompleted: root.updateProfilesDropDown()
+                Component.onCompleted: root.resetCurrentIndexProfilesDropDown()
             }
         }
     }
+
+    Component.onCompleted: root.loadItemProperties()
 }
