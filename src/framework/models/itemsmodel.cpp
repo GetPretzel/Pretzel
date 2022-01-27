@@ -19,6 +19,10 @@ ItemsModel::ItemsModel(QObject *parent) : QAbstractListModel(parent) {
     m_roleNames[ProfileRole] = "profile";
     m_roleNames[PropertiesRole] = "properties";
 
+    // WARNING: This *will* produce errors in future (when loading data from the database when rows have been removed)
+    m_dataIdNum = 1;
+    bool dataLoaded = false;
+
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query("SELECT * FROM items");
 
@@ -32,6 +36,9 @@ ItemsModel::ItemsModel(QObject *parent) : QAbstractListModel(parent) {
         values.append(profileId);
 
         int id = query.value(idIndex).toInt();
+        if (id > m_dataIdNum) {
+            m_dataIdNum = id;
+        }
 
         ItemPropertiesModel *propertiesModel = new ItemPropertiesModel();
         propertiesModel->setItemId(id);
@@ -62,8 +69,9 @@ ItemsModel::ItemsModel(QObject *parent) : QAbstractListModel(parent) {
         m_data.append(values);
     }
 
-    // WARNING: This *will* produce errors in future (when loading data from the database when rows have been removed)
-    m_dataIdNum = 1;
+    if (dataLoaded) {
+        m_dataIdNum += 1;
+    }
 }
 
 
