@@ -87,13 +87,11 @@ void ItemPropertiesModel::set(int itemPropertyId, QVariant value) {
     QSqlQuery query;
 
     QString queryString = QString("update item_%1_properties set value = :value where property_id = :property_id").arg(m_itemId);
-    qDebug() << queryString;
 
     query.prepare(queryString);
     query.bindValue(":property_id", itemPropertyId);
     query.bindValue(":value", value);
     query.exec();
-    qDebug() << query.lastError().text();
 }
 
 
