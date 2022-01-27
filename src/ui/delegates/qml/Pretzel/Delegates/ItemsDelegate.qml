@@ -35,6 +35,10 @@ ItemDelegate {
         profileDropDown.model = newModel;
     }
 
+    function updateItemProfileId() {
+        root.model.set(index, profileDropDown.currentValue, 0)
+    }
+
     function updateItemProperties() {
         root.clearItemProperties()
         root.addItemProperties()
@@ -220,7 +224,10 @@ ItemDelegate {
                 valueRole: "value"
                 model: []
 
-                onActivated: root.updateItemProperties()
+                onActivated: {
+                    root.updateItemProfileId()
+                    root.updateItemProperties()
+                }
 
                 Component.onCompleted: root.resetCurrentIndexProfilesDropDown()
             }

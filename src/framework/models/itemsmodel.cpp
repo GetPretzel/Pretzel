@@ -172,7 +172,7 @@ QVariant ItemsModel::getEditable(int index, int role) {
 void ItemsModel::set(int index, QVariant value, int role) {
     // Role 0: profile id
     // Role 2: item id
-    if (role == m_data.at(index).count() - 2) {
+    if (role == m_data.at(index).count() - 1) {
         // The ID can not be overriden
         return;
     }
