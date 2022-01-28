@@ -15,6 +15,35 @@ StockModel::StockModel(QObject *parent) : QAbstractListModel(parent) {
     m_roleNames[QuantityRole] = "quantity";
     m_roleNames[UnitRole] = "unit";
     m_roleNames[CostRole] = "cost";
+
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery itemsIdQuery("SELECT id FROM items");
+
+    while (itemsIdQuery.next()) {
+        QVariantList stockData;
+        int itemsId = itemsIdQuery.value(0).toInt();
+        stockData.append(itemsId);
+
+        QString stockQueryString = QString("SELECT * FROM item_%1_stock").arg(itemsId);
+        QSqlQuery stockQuery(stockQueryString);
+
+        int quantityIndex = stockQuery.record().indexOf("quantity");
+        int unitIndex = stockQuery.record().indexOf("unit");
+        int costIndex = stockQuery.record().indexOf("cost");
+
+        while (stockQuery.next()) {
+            int quantity = stockQuery.value(quantityIndex).toInt();
+            stockData.append(quantity);
+
+            QString unit = stockQuery.value(unitIndex).toString();
+            stockData.append(unit);
+
+            int cost = stockQuery.value(costIndex).toInt();
+            stockData.append(cost);
+        }
+
+        m_data.append(stockData);
+    }
 }
 
 
@@ -115,6 +144,7 @@ void StockModel::set(int index, QVariant value, int role) {
     int itemId = itemsModel->get(index, 2).toInt();
     // TODO: Should I use the "stock" table instead?
     QString tableName = QString("item_%1_stock").arg(itemId);
+    // QString tableName = QString("stock");
 
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query;
@@ -165,6 +195,7 @@ void StockModel::insert(int index, QVariantList values) {
     QSqlQuery query;
 
     QString tableName = QString("item_%1_stock").arg(itemId);//values.at(0).toString());
+    // QString tableName = QString("stock");//values.at(0).toString());
     query.prepare("insert into " + tableName + " (quantity, unit, cost) values (:quantity, :unit, :cost)");
     query.bindValue(":quantity", values.at(1));
     query.bindValue(":unit", values.at(2));

@@ -228,6 +228,7 @@ void ItemsModel::insert(int index, QVariantList value) {
     // TODO: Is an id needed?
     // QString queryString = QString("create table if not exists item_%2_stock (id integer not null primary key autoincrement, quantity real, unit text, cost real)").arg(itemVals.at(2).toString());
     queryString = QString("create table if not exists item_%1_stock (quantity real, unit text, cost real)").arg(itemVals.at(2).toString());
+    // queryString = QString("create table if not exists stock (quantity real, unit text, cost real)");
     query.exec(queryString);
 
     // Use a QString for the query (see https://forum.qt.io/topic/132903/sqlite-create-table-does-not-work-when-inserting-variable-into-query/2)
