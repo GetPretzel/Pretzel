@@ -8,4 +8,6 @@ Button {
     id: root
 
     height: 30
+
+    property int radius: 4
 }
