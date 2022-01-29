@@ -30,6 +30,7 @@ ItemsModel::ItemsModel(QObject *parent) : QAbstractListModel(parent) {
     int profileIdIndex = query.record().indexOf("profile_id");
 
     while (query.next()) {
+        dataLoaded = true;
         QVariantList values;
 
         int profileId = query.value(profileIdIndex).toInt();
