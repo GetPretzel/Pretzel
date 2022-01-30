@@ -13,9 +13,12 @@
 ## About
 This is the next generation of Pretzel. This version will be a complete rewrite and restructuring of the code as well as a completely new UI/UX design.
 
-<!-- TODO
 ## Support
--->
+For user support, first refer to the documentation. If further support is needed, visit the [Discord](https://discord.gg/5eAMUqNrUe) server.
+
+If a feature is missing feel free to suggest it. Either put something in the [Discord](https://discord.gg/5eAMUqNrUe) server or open an issue in either GitLab or GitHub.
+
+If a bug is found, please open an issue either on GitLab or GitHub.
 
 ## Compiling
 
