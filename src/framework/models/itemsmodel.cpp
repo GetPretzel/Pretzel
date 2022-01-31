@@ -268,7 +268,15 @@ void ItemsModel::remove(int index) {
     }
 
     emit beginRemoveRows(QModelIndex(), index, index);
-    // TODO: Add the database code
+
+    ItemPropertiesModel *itemPropsModel = get(index, 1).value<ItemPropertiesModel*>();
+    delete itemPropsModel;
+
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query("DELETE FROM items WHERE id = ?");
+    query.bindValue(0, get(index, 2));
+    query.exec();
+
     m_data.removeAt(index);
     emit endRemoveRows();
     emit countChanged(m_data.count());

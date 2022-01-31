@@ -16,7 +16,12 @@ ItemPropertiesModel::ItemPropertiesModel(QObject *parent) : QAbstractListModel(p
 
 
 ItemPropertiesModel::~ItemPropertiesModel() {
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query;
 
+    QString tableName = QString("item_%1_properties").arg(m_itemId);
+    query.prepare("DROP TABLE " + tableName);
+    query.exec();
 }
 
 

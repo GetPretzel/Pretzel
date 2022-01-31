@@ -203,9 +203,30 @@ ItemDelegate {
         root.model.get(index, 1).set(itemPropertyId, value)
     }
 
+    function deleteItem() {
+        root.model.remove(index)
+    }
+
     contentItem: ColumnLayout {
         id: contentLayout
         anchors.fill: parent
+
+        RowLayout {
+            Layout.fillWidth: true
+            
+            // TODO: Display the value of the first property
+
+            Item {
+                Layout.fillWidth: true
+            }
+
+            PButton {
+                id: removeItemButton
+                implicitWidth: height
+                text: qsTr("-")
+                onClicked: root.deleteItem()
+            }
+        }
 
         RowLayout {
             Layout.fillWidth: true
