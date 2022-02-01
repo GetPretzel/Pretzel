@@ -279,13 +279,13 @@ void ItemsModel::remove(int index) {
         return;
     }
 
-    emit beginRemoveRows(QModelIndex(), index, index);
-
     StockModel *stockModel = m_stockModel.value<StockModel*>();
     stockModel->remove(index);
 
     ItemPropertiesModel *itemPropsModel = get(index, 1).value<ItemPropertiesModel*>();
     delete itemPropsModel;
+
+    emit beginRemoveRows(QModelIndex(), index, index);
 
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query("DELETE FROM items WHERE id = ?");
