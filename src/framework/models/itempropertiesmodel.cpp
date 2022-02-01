@@ -68,6 +68,7 @@ int ItemPropertiesModel::itemId() {
 
 void ItemPropertiesModel::setItemId(int newId) {
     m_itemId = newId;
+    emit itemIdChanged(newId);
 }
 
 
