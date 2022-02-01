@@ -6,6 +6,7 @@
 #include "itempropertiesmodel.h"
 #include "profilesmodel.h"
 #include "propertiesmodel.h"
+#include "stockmodel.h"
 #include "../database/databasehost.h"
 
 
@@ -126,6 +127,17 @@ QVariant ItemsModel::profilesModel() {
 void ItemsModel::setProfilesModel(QVariant model) {
     m_profilesModel = model;
     emit profilesModelChanged(model);
+}
+
+
+QVariant ItemsModel::stockModel() {
+    return m_stockModel;
+}
+
+
+void ItemsModel::setStockModel(QVariant model) {
+    m_stockModel = model;
+    emit stockModelChanged(model);
 }
 
 
@@ -269,6 +281,9 @@ void ItemsModel::remove(int index) {
 
     emit beginRemoveRows(QModelIndex(), index, index);
 
+    StockModel *stockModel = m_stockModel.value<StockModel*>();
+    stockModel->remove(index);
+
     ItemPropertiesModel *itemPropsModel = get(index, 1).value<ItemPropertiesModel*>();
     delete itemPropsModel;
 
@@ -278,6 +293,7 @@ void ItemsModel::remove(int index) {
     query.exec();
 
     m_data.removeAt(index);
+
     emit endRemoveRows();
     emit countChanged(m_data.count());
 }

@@ -29,6 +29,7 @@ class Pretzel::Framework::Models::ItemsModel : public QAbstractListModel
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(QVariant profilesModel READ profilesModel WRITE setProfilesModel NOTIFY profilesModelChanged)
+    Q_PROPERTY(QVariant stockModel READ stockModel WRITE setStockModel NOTIFY stockModelChanged)
     Q_PROPERTY(int profileId READ profileId WRITE setProfileId NOTIFY profileIdChanged)
     QML_ELEMENT
 private:
@@ -36,6 +37,7 @@ private:
     int m_dataIdNum;
     QHash<int, QByteArray> m_roleNames;
     QVariant m_profilesModel;
+    QVariant m_stockModel;
     int m_profileId;
 public:
     enum RoleNames {
@@ -56,6 +58,9 @@ public:
 
     QVariant profilesModel();
     void setProfilesModel(QVariant model);
+    
+    QVariant stockModel();
+    void setStockModel(QVariant model);
 
     int profileId();
     void setProfileId(int id);
@@ -76,6 +81,7 @@ public:
 signals:
     void countChanged(int newCount);
     void profilesModelChanged(QVariant model);
+    void stockModelChanged(QVariant model);
     void profileIdChanged(int newProfileId);
 };
 

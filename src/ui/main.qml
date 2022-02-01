@@ -63,6 +63,7 @@ ApplicationWindow {
         id: itemsModel
 
         profilesModel: profilesModel
+        stockModel: stockModel
     }
 
     StockModel {
