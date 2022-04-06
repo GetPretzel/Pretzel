@@ -42,7 +42,7 @@ ItemDelegate {
                 id: nameEdit
 
                 Layout.fillWidth: true
-                text: root.model.get(index, 0)
+                // text: root.model.get(index, 0)
                 placeholderText: qsTr("The name of this property")
                 onTextEdited: {
                     root.model.set(index, nameEdit.text, 0)
@@ -92,7 +92,7 @@ ItemDelegate {
                     root.model.set(root.ListView.view.currentIndex, displayItemDropDown.currentText, 2)
                     root.propertiesModelDataChanged()
                 }
-                Component.onCompleted: displayItemDropDown.currentIndex = 1
+                // Component.onCompleted: displayItemDropDown.currentIndex = 1
             }
 
         }

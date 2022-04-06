@@ -279,12 +279,6 @@ void ItemsModel::remove(int index) {
         return;
     }
 
-    StockModel *stockModel = m_stockModel.value<StockModel*>();
-    stockModel->remove(index);
-
-    ItemPropertiesModel *itemPropsModel = get(index, 1).value<ItemPropertiesModel*>();
-    delete itemPropsModel;
-
     emit beginRemoveRows(QModelIndex(), index, index);
 
     QSqlDatabase database = DatabaseHost::databaseInstance();
@@ -296,6 +290,12 @@ void ItemsModel::remove(int index) {
 
     emit endRemoveRows();
     emit countChanged(m_data.count());
+
+    StockModel *stockModel = m_stockModel.value<StockModel*>();
+    stockModel->remove(index);
+
+    ItemPropertiesModel *itemPropsModel = getEditable(index, 1).value<ItemPropertiesModel*>();
+    delete itemPropsModel;
 }
 
 

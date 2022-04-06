@@ -39,7 +39,8 @@ ProfilesModel::ProfilesModel(QObject *parent) : QAbstractListModel(parent) {
         QString name = query.value(nameIndex).toString();
         row_data << name;
 
-        PropertiesModel *propertiesModel = new PropertiesModel(0, id);
+        PropertiesModel *propertiesModel = new PropertiesModel();//0, id);
+        propertiesModel->setProfileId(id);
         QString propertiesQueryString = QString("SELECT * FROM profile_%1_properties").arg(id);
         QSqlQuery propertiesQuery(propertiesQueryString);
 
@@ -192,7 +193,8 @@ void ProfilesModel::insert(int index, QVariantList value) {
 
     value.append(m_dataIdNum);
 
-    PropertiesModel* props_model = new PropertiesModel(0, m_dataIdNum);
+    PropertiesModel* props_model = new PropertiesModel();//0, m_dataIdNum);
+    props_model->setProfileId(m_dataIdNum);
     QVariant props_variant_model = QVariant::fromValue(props_model);
     
     QVariantList profile_vals;
@@ -225,10 +227,20 @@ void ProfilesModel::remove(int index) {
         return;
     }
 
+
     emit beginRemoveRows(QModelIndex(), index, index);
+
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query("DELETE FROM profiles WHERE id = :profile_id");
+    query.bindValue(":profile_id", get(index, 2));
+    query.exec();
+
     m_data.removeAt(index);
+
     emit endRemoveRows();
     emit countChanged(m_data.count());
+    
+    delete getEditable(index, 1).value<PropertiesModel*>();
 }
 
 

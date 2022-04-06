@@ -9,7 +9,7 @@ using namespace Pretzel::Framework::Database;
 using namespace Pretzel::Framework::Models;
 
 
-PropertiesModel::PropertiesModel(QObject *parent, int profileId) : QAbstractListModel(parent), m_profileId(profileId) {
+PropertiesModel::PropertiesModel(QObject *parent) : QAbstractListModel(parent) {//, int profileId) : QAbstractListModel(parent), m_profileId(profileId) {
     m_roleNames[NameRole] = "name";
     m_roleNames[TypeRole] = "type";
     m_roleNames[DisplayItemRole] = "displayItem";
@@ -21,6 +21,12 @@ PropertiesModel::PropertiesModel(QObject *parent, int profileId) : QAbstractList
 
 
 PropertiesModel::~PropertiesModel() {
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query;
+
+    QString tableName = QString("item_%1_properties").arg(m_profileId);
+    query.prepare("DROP TABLE " + tableName);
+    query.exec();
 }
 
 
@@ -62,6 +68,17 @@ QVariant PropertiesModel::data(const QModelIndex &index, int role) const {
 
 int PropertiesModel::count() {
     return m_data.count();
+}
+
+
+int PropertiesModel::profileId() {
+    return m_profileId;
+}
+
+
+void PropertiesModel::setProfileId(int newId) {
+    m_profileId = newId;
+    emit profileIdChanged(newId);
 }
 
 

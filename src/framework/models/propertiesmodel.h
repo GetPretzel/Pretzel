@@ -25,6 +25,7 @@ class Pretzel::Framework::Models::PropertiesModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+    Q_PROPERTY(int profileId READ profileId WRITE setProfileId NOTIFY profileIdChanged)
     QML_ELEMENT
 private:
     QList<QVariantList> m_data;
@@ -38,7 +39,7 @@ public:
         DisplayItemRole = Qt::UserRole + 3
     };
 
-    explicit PropertiesModel(QObject *parent = 0, int profileId = -1);
+    explicit PropertiesModel(QObject *parent = 0);//, int profileId = -1);
     ~PropertiesModel();
 
     virtual int rowCount(const QModelIndex &parent) const override;
@@ -47,6 +48,9 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
     int count();
+
+    int profileId();
+    void setProfileId(int newId);
 
     // QML methods
     Q_INVOKABLE QVariant get(int index, int role);
@@ -60,6 +64,7 @@ public:
     Q_INVOKABLE void clear();
 signals:
     void countChanged(int newCount);
+    void profileIdChanged(int newId);
 };
 
 #endif // PROPERTIESMODEL_H

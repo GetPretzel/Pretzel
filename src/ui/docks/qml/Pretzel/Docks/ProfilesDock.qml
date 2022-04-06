@@ -54,7 +54,7 @@ KDDW.DockWidget {
                     id: profilesDelegate
                     model: profilesModel
                     // WARNING: This code may cause some trouble down the track
-                    propertiesModel: profilesModel.getEditable(index, 1)
+                    // propertiesModel: profilesModel.getEditable(index, 1)
                     onProfilesModelDataChanged: root.profilesModelDataChanged()
                     // TODO: Send the profile id parameter
                     // onPropertiesModelChanged: root.propertiesModelChanged()

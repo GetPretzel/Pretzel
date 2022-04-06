@@ -10,7 +10,7 @@ ItemDelegate {
     id: root
 
     property var model: ListView.view.model
-    property var propertiesModel
+    property var propertiesModel: model.get(index, 1)
 
     width: ListView.view.width
     checkable: true
@@ -18,6 +18,11 @@ ItemDelegate {
 
     signal profilesModelDataChanged
     signal propertiesModelDataChanged(int profileId)
+
+    function deleteProfile() {
+        // TODO: Send a signal
+        root.model.remove(index)
+    }
 
     contentItem: ColumnLayout {
         anchors.fill: parent
@@ -30,6 +35,17 @@ ItemDelegate {
                 text: nameEdit.text
             }
 
+            Item {
+                Layout.fillWidth: true
+            }
+
+            PButton {
+                id: deleteProfileButton
+                width: height
+                radius: height / 2
+                text: qsTr("-")
+                onClicked: root.deleteProfile()
+            }
         }
 
         RowLayout {
@@ -44,7 +60,7 @@ ItemDelegate {
                 id: nameEdit
 
                 Layout.fillWidth: true
-                text: root.model.get(index, 0)
+                // text: root.model.get(index, 0)
                 placeholderText: qsTr("The name of this profile")
                 onTextEdited: {
                     root.model.set(index, nameEdit.text, 0)
@@ -80,7 +96,7 @@ ItemDelegate {
 
                             Layout.fillWidth: true
                             Layout.fillHeight: true
-                            model: propertiesModel
+                            model: root.propertiesModel
 
                             delegate: PropertiesDelegate {
                                 onPropertiesModelDataChanged: root.propertiesModelDataChanged(model.get(index, 2))
