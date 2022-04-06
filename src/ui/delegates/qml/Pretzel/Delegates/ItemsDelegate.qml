@@ -222,7 +222,7 @@ ItemDelegate {
 
             PButton {
                 id: removeItemButton
-                implicitWidth: height
+                width: height
                 text: qsTr("-")
                 onClicked: root.deleteItem()
             }

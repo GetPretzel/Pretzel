@@ -52,7 +52,7 @@ KDDW.DockWidget {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 8
-            width: 30
+            width: height
             text: qsTr("+")
             onClicked: {
                 itemsModel.append([])

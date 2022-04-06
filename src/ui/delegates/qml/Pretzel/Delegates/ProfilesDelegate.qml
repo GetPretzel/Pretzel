@@ -112,7 +112,7 @@ ItemDelegate {
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.bottom: parent.bottom
                         anchors.bottomMargin: 8
-                        width: 30
+                        width: height
                         text: qsTr("+")
                         onClicked: {
                             propertiesModel.append()//["New property", "String", "PLineEdit"])
