@@ -33,6 +33,13 @@ KDDW.DockWidget {
             }
         }*/
 
+        // TODO: Some elements appear behind the background
+        Rectangle {
+            id: backgroundRect
+            anchors.fill: parent
+            color: "#21262E"
+        }
+
         ColumnLayout {
             /*PLineEdit {
                 id: filterProfilesLineEdit
@@ -91,7 +98,5 @@ KDDW.DockWidget {
                 root.profilesModelDataChanged()
             }
         }
-
     }
-
 }
