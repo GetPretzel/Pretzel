@@ -10,6 +10,9 @@ Item {
 
     signal clicked
 
+    property bool hovered: false
+    property bool toggled: false
+
     height: 32
 
     property alias radius: backgroundRect.radius
@@ -18,8 +21,14 @@ Item {
     Rectangle {
         id: backgroundRect
         anchors.fill: parent
-        color: "#39414A"
-        border.color: "#00010B"
+        color: "#313844"
+        border.color: {
+            if (hovered) {
+                return "#535F74"
+            } else {
+                return "#0D0F12"
+            }
+        }
         border.width: 2
         radius: 4
     }
@@ -33,6 +42,15 @@ Item {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: root.clicked()
+        hoverEnabled: true
+        onClicked: {
+            root.toggled = !root.toggled
+            root.clicked()
+        }
+
+        onHoveredChanged: {
+            root.hovered = !root.hovered
+            root.hoveredChanged()
+        }
     }
 }
