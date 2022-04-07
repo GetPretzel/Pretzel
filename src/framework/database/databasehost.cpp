@@ -33,7 +33,9 @@ void DatabaseHost::init() {
 
 
 void DatabaseHost::quit() {
-
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query;
+    query.exec("VACUUM;");
 }
 
 

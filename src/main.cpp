@@ -69,6 +69,7 @@ int main(int argc, char *argv[]) {
     actionController->addAction(printHelloAction);
 
     Pretzel::Ui::registerObject(engine.rootContext(), "ActionController", actionController);
+    Pretzel::Ui::registerObject(engine.rootContext(), "DatabaseHost", &databaseHost);
 
     engine.addImportPath("qrc:/ui/components/qml");
     engine.addImportPath("qrc:/ui/delegates/qml");
