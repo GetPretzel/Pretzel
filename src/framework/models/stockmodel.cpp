@@ -213,19 +213,19 @@ void StockModel::remove(int index) {
         return;
     }
 
-    // emit beginRemoveRows(QModelIndex(), index, index);
+    emit beginRemoveRows(QModelIndex(), index, index);
 
-    // ItemsModel *itemsModel = m_itemsModel.value<ItemsModel*>();
-    // QString tableName = QString("item_%1_stock").arg(itemsModel->get(index, 2).toInt());
+    ItemsModel *itemsModel = m_itemsModel.value<ItemsModel*>();
+    QString tableName = QString("item_%1_stock").arg(itemsModel->get(index, 2).toInt());
 
-    // QSqlDatabase database = DatabaseHost::databaseInstance();
-    // QSqlQuery query("DROP TABLE " + tableName);
-    // query.exec();
+    QSqlDatabase database = DatabaseHost::databaseInstance();
+    QSqlQuery query("DROP TABLE " + tableName);
+    query.exec();
 
-    // m_data.removeAt(index);
+    m_data.removeAt(index);
 
-    // emit endRemoveRows();
-    // emit countChanged(m_data.count());
+    emit endRemoveRows();
+    emit countChanged(m_data.count());
 }
 
 
