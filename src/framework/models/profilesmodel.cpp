@@ -230,7 +230,8 @@ void ProfilesModel::insert(int index, QVariantList value) {
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query;
 
-    query.prepare("insert into profiles (name) values (:name)");
+    query.prepare("insert into profiles (id, name) values (:id, :name)");
+    query.bindValue(":id", profile_vals[2]);
     query.bindValue(":name", profile_vals[0]);
     query.exec();
 
