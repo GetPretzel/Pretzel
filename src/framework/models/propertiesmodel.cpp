@@ -24,9 +24,11 @@ PropertiesModel::~PropertiesModel() {
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query;
 
-    QString tableName = QString("item_%1_properties").arg(m_profileId);
+    QString tableName = QString("profile_%1_properties").arg(m_profileId);
+    qDebug() << tableName;
     query.prepare("DROP TABLE " + tableName);
     query.exec();
+    qDebug() << query.lastError().text();
 }
 
 

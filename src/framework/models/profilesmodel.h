@@ -32,7 +32,8 @@ private:
 public:
     enum RoleNames {
         NameRole = Qt::UserRole,
-        PropertiesRole = Qt::UserRole + 2
+        PropertiesRole = Qt::UserRole + 2,
+        IndexRole = Qt::UserRole + 3
     };
 
     explicit ProfilesModel(QObject *parent = 0);

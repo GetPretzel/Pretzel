@@ -98,20 +98,38 @@ int ProfilesModel::rowCount(const QModelIndex &parent) const {
 
 QVariant ProfilesModel::data(const QModelIndex &index, int role) const {
     int row = index.row();
-    
+
     if (row < 0 || row >= m_data.count()) {
         return QVariant();
     }
 
-    const QVariantList &row_data = m_data.at(row);
+    if (role < 256) {
+        switch (role) {
+            case 0:
+                role = RoleNames::NameRole;
+                break;
+            case 1:
+                role = RoleNames::PropertiesRole;
+                break;
+            case 2:
+                role = RoleNames::IndexRole;
+                break;
+        }
+    }
+
+    // const QVariantList &row_data = m_data.at(row);
+    QVariantList row_data = m_data.at(row);
 
     switch (role) {
         case NameRole:
             // The name
-            return row_data.at(0);
+            return row_data[0];
         case PropertiesRole:
             // The properties model
-            return row_data.at(1);
+            return row_data[1];
+        case IndexRole:
+            // The index role
+            return row_data.at(2);
         default:
             return QVariant();
     }
@@ -125,22 +143,28 @@ int ProfilesModel::count() {
 
 // TODO: Look at SortFilterProxyModel for a better example of a get method
 // QQmlSortFilterProxyModel::get(int row, const QString& roleName) const
-QVariant ProfilesModel::get(int index, int role) {
+QVariant ProfilesModel::get(int row, int role) {
     // Role 0: name
     // Role 1: properties
     // Role 2: id
-    const QVariantList &row_data = m_data[index];
-    return row_data.at(role);
+    // if (index < 0 || index >= m_data.count()) {
+    //     return QVariant();
+    // }
+
+    // const QVariantList &row_data = m_data[index];
+    // return row_data.at(role);
+    return data(index(row, 0), role);
 }
 
 
-QVariant ProfilesModel::getEditable(int index, int role) {
+QVariant ProfilesModel::getEditable(int row, int role) {
     // Returns a editable value (as oppose to get() which is read-only)
     // Role 0: name
     // Role 1: properties
     // Role 2: id
-    QVariantList &row_data = m_data[index];
-    return row_data[role];
+    // QVariantList &row_data = m_data[index];
+    // return row_data[role];
+    return data(index(row, 0), role);
 }
 
 
@@ -223,25 +247,25 @@ void ProfilesModel::insert(int index, QVariantList value) {
 }
 
 
-void ProfilesModel::remove(int index) {
-    if (index < 0 || index >= m_data.count()) {
+void ProfilesModel::remove(int row) {
+    if (row < 0 || row >= m_data.count()) {
         return;
     }
 
-
-    emit beginRemoveRows(QModelIndex(), index, index);
-
+    emit beginRemoveRows(QModelIndex(), row, row);
+    
     QSqlDatabase database = DatabaseHost::databaseInstance();
-    QSqlQuery query("DELETE FROM profiles WHERE id = :profile_id");
-    query.bindValue(":profile_id", get(index, 2));
+    QSqlQuery query("DELETE FROM profiles WHERE id = ?");
+    query.bindValue(0, get(row, RoleNames::IndexRole));
     query.exec();
 
-    m_data.removeAt(index);
+    delete get(row, RoleNames::PropertiesRole).value<PropertiesModel*>();
+
+    m_data.removeAt(row);
 
     emit endRemoveRows();
     emit countChanged(m_data.count());
     
-    delete getEditable(index, 1).value<PropertiesModel*>();
 }
 
 
