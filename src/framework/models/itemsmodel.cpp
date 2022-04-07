@@ -160,6 +160,7 @@ QVariantList ItemsModel::getProfileData(int id) {
 
 
 QVariant ItemsModel::getPropertiesModel() {
+    // TODO: This function is not used (probably will be removed) 
     QVariant variant;
     return variant;
 }
