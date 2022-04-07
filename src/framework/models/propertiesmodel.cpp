@@ -24,11 +24,10 @@ PropertiesModel::~PropertiesModel() {
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query;
 
+    // NOTE: There has been warnings/errors with the following query
     QString tableName = QString("profile_%1_properties").arg(m_profileId);
-    qDebug() << tableName;
     query.prepare("DROP TABLE " + tableName);
     query.exec();
-    qDebug() << query.lastError().text();
 }
 
 
@@ -168,11 +167,12 @@ void PropertiesModel::insert(int index) {
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query;
 
-    QString query_string = QString("INSERT INTO profile_%1_properties (name, type, display_item) VALUES (?, ?, ?)").arg(m_profileId);
+    QString query_string = QString("INSERT INTO profile_%1_properties (id, name, type, display_item) VALUES (?, ?, ?, ?)").arg(m_profileId);
     query.prepare(query_string);
-    query.bindValue(0, properties_vals[0]);
-    query.bindValue(1, properties_vals[1]);
-    query.bindValue(2, properties_vals[2]);
+    query.bindValue(0, properties_vals[3]);
+    query.bindValue(1, properties_vals[0]);
+    query.bindValue(2, properties_vals[1]);
+    query.bindValue(3, properties_vals[2]);
     query.exec();
 
     m_dataIdNum += 1;
