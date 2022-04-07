@@ -166,6 +166,7 @@ void ProfilesModel::set(int index, QVariant value, int role) {
         return;
     }
 
+    // TODO: For all functions, update it to the API found to work with the get() method
     QVariantList &row_data = m_data[index];
     row_data[role] = value;
 
