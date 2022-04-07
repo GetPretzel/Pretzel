@@ -43,7 +43,8 @@ public:
     enum RoleNames {
         // WARNING: Where is the items id? This could be the cause of a bug
         ProfileRole = Qt::UserRole,
-        PropertiesRole = Qt::UserRole + 2
+        PropertiesRole = Qt::UserRole + 2,
+        IdRole = Qt::UserRole + 3
     };
 
     explicit ItemsModel(QObject *parent = 0);

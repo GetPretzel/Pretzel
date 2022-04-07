@@ -99,7 +99,22 @@ QVariant ItemsModel::data(const QModelIndex &index, int role) const {
         return QVariant();
     }
 
-    const QVariantList &row_data = m_data.at(row);
+    if (role < 256) {
+        switch (role) {
+            case 0:
+                role = RoleNames::ProfileRole;
+                break;
+            case 1:
+                role = RoleNames::PropertiesRole;
+                break;
+            case 2:
+                role = RoleNames::IdRole;
+                break;
+        }
+    }
+
+    // const QVariantList &row_data = m_data.at(row);
+    QVariantList row_data = m_data.at(row);
 
     switch (role) {
         case ProfileRole:
@@ -108,6 +123,8 @@ QVariant ItemsModel::data(const QModelIndex &index, int role) const {
         case PropertiesRole:
             // The properties model
             return row_data.at(1);
+        case IdRole:
+            return row_data.at(2);
         default:
             return QVariant();
     }
@@ -166,20 +183,22 @@ QVariant ItemsModel::getPropertiesModel() {
 }
 
 
-QVariant ItemsModel::get(int index, int role) {
+QVariant ItemsModel::get(int row, int role) {
     // Role 0: profile id
     // Role 2: item id
-    const QVariantList &row_data = m_data[index];
-    return row_data.at(role);
+    // const QVariantList &row_data = m_data[index];
+    // return row_data.at(role);
+    return data(index(row, 0), role);
 }
 
 
-QVariant ItemsModel::getEditable(int index, int role) {
+QVariant ItemsModel::getEditable(int row, int role) {
     // Returns a editable value (as oppose to get() which is read-only)
     // Role 0: profile id
     // Role 2: item id
-    QVariantList &row_data = m_data[index];
-    return row_data[role];
+    // QVariantList &row_data = m_data[index];
+    // return row_data[role];
+    return data(index(row, 0), role);
 }
 
 
@@ -232,8 +251,9 @@ void ItemsModel::insert(int index, QVariantList value) {
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query;
 
-    query.prepare("insert into items (profile_id) values (:profile_id)");
-    query.bindValue(":profile_id", itemVals[0]);
+    query.prepare("insert into items (id, profile_id) values (?, ?)");
+    query.bindValue(0, itemVals[2]);
+    query.bindValue(1, itemVals[0]);
     query.exec();
 
     QString queryString = QString("create table if not exists item_%1_properties (property_id integer not null primary key autoincrement, value text)").arg(itemVals.at(2).toString());
@@ -275,28 +295,27 @@ void ItemsModel::insert(int index, QVariantList value) {
 }
 
 
-void ItemsModel::remove(int index) {
-    if (index < 0 || index >= m_data.count()) {
+void ItemsModel::remove(int row) {
+    if (row < 0 || row >= m_data.count()) {
         return;
     }
 
-    emit beginRemoveRows(QModelIndex(), index, index);
+    StockModel *stockModel = m_stockModel.value<StockModel*>();
+    stockModel->remove(row);
+
+    delete get(row, 1).value<ItemPropertiesModel*>();
+    
+    emit beginRemoveRows(QModelIndex(), row, row);
 
     QSqlDatabase database = DatabaseHost::databaseInstance();
     QSqlQuery query("DELETE FROM items WHERE id = ?");
-    query.bindValue(0, get(index, 2));
+    query.bindValue(0, get(row, 2));
     query.exec();
 
-    m_data.removeAt(index);
+    m_data.removeAt(row);
 
     emit endRemoveRows();
     emit countChanged(m_data.count());
-
-    StockModel *stockModel = m_stockModel.value<StockModel*>();
-    stockModel->remove(index);
-
-    ItemPropertiesModel *itemPropsModel = getEditable(index, 1).value<ItemPropertiesModel*>();
-    delete itemPropsModel;
 }
 
 
